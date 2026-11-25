@@ -82,6 +82,45 @@ def check_browser(context, engine, width, args, report):
     expect(p.locator(".map-readout")).to_contain_text("RMSE")
 
     if not args.phase2:
+        # Exercise the real Designer → worker → exported ranking path in both audited worlds.
+        def set_slider(label, value):
+            p.get_by_role("slider", name=label, exact=True).evaluate("""(el,v)=>{
+                Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(el,String(v));
+                el.dispatchEvent(new Event('input',{bubbles:true})); el.dispatchEvent(new Event('change',{bubbles:true}));
+            }""",value)
+        opened = p.locator("details").filter(has=p.get_by_text("Sensor & occupancy settings", exact=True))
+        if not opened.get_attribute("open") == "":
+            opened.locator("summary").click()
+        p.get_by_role("spinbutton",name="Expected initial sensor reading",exact=False).fill("790")
+        assert p.locator('link[rel="icon"]').evaluate("""async el=>{
+          const r=await fetch(el.href);return new URL(el.href).pathname.startsWith('/ventlab/') && r.ok && (await r.text()).includes('<svg')
+        }""")
+        configurations = []
+        for initial, supply, offset in ((760,430,30),(820,490,-30)):
+            set_slider("Physical initial room CO₂",initial)
+            set_slider("Supply-air CO₂",supply)
+            set_slider("Sensor noise (SD)",0)
+            set_slider("Room calibration offset",offset)
+            p.get_by_role("button",name="Run simulation").click()
+            configurations.append(download_report("Download experiment report","ventlab-simulation-report.json"))
+        a,b=configurations
+        assert a["plannedSelection"] == b["plannedSelection"] and a["plannedSelection"]["expectedInitialReadingPpm"] == 790
+        assert max(abs(x-y) for x,y in zip(a["before"]["roomObservationsPpm"],b["before"]["roomObservationsPpm"])) < 1e-9
+        assert a["before"]["configuration"]["initial"] != b["before"]["configuration"]["initial"]
+        assert a["plannedSelection"]["recommended"] == "empty"
+        report["identicalRankingAt790ppm"] = True
+        p.get_by_text("Planning constraints",exact=True).click()
+        p.get_by_label("Allow an empty room").uncheck()
+        expect(p.get_by_label("Measurement strategy",exact=True).locator('option[value="empty"]')).to_have_count(0)
+        restricted=download_report("Download experiment report","ventlab-simulation-report.json")
+        set_slider("Physical initial room CO₂",760)
+        set_slider("Supply-air CO₂",430)
+        set_slider("Room calibration offset",30)
+        p.get_by_role("button",name="Run simulation").click()
+        restricted_again=download_report("Download experiment report","ventlab-simulation-report.json")
+        assert restricted["plannedSelection"] == restricted_again["plannedSelection"]
+        assert restricted_again["plannedSelection"]["constraints"]["allowEmpty"] is False
+        p.get_by_role("button",name="Reset experiment").click()
         phase3_journey(p, report, audit, snap)
         simulation = download_report("Download experiment report", "ventlab-simulation-report.json")
         assert simulation["executedComparison"]["after"]["configuration"]["occupancy"] == 0
@@ -128,6 +167,18 @@ def check_browser(context, engine, width, args, report):
     expect(p.locator(".metadata")).to_contain_text("Unmeasured")
     p.get_by_label("Session", exact=True).select_option("1")
     p.get_by_text("Import a local CSV").click()
+    if not args.phase2:
+        # Exercise a near-limit file and cancellation. Only the final selection may be published.
+        header=b"time,co2,people,flow_lps,comment\n"
+        payload=header+b"".join(f"{i*60},650,0,1,".encode()+b"x"*110+b"\n" for i in range(30000))
+        upload=p.get_by_label("CSV file")
+        upload.set_input_files({"name":"large.csv","mimeType":"text/csv","buffer":payload})
+        p.get_by_role("button",name="Cancel import").click()
+        expect(p.get_by_role("button",name="Load recording")).to_have_count(0)
+        upload.set_input_files({"name":"large.csv","mimeType":"text/csv","buffer":payload})
+        p.get_by_role("button",name="Load recording").click()
+        expect(p.locator(".metadata")).to_contain_text("30000",timeout=25000)
+        report["largeImport"]={"rows":30000,"bytes":len(payload),"cancellationAndLoadPassed":True}
     p.get_by_label("CSV file").set_input_files({"name":"custom.csv", "mimeType":"text/csv",
         "buffer":("time,co2,people,flow_lps\n"+"".join(
             f"{60*i},{420+600*math.exp(-2*i/60)},0,7\n" for i in range(31))).encode()})
@@ -177,11 +228,11 @@ def check_browser(context, engine, width, args, report):
         ), "Full synthetic evaluation download failed"
         p.get_by_label("Stress case", exact=True).select_option("Drifting source and fan")
         p.get_by_label("Outcome", exact=True).select_option("inside")
-        expect(p.locator(".policy-chart tr").filter(has_text="Robust ensemble")).to_contain_text("0 / 32")
+        expect(p.locator(".policy-chart tr").filter(has_text="Robust ensemble")).to_contain_text("0 / 96")
         p.get_by_text("Why precision can mislead").click()
         p.get_by_label("Stress case", exact=True).select_option("")
         p.get_by_label("Outcome", exact=True).select_option("rateMAE")
-        expect(p.locator(".policy-chart")).to_contain_text("1.106")
+        expect(p.locator(".policy-chart")).to_contain_text("1.198")
         if width < 640:
             p.locator(".policy-chart").evaluate("table => table.scrollIntoView({block:'center'})")
         else:

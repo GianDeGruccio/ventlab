@@ -1,5 +1,7 @@
 # Robust measurement planning
 
+This document records the historical benchmark implementation. [RC1 numerical corrections, current results and reproduction](phase6-review.md)
+
 Given a starting CO₂ reading and an observation protocol, would another measurement still be informative under several different explanations for the room's behavior? The robust planner compares feasible measurements **before observing a synthetic outcome**. Sliders for hidden ventilation, generation, supply concentration, calibration offset and seed control the demonstration and its eventual outcome. The planner reads only the planned starting room reading, occupancy count, total duration, sampling interval, assumed noise standard deviation, availability of a supply measurement, and explicit constraints. The assumed starting reading is treated as the expected room-sensor reading at time zero.
 
 ## Finite ensemble

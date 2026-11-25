@@ -5,8 +5,8 @@ import {cpus} from 'node:os'
 import {performance} from 'node:perf_hooks'
 import {pathToFileURL} from 'node:url'
 import protocol from './fixtures/phase3-stress-protocol.json'
-import {interventions, plannedWidth} from './src/design'
-import {planningInputs, robustPlan} from './src/robust'
+import {interventions, plannedWidth} from './historical/design'
+import {planningInputs, robustPlan} from './historical/robust'
 import {actions, assessTrial, feasible, plannedDesign, policies, simpleRule,
   type Action, type Policy, type StressCase} from './stress-simulation'
 
@@ -58,7 +58,7 @@ export function planCase(c: StressCase) {
 }
 
 type Trial = ReturnType<typeof assessTrial>
-function summarize(runs: Trial[], baseline: Trial[]) {
+export function summarize(runs: Trial[], baseline: Trial[]) {
   const count = runs.length
   if (!count || baseline.length!==count || runs.some((x,i)=>x.seed!==baseline[i].seed)) {
     throw new Error('Paired seed mismatch')
@@ -98,7 +98,7 @@ function studyCase(c: StressCase, firstSeed: number) {
 }
 
 type CaseResult = ReturnType<typeof studyCase>
-function summarizePolicy(rows: CaseResult[], policy: Policy) {
+export function summarizePolicy(rows: Pick<CaseResult,'policies'|'name'>[], policy: Policy) {
   const selected = rows.map(row=>row.policies[policy])
   const sum = (values:number[]) => values.reduce((s,x)=>s+x,0)
   const delta = rows.map(r=>r.policies[policy].rateMAE-r.policies.unchanged.rateMAE)

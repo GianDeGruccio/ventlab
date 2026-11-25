@@ -2,8 +2,8 @@ import { StressEvidence } from './StressEvidence'
 import { useEffect, useState } from 'react'
 import { BookOpen, Download, ExternalLink, FlaskConical } from 'lucide-react'
 import { benchmarkLinks, bundledFiles, loadBenchmark, type BundledFile } from './recordings'
-import synthetic from '../../reports/phase2-synthetic.json'
-import syntheticUrl from '../../reports/phase2-synthetic.json?url'
+import synthetic from '../../reports/phase6/scenario-study.json'
+import syntheticUrl from '../../reports/phase6/scenario-study.json?url'
 const fmt = (n: number | null) => (n === null ? '—' : n.toFixed(2))
 const stat = (s: string) => (s ? Number(s).toFixed(2) : '—')
 export default function Methods() {
@@ -178,13 +178,14 @@ export default function Methods() {
           <h2>Prospective synthetic evaluation</h2>
         </div>
         <p>
-          Three development scenarios precede six separate evaluation scenarios, with 32 seeded
-          noise draws per scenario. Each strategy is evaluated against known simulated parameters.
+          RC1 continuous recovery. Three development scenarios precede six separate evaluation
+          scenarios, with 32 seeded noise draws per scenario. Each strategy is evaluated against
+          known simulated parameters.
         </p>
         <div
           className="table-wrap"
           role="region"
-          aria-label="Phase 2 synthetic evaluation results"
+          aria-label="RC1 synthetic evaluation results"
           tabIndex={0}
         >
           <table>
@@ -225,7 +226,7 @@ export default function Methods() {
           {s.improvedMeanWidth}, and rate MAE improved in {s.improvedMeanRateMAE}. True-rate
           containment fell after applying the recommendations.
         </p>
-        <a href={syntheticUrl} download="phase2-synthetic.json" className="text-link">
+        <a href={syntheticUrl} download="rc1-scenario-study.json" className="text-link">
           <Download size={15} /> Full benchmark with seeds, assumptions and failures
         </a>
       </section>
@@ -249,9 +250,9 @@ export default function Methods() {
         <h3>Three different quantities</h3>
         <p>
           The empirical seven-scenario range measures sensitivity to sensor offsets and drift. The
-          designer’s prospective width measures distinguishability on a bounded constant-source
-          grid. Error compares an estimate with either a synthetic truth or the mechanical
-          reference. Neither range has a calibrated confidence level.
+          designer’s prospective width measures distinguishability using a continuously refined
+          bounded constant-source profile. Error compares an estimate with either a synthetic truth
+          or the mechanical reference. Neither range has a calibrated confidence level.
         </p>
         <h3>Reference protocol</h3>
         <p>

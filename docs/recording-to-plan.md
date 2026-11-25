@@ -11,6 +11,10 @@ Choose a session and occupancy period in **Data explorer** or a custom window in
 | Modeled parameters | The fixed prospective ensemble supplies unknown ventilation, generation, background and calibration offsets. The independent stress cases supply the evidence behind the limitations. The readout includes alternative strategies and the smallest modeled gain. |
 | Mechanical airflow | Only the existing post-fit reveal reads the reference store. Neither the repeat calculation nor either export reads it. A rate fitted to the historical trace also stays outside the planner. |
 
+## Recommendation eligibility
+
+The prospective ranking optimizes compatible width under fixed ventilation and a bounded constant source. The selected action shows its eligibility for the empirical estimator. Occupied repeats require an independent source model, which the retrospective decay estimator does not supply. A proposed empty-room measurement only addresses the original rate when ventilation operation is maintained. A demand-controlled fan can change the target. The exported proposed repeat includes this interpretation. [RC1 correction evidence](phase6-review.md)
+
 ## Read and export the result
 
 The observed sensitivity range comes from the decay model's sensor scenarios. A prospective mean width instead summarizes hypothetical repeat measurements across the planner's equal-weight ensemble. A simulated compatible range comes from profiling the generated observations. None has calibrated probability coverage. If sensors disagree systematically, improving random precision can sharpen a biased fit. If occupancy or fan settings change, record the transition times and examine stable windows. One room sensor cannot verify mixing or distinguish all sources.

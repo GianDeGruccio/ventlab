@@ -23,7 +23,8 @@ export function Comparison({
     return [Math.min(...values), Math.max(...values)]
   }, [first, second])
   const err = compareErrors(pair)
-  const range = (r: typeof first) => r.compatibleLow.toFixed(2) + '–' + r.compatibleHigh.toFixed(2)
+  const range = (r: typeof first) =>
+    r.compatibleRegions.map(([lo, hi]) => lo.toFixed(5) + '–' + hi.toFixed(5)).join(' ∪ ')
   return (
     <section className="paired">
       <div className="section-heading">
@@ -39,7 +40,7 @@ export function Comparison({
             <h2>Read the new decay</h2>
             <p>
               Removing the simulated source breaks the balance. Check how much the compatible range
-              narrowed and whether the fitted rate moved closer to the known rate.{' '}
+              narrowed. At the original equilibrium, many rate and source pairs fit exactly.{' '}
               <a href="#explorer">Plan from a recording</a>.
             </p>
           </div>
@@ -98,7 +99,7 @@ export function Comparison({
                 ],
                 ['True rate (h⁻¹)', before.rate.toFixed(2), after.rate.toFixed(2)],
                 ['Fitted rate (h⁻¹)', first.fitRate.toFixed(2), second.fitRate.toFixed(2)],
-                ['Absolute rate error (h⁻¹)', err.before.toFixed(2), err.after.toFixed(2)],
+                ['Absolute rate error (h⁻¹)', err.before?.toFixed(2), err.after?.toFixed(2)],
                 [
                   'True total source (ppm/h)',
                   before.occupancy * before.generation,
@@ -117,8 +118,10 @@ export function Comparison({
               ].map(([k, a, b]) => (
                 <tr key={k}>
                   <th>{k}</th>
-                  <td>{a}</td>
-                  <td>{b}</td>
+                  <td>{first.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : a}</td>
+                  <td>
+                    {second.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : b}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -130,9 +133,11 @@ export function Comparison({
               ? 'The compatible range narrowed.'
               : 'The compatible range stayed as wide or grew.'}
           </strong>{' '}
-          {err.improved
-            ? 'The absolute rate error fell.'
-            : 'The absolute rate error did not improve.'}{' '}
+          {first.nonUnique || second.nonUnique
+            ? 'A point fit is non-unique. Directional accuracy is unavailable.'
+            : err.improved
+              ? 'The absolute rate error fell.'
+              : 'The absolute rate error did not improve.'}{' '}
           This is one paired synthetic run.
         </p>
       </div>

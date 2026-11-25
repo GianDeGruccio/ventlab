@@ -94,7 +94,7 @@ function assess(design: Design, firstSeed: number) {
       trialsData.map((r) => Math.abs(r.generation - design.generation * design.occupancy)),
     ),
     meanWidth: mean(trialsData.map((r) => r.width)),
-    targetInside: trialsData.filter((r) => r.low <= design.rate && design.rate <= r.high).length,
+    targetInside: trialsData.filter((r) => r.regions.some(([lo,hi])=>lo<=design.rate && design.rate<=hi)).length,
     searchBoundaryFits: trialsData.filter((r) => r.rate === 0 || r.rate === 8).length,
     meanResidualRMSE: mean(trialsData.map((r) => r.rmse)),
   }
@@ -158,7 +158,7 @@ const report = {
   evaluation: { summary: summary(evalRows), cases: evalRows },
 }
 writeFileSync(
-  new URL('../reports/phase2-synthetic.json', import.meta.url),
+  new URL('../reports/phase6/scenario-study.json', import.meta.url),
   JSON.stringify(report, null, 2) + '\n',
 )
 console.log(

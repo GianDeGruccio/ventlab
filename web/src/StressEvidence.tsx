@@ -1,9 +1,9 @@
 import { PolicyComparison } from './PolicyComparison'
 import { Download, TestTubes } from 'lucide-react'
-import report from '../fixtures/phase3-stress-summary.json'
-import fullReport from '../../reports/phase3-stress.json?url'
+import report from '../fixtures/phase6-stress-summary.json'
+import fullReport from '../../reports/phase6/stress.json?url'
 import protocol from '../fixtures/phase3-stress-protocol.json?url'
-import costs from '../../reports/phase3-stress-timing.json?url'
+import costs from '../../reports/phase6/timing.json?url'
 
 const policies = {
   unchanged: 'Keep current measurement',
@@ -22,8 +22,8 @@ export function StressEvidence() {
       </div>
       <p>
         Eight fixed evaluation cases combine cycling ventilation, changing sources, correlated
-        noise, sensor bias and weak contrast. Each method chose an action before observing the 32
-        paired trials per case.
+        noise, sensor bias and weak contrast. Each method chose an action before observing three
+        predeclared blocks of 32 paired trials per case (RC1).
       </p>
       <PolicyComparison />
       <div
@@ -69,11 +69,21 @@ export function StressEvidence() {
         . These ranges have no calibrated coverage probability. With varying ventilation, error uses
         the time-average rate over the chosen window.
       </p>
+      <p>
+        Robust mean absolute error by seed block (h⁻¹):{' '}
+        {report.blocks.map((b) => b.summary.robust.rateMAE.toFixed(3)).join(' · ')}. In the separate
+        occupancy-responsive control, emptying the simulated room halved the rate. Recovery after
+        emptying concerns a different physical target.
+      </p>
+      <a href="https://github.com/GianDeGruccio/ventlab/blob/main/docs/stress-protocol.md">
+        Historical Phase 3 results and assumptions
+      </a>
       <details className="ledger">
         <summary>Case results and planning policies</summary>
         <p>
-          ¹ The Phase 2 planner receives a fixed nominal guess. ² The simple rule takes an
-          empty-room repeat when feasible, then prefers longer observation, improved precision,
+          ¹ The nominal planner uses a fixed guess, the same feasible actions including
+          keep-current, and the same extra-hour penalty as robust planning. ² The simple rule takes
+          an empty-room repeat when feasible, then prefers longer observation, improved precision,
           supply measurement or an unchanged design. All four policies have the same feasible
           actions.
         </p>
@@ -112,19 +122,19 @@ export function StressEvidence() {
         </div>
       </details>
       <div className="linkbar">
-        <a href={fullReport} download="phase3-stress.json">
+        <a href={fullReport} download="rc1-stress.json">
           <Download />
           All paired outcomes
         </a>
         <a href={protocol} download="stress-protocol.json">
           <Download />
-          Frozen protocol
+          Original case definitions
         </a>
         <a href={costs} download="planning-cost.json">
           <Download />
           Computational costs
         </a>
-        <a href="https://github.com/GianDeGruccio/ventlab/blob/main/docs/stress-protocol.md">
+        <a href="https://github.com/GianDeGruccio/ventlab/blob/main/docs/phase6-review.md">
           Reproduce this study
         </a>
       </div>

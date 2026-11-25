@@ -1,0 +1,5 @@
+# Release-candidate evaluation protocol
+
+Starting revision e3accf6. Keep the original synthetic evidence and re-run the same Phase 2 designs and seeds with continuous recovery. For stress evaluation retain every original case, 32 trials per case and the original development/evaluation seed starts. Repeat independently at offsets 1,000,000 and 2,000,000. Report both pooled and block-level outcomes. Add one separately identifiable occupied-control case using the development occupied control, with the true rate halved when the room is emptied. Its target changes with the action. Report it separately from comparisons across the original eight cases.
+
+Use reproducibly domain-separated SHA-256 seed/tag/counter draws for room bias, duct bias, jitter and Gaussian innovations, shared across interventions. Match the nominal policy to robust feasibility, include keeping the measurement, and apply the same 0.25 per extra hour penalty. Keep the rule ordering and robust objective. No parameters will be selected on evaluation scores. Reproduce empirical reports separately after diagnostic changes.

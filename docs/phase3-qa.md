@@ -6,9 +6,8 @@ The Playwright journeys exercise the built application under the GitHub Pages pr
 (cd web && npm ci && npm run build)
 python -m pip install playwright==1.62.0
 python -m playwright install --with-deps chromium firefox webkit
-npm install --prefix /tmp/ventlab-a11y --no-audit --no-fund axe-core@4.11.0
 python scripts/browser_smoke.py --engines chromium firefox webkit \
-  --axe-script /tmp/ventlab-a11y/node_modules/axe-core/axe.min.js \
+  --axe-script web/node_modules/axe-core/axe.min.js \
   --report /tmp/ventlab-qa.json --screenshots /tmp/ventlab-screens
 ```
 

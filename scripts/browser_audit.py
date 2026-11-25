@@ -105,6 +105,12 @@ def phase3_journey(page, report, audit, snap):
     page.get_by_role("button", name="Finish demo").click()
     expect(page.get_by_role("button", name="Finish demo")).to_have_count(0)
 
+    page.get_by_role("button", name="Start guided demo").click()
+    strategy.select_option("baseline")
+    page.get_by_role("button", name="Run comparison").click()
+    expect(before_after).to_be_visible()
+    expect(page.get_by_role("heading", name="Read the new decay")).to_have_count(0)
+
     page.get_by_role("button", name="Reset experiment").click()
     page.get_by_role("button", name="Configured scenario").click()
     expect(strategy.locator('option[value="baseline"]')).to_have_count(0)

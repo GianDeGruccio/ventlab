@@ -69,7 +69,7 @@ export default function Designer() {
   const [pair, setPair] = useState<PairedResult | null>(null)
   function runComparison(id: OptionId, minutes: number, label: string) {
     setPair(compareMeasurement(applied, r, id, minutes, label))
-    if (guide) setGuide(3)
+    setGuide(guide && id === 'empty' ? 3 : 0)
   }
   function startGuide() {
     const demo = {

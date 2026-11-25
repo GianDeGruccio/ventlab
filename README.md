@@ -1,9 +1,20 @@
-# ventlab
-Physics-based ventilation inference, uncertainty quantification, and optimal scientific measurement design.
+# VentLab
 
-## Phase 2 web application
+Two ventilation rates can explain the same indoor CO₂ record when the occupants’ CO₂ generation is unknown. VentLab lets you inspect those competing explanations, choose another measurement and see whether it improves the estimate.
 
-VentLab runs the CO₂ experiment designer, blind empirical validation lab, and recording explorer in the browser. Open **Methods** inside the app for both synthetic and retrospective results, including abstentions and failed estimates.
+The [public application](https://giandegruccio.github.io/ventlab/) runs the reviewed Phase 2 release. This Phase 3 branch adds robust measurement planning and paired synthetic experiments.
+
+## Try the Phase 3 experiment
+
+In **Experiment designer**, choose **Start guided demo**. An occupied room holds steady at 520 ppm. Inspect the combinations of generation and ventilation that produce that reading, then choose **Compare an empty room**. The paired trajectories, linked residual maps and recovery table show what changed when the source was removed.
+
+For your own simulated experiment, select **Robust ensemble** or **Configured scenario** in **Measurement strategies**, choose a feasible action and run the comparison. **Methods** contains the 256-trial stress comparison, including cases where a narrower range accompanied a worse estimate. **Blind validation** separately evaluates retrospective room recordings against measured mechanical airflow. Prospective field validation remains open.
+
+- [Ensemble assumptions, objective and constraints](docs/robust-planning.md)
+- [Independent synthetic stress protocol and results](docs/stress-protocol.md)
+- [Browser checks and screenshots](docs/phase3-qa.md)
+
+## Run locally
 
 With Node.js 24 and npm installed, run the following from the repository root.
 
@@ -18,7 +29,7 @@ Open the URL printed by Vite. For a static distribution, run `npm run build` in 
 - [Application guide, deployment and verification](docs/web-application.md)
 - [Experiment design model, strategy ranking and seeded benchmark](docs/design-study.md)
 - [Python–TypeScript numerical agreement](docs/parity.md)
-- [Desktop](docs/screenshots/designer-1440.png) · [Mobile](docs/screenshots/designer-390.png) · [Identifiability and strategy ranking](docs/screenshots/measurement-design.png) · [Blind validation](docs/screenshots/validation-1440.png)
+- Phase 2 screenshots: [Desktop](docs/screenshots/designer-1440.png) · [Mobile](docs/screenshots/designer-390.png) · [Identifiability and strategy ranking](docs/screenshots/measurement-design.png) · [Blind validation](docs/screenshots/validation-1440.png)
 
 ## Phase 1 scientific reference
 

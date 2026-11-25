@@ -259,7 +259,7 @@ export default function Methods() {
           <a href="https://github.com/GianDeGruccio/ventlab">
             Source repository <ExternalLink />
           </a>
-          <a href={import.meta.env.BASE_URL + 'licenses.txt'} download="licenses.txt">
+          <a href={import.meta.env.PROD ? import.meta.env.BASE_URL + 'licenses.txt' : 'https://github.com/GianDeGruccio/ventlab/blob/main/LICENSE'} download="licenses.txt">
             Software & font notices <Download />
           </a>
         </div>

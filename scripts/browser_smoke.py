@@ -51,6 +51,9 @@ def check_browser(browser, width, height, screenshots):
             p.screenshot(path=screenshots / f"{name}-{width}.png", animations="disabled")
 
     snap("designer")
+    if screenshots and width > 800:
+        p.locator(".analysis-grid").screenshot(path=screenshots / "measurement-design.png")
+
     p.get_by_role("slider", name="Air-change rate").press("ArrowRight")
     expect(p.get_by_text("Settings changed · run to apply")).to_be_visible()
     p.get_by_role("button", name="Run simulation").click()

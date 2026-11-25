@@ -3,6 +3,8 @@ import { scaleSequential, interpolateRgbBasis, scaleLinear } from 'd3'
 import {
   Activity,
   ArrowDownRight,
+  ArrowUpRight,
+  Minus,
   ArrowRight,
   ChevronDown,
   Clock3,
@@ -384,8 +386,9 @@ export default function Designer() {
                 </small>
               </div>
               <span className="reduction">
-                <ArrowDownRight size={14} />
-                {s.reduction.toFixed(2)} h⁻¹
+                {Math.abs(s.reduction) < 0.005 ? <Minus size={14} aria-label="No change at displayed precision" /> :
+                  s.reduction > 0 ? <ArrowDownRight size={14} aria-label="Narrower" /> : <ArrowUpRight size={14} aria-label="Wider" />}
+                {Math.abs(s.reduction).toFixed(2)} h⁻¹
               </span>
             </div>
           ))}

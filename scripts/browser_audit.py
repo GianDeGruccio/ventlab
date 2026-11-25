@@ -101,6 +101,8 @@ def phase3_journey(page, report, audit, snap):
     report["guidedComparisonObservedMs"] = round(1000 * (time.perf_counter() - guide_start), 2)
     page.get_by_role("heading", name="Paired CO₂ trajectories").scroll_into_view_if_needed()
     snap("comparison")
+    pair.locator(".analysis-grid").scroll_into_view_if_needed()
+    snap("paired-maps")
     audit("guided comparison")
     page.get_by_role("button", name="Finish demo").click()
     expect(page.get_by_role("button", name="Finish demo")).to_have_count(0)

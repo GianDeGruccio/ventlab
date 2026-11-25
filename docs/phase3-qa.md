@@ -20,3 +20,25 @@ Each run checks the first Tab stop and skip-to-main focus, keyboard traversal of
 The axe scan covers WCAG 2 and 2.1 Level A/AA automated rules at six states: initial Designer, guided paired comparison, constrained robust ranking, blind reference reveal, CSV mapping, and Methods with an open archive ledger. Keyboard and layout checks supplement the scans. Narrow viewports are browser emulations. Physical devices, assistive technology with human users, Safari itself, and user studies remain untested.
 
 Navigation timing samples come from fresh browser contexts on the same managed Linux host without explicit CPU or bandwidth throttling. The fixture resolves files from disk and routes them through Playwright. FCP is the browser's first contentful paint. The observed default-planner time includes Playwright waiting for the document, plot, fonts, and strategy control; simulation time includes the automated click and display assertion. Single observations describe this run and do not predict field latency or percentiles.
+
+## Review results
+
+The [PR verification run](https://github.com/GianDeGruccio/ventlab/actions/runs/45581058649) passed 19 Python tests, 49 TypeScript tests and the production build. It served the built assets under the project prefix and exercised the complete journeys in each cell below. Every cell completed six axe scans. The checks reported zero violations, page errors, console errors or missing fixture assets.
+
+| Browser engine on Linux | 1440 × 1000 | 390 × 844 |
+|---|---|---|
+| Chromium 151.0.7922.34 | Passed | Passed |
+| Firefox 153.0 | Passed | Passed |
+| WebKit 26.5 | Passed | Passed |
+
+On the local review host, single observations on desktop and narrow Chromium and WebKit ranged from 0.67–2.62 s to the first usable strategy control and 87–267 ms from applying a rate change to observing the updated simulation. These observations include browser and test-driver work. The [stress study](stress-protocol.md#computational-cost) separately reports planner-only timings. Axe left some color-contrast checks for manual review. A human screen-reader evaluation and physical-device testing remain open.
+
+## Screenshots
+
+| Workflow | Desktop | Narrow viewport |
+|---|---|---|
+| Designer entry and two competing fits | [Desktop designer](screenshots/phase3/designer-1440.png) | [Mobile designer](screenshots/phase3/designer-390.png) |
+| Guided empty-room comparison | [Paired trajectories](screenshots/phase3/comparison-1440.png) | [Paired trajectories](screenshots/phase3/comparison-390.png) |
+| One parameter pair across two experiments | [Linked residual maps](screenshots/phase3/paired-maps-1440.png) | [Linked residual maps](screenshots/phase3/paired-maps-390.png) |
+| Stress evidence in Methods | [Policy comparison](screenshots/phase3/evidence-1440.png) | [Policy comparison](screenshots/phase3/evidence-390.png) |
+| Blind analysis and mechanical reference | [Retrospective measurement](screenshots/phase3/validation-1440.png) | [Retrospective measurement](screenshots/phase3/validation-390.png) |

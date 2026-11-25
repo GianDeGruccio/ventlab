@@ -65,6 +65,7 @@ export function Chart({ minutes, traces, title, dark = false, unit = 'ppm', sele
         tabIndex={0}
         role="img"
         aria-labelledby={id}
+        aria-describedby={id + '-readout'}
         aria-label={title}
         onKeyDown={(e) => {
           if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
@@ -146,7 +147,7 @@ export function Chart({ minutes, traces, title, dark = false, unit = 'ppm', sele
           />
         )}
       </svg>
-      <div className="axis-caption">
+      <div className="axis-caption" id={id + '-readout'}>
         {ix === null ? (
           'Elapsed time (min)'
         ) : (

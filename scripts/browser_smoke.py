@@ -1,46 +1,48 @@
-"""Exercise the built application in Chromium under a GitHub Pages project path.
-
-Playwright serves only the distribution files via its request fixture. This
-checks that a published static artifact works without a backend or an origin
-root fallback. No browser requests leave the test.
-"""
+"""Verify VentLab core journeys at desktop and mobile widths against a static build or a live Pages URL."""
 import argparse
+import json
 import math
-import mimetypes
+import time
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
-
 from playwright.sync_api import expect, sync_playwright
+
+from browser_audit import FIXTURE, audit_accessibility, bind_fixture, keyboard_skip, phase3_journey, timings
 
 
 PROJECT = Path(__file__).resolve().parents[1]
-BASE = "https://ventlab.test/ventlab/"
 
 
-def check_browser(browser, width, height, screenshots):
-    context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1)
-    failures = []
-    dist = PROJECT / "web/dist"
-
-    def serve(route):
-        path = unquote(urlsplit(route.request.url).path)
-        if not route.request.url.startswith(BASE):
-            failures.append("Unexpected request " + route.request.url)
-            return route.abort()
-        f = (dist / (path[len('/ventlab/'):] or "index.html")).resolve()
-        if not f.is_relative_to(dist) or not f.is_file():
-            failures.append("Missing static asset " + path)
-            return route.fulfill(status=404)
-        route.fulfill(path=f, content_type=mimetypes.guess_type(f.name)[0] or "application/octet-stream")
-
-    context.route("**/*", serve)
+def check_browser(context, engine, width, args, report):
+    failures = report["errors"]
+    screenshots = args.screenshots
+    if screenshots and len(args.engines) > 1:
+        screenshots = screenshots / engine
+    if screenshots:
+        screenshots.mkdir(parents=True, exist_ok=True)
+    if not args.url:
+        bind_fixture(context, args.dist, failures)
     p = context.new_page()
+    p.set_default_timeout(12000)
     p.on("pageerror", lambda error: failures.append(str(error)))
     p.on("console", lambda msg: failures.append(msg.text) if msg.type == "error" else None)
-    p.goto(BASE)
+    p.on("response", lambda response: failures.append(f"HTTP {response.status} {response.url}")
+         if response.status >= 400 else None)
+    p.goto(args.url or FIXTURE, wait_until="load", timeout=30000)
     nav = p.get_by_role("navigation")
     p.get_by_role("heading", name="CO₂ trajectory").wait_for()
     p.evaluate("document.fonts.ready")
+    p.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+    report["navigation"] = timings(p)
+    if not args.phase2:
+        p.get_by_label("Measurement strategy", exact=True).wait_for(timeout=30000)
+        report["defaultPlannerReadyObservedMs"] = round(p.evaluate("performance.now()"), 2)
+    keyboard_skip(p)
+    p.get_by_role("link", name="VentLab home").focus()
+    p.evaluate("scrollTo(0,0)")
+
+    def audit(name):
+        if args.axe_script:
+            report["accessibility"].append(audit_accessibility(p, args.axe_script, name))
 
     def fits():
         assert p.evaluate("document.documentElement.scrollWidth <= innerWidth"), "Horizontal overflow"
@@ -51,13 +53,16 @@ def check_browser(browser, width, height, screenshots):
             p.screenshot(path=screenshots / f"{name}-{width}.png", animations="disabled")
 
     snap("designer")
+    audit("designer")
     if screenshots and width > 800:
         p.locator(".analysis-grid").screenshot(path=screenshots / "measurement-design.png")
 
     p.get_by_role("slider", name="Air-change rate").press("ArrowRight")
     expect(p.get_by_text("Settings changed · run to apply")).to_be_visible()
+    start = time.perf_counter()
     p.get_by_role("button", name="Run simulation").click()
     expect(p.locator(".instrument-stats")).to_contain_text("1.90")
+    report["applySimulationObservedMs"] = round(1000 * (time.perf_counter() - start), 2)
     p.get_by_text("Sensor & occupancy settings").click()
     p.get_by_label("Measured supply CO₂").check()
     p.get_by_role("button", name="Run simulation").click()
@@ -70,6 +75,8 @@ def check_browser(browser, width, height, screenshots):
     p.get_by_role("img", name="Residual surface", exact=False).press("ArrowRight")
     expect(p.locator(".map-readout")).to_contain_text("RMSE")
 
+    if not args.phase2:
+        phase3_journey(p, report, audit, snap)
     nav.get_by_text("Blind validation").click()
     expect(p.get_by_role("heading", name="Blind validation", exact=True)).to_be_visible()
     period = p.get_by_label("Occupancy period")
@@ -91,8 +98,8 @@ def check_browser(browser, width, height, screenshots):
     expect(p.get_by_role("button", name="Recorded count")).to_be_visible()
     p.get_by_role("button", name="CO₂", exact=True).click()
     p.evaluate("scrollTo(0, 0)")
-    if width > 800:
-        snap("validation")
+    audit("blind reference revealed")
+    snap("validation")
     p.get_by_label("Session", exact=True).select_option("1")
     expect(p.locator(".results")).to_have_count(0)
 
@@ -105,6 +112,7 @@ def check_browser(browser, width, height, screenshots):
     p.get_by_label("CSV file").set_input_files({"name":"custom.csv", "mimeType":"text/csv",
         "buffer":("time,co2,people,flow_lps\n"+"".join(
             f"{60*i},{420+600*math.exp(-2*i/60)},0,7\n" for i in range(31))).encode()})
+    audit("CSV column mapping")
     p.get_by_label("Volume (m³, optional)").fill("21.87")
     p.get_by_role("button", name="Load recording").click()
     expect(p.locator(".metadata")).to_contain_text("custom")
@@ -121,23 +129,70 @@ def check_browser(browser, width, height, screenshots):
     p.get_by_label("Ledger recording").select_option("training_data_2.csv")
     expect(p.locator(".pager")).to_contain_text("Page 1 of 7")
     expect(p.get_by_role("heading", name="Prospective synthetic evaluation")).to_be_visible()
+    if not args.phase2:
+        stress = p.get_by_role("heading", name="Independent synthetic stress test")
+        expect(stress).to_be_visible()
+        p.get_by_text("Case results and planning policies", exact=True).click()
+        expect(p.get_by_role("table", name="Robust strategy versus unchanged design")).to_be_visible()
+        assert p.get_by_role("link", name="All paired outcomes").evaluate(
+            "async el => {const r=await fetch(el.href); return r.ok && (await r.json()).evaluation.cases.length > 0}"
+        ), "Full synthetic evaluation download failed"
+        stress.scroll_into_view_if_needed()
+        snap("evidence")
     fits()
+    audit("methods and open archive ledger")
     p.reload()
     expect(p.get_by_role("heading", name="Methods & evidence")).to_be_visible()
-    assert not failures, failures
-    context.close()
-    print(f"{width}×{height}: designer, map, blind comparisons, abstention, explorer, CSV upload, ledger, deep link and assets passed; zero console/page errors")
+    report["journeyPassed"] = True
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--engines", nargs="+", choices=("chromium", "firefox", "webkit"), default=["chromium"])
+    parser.add_argument("--chromium", help="Optional system Chromium executable")
+    parser.add_argument("--webkit", help="Optional Playwright-compatible WebKit executable")
+    parser.add_argument("--url", help="Test this real project URL instead of the isolated static artifact fixture")
+    parser.add_argument("--dist", type=Path, default=PROJECT / "web/dist")
+    parser.add_argument("--axe-script", type=Path, help="Local axe-core/axe.min.js for WCAG 2.1 A/AA checks")
+    parser.add_argument("--report", type=Path, help="Write per-viewport measurements and accessibility findings as JSON")
+    parser.add_argument("--screenshots", type=Path)
+    parser.add_argument("--phase2", action="store_true", help="Run original journeys only, e.g. for a Phase 2 deployment")
+    args = parser.parse_args()
+    if not args.url and not (args.dist / "index.html").is_file():
+        parser.error("Build the static application before running the fixture")
+    if args.axe_script and not args.axe_script.is_file():
+        parser.error("Pass the path to a local axe.min.js bundle for accessibility checks")
+    runs = []
+    with sync_playwright() as pw:
+        for engine in args.engines:
+            executable = args.chromium if engine == "chromium" else args.webkit if engine == "webkit" else None
+            try:
+                browser = getattr(pw, engine).launch(executable_path=executable, timeout=22000)
+            except Exception as exc:
+                runs.append({"engine": engine, "errors": [str(exc)]})
+                continue
+            try:
+                for width, height in [(1440, 1000), (390, 844)]:
+                    r = {"engine": engine, "version": browser.version, "viewport": [width, height],
+                         "target": args.url or FIXTURE, "accessibility": [], "errors": [], "journeyPassed": False}
+                    runs.append(r)
+                    context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1)
+                    try:
+                        check_browser(context, engine, width, args, r)
+                    except Exception as exc:
+                        r["errors"].append(str(exc))
+                    finally:
+                        context.close()
+                    print(f"{engine} {r['version']} {width}×{height} journeys={r['journeyPassed']} "
+                          f"violations={sum(len(x['violations']) for x in r['accessibility'])} "
+                          f"errors={r['errors']}", flush=True)
+            finally:
+                browser.close()
+    if args.report:
+        args.report.parent.mkdir(parents=True, exist_ok=True)
+        args.report.write_text(json.dumps(runs, indent=2) + "\n")
+    return int(any(r["errors"] or any(a["violations"] for a in r.get("accessibility", [])) for r in runs))
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--chromium", help="Optional system Chromium executable")
-    parser.add_argument("--screenshots", type=Path)
-    args = parser.parse_args()
-    if args.screenshots:
-        args.screenshots.mkdir(parents=True, exist_ok=True)
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(executable_path=args.chromium)
-        for size in [(1440, 1000), (390, 844)]:
-            check_browser(browser, *size, args.screenshots)
-        browser.close()
+    raise SystemExit(main())

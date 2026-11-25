@@ -1,22 +1,19 @@
 import { useMemo, useState, useId } from 'react'
-import {Surface} from './Surface'
-import {Planner} from './Planner'
-import {Comparison, compareMeasurement, type PairedResult} from './Comparison'
-import {type OptionId} from './robust'
-import {useEffect} from 'react'
+import { Surface } from './Surface'
+import { Planner } from './Planner'
+import { Comparison, compareMeasurement, type PairedResult } from './Comparison'
+import { type OptionId } from './robust'
+import { useEffect } from 'react'
 import {
   Activity,
-
   ArrowRight,
   ChevronDown,
-  Clock3,
+  GitCompareArrows,
   FlaskConical,
-
   Layers3,
   Play,
   RotateCcw,
   SlidersHorizontal,
-
   Waves,
 } from 'lucide-react'
 import { type Design, defaultDesign, experiment } from './design'
@@ -75,11 +72,29 @@ export default function Designer() {
     if (guide) setGuide(3)
   }
   function startGuide() {
-    const demo = {...defaultDesign, initial:520, supply:420, rate:2, generation:200, occupancy:1, noise:0, supplyKnown:true}
-    setApplied(demo); setDraft(demo); setPair(null); setGuide(1)
+    const demo = {
+      ...defaultDesign,
+      initial: 520,
+      supply: 420,
+      rate: 2,
+      generation: 200,
+      occupancy: 1,
+      noise: 0,
+      supplyKnown: true,
+    }
+    setApplied(demo)
+    setDraft(demo)
+    setPair(null)
+    setGuide(1)
   }
   useEffect(() => {
-    const target = pair ? 'comparison-title' : guide === 2 ? 'plan-title' : guide === 1 ? 'guide-title' : null
+    const target = pair
+      ? 'comparison-title'
+      : guide === 2
+        ? 'plan-title'
+        : guide === 1
+          ? 'guide-title'
+          : null
     if (target) document.getElementById(target)?.focus()
   }, [pair, guide])
   const pending = JSON.stringify(draft) !== JSON.stringify(applied)
@@ -115,21 +130,47 @@ export default function Designer() {
             Synthetic measurement design
           </div>
           <h1>Experiment designer</h1>
-          <p>Two ventilation rates can explain a similar CO₂ trace. Test which measurement helps tell them apart.</p>
+          <p>
+            Two ventilation rates can explain a similar CO₂ trace. Test which measurement helps tell
+            them apart.
+          </p>
         </div>
-        <div className="designer-actions"><button className="primary" onClick={startGuide}><FlaskConical size={16}/>Start guided demo</button>
-        <button
-          className="subtle-btn"
-          onClick={() => {
-            setDraft({ ...defaultDesign })
-            setApplied({ ...defaultDesign })
-            setRun(0); setGuide(0); setPair(null)
-          }}
-        >
-          <RotateCcw size={15} /> Reset experiment
-        </button></div>
+        <div className="designer-actions">
+          <button className="primary" onClick={startGuide}>
+            <FlaskConical size={16} />
+            Start guided demo
+          </button>
+          <button
+            className="subtle-btn"
+            onClick={() => {
+              setDraft({ ...defaultDesign })
+              setApplied({ ...defaultDesign })
+              setRun(0)
+              setGuide(0)
+              setPair(null)
+            }}
+          >
+            <RotateCcw size={15} /> Reset experiment
+          </button>
+        </div>
       </div>
-      {guide === 1 && <section className="guide-panel"><div><small>Guided demo · 1 of 3</small><h2 id="guide-title" tabIndex={-1}>Why does the trace stay flat?</h2><p>One occupant adds 200 ppm/h. Ventilation removes 2 × (520 − 420) = 200 ppm/h. At equilibrium the indoor sensor reads 520 ppm throughout, even with perfect precision.</p></div><button className="subtle-btn" onClick={()=>setGuide(2)}>Inspect the map <ArrowRight size={16}/></button></section>}
+      {guide === 1 && (
+        <section className="guide-panel">
+          <div>
+            <small>Guided demo · 1 of 3</small>
+            <h2 id="guide-title" tabIndex={-1}>
+              Why does the trace stay flat?
+            </h2>
+            <p>
+              One occupant adds 200 ppm/h. Ventilation removes 2 × (520 − 420) = 200 ppm/h. At
+              equilibrium the indoor sensor reads 520 ppm throughout, even with perfect precision.
+            </p>
+          </div>
+          <button className="subtle-btn" onClick={() => setGuide(2)}>
+            Inspect the map <ArrowRight size={16} />
+          </button>
+        </section>
+      )}
       <div className="designer-grid">
         <section className="trajectory">
           <div className="trajectory-head">
@@ -154,11 +195,15 @@ export default function Designer() {
               { label: 'Alternative fit', values: r.alternative, color: '#f5b47f', style: 'dash' },
             ]}
           />
+          <div className="plot-context">
+            {r.minutes.length} samples over {applied.duration} min · sensor noise SD {applied.noise}{' '}
+            ppm
+          </div>
           <div className="instrument-stats">
             <div>
               <span>
                 <Waves />
-                Air-change rate
+                Configured rate
               </span>
               <strong>
                 {applied.rate.toFixed(2)} <small>h⁻¹</small>
@@ -166,20 +211,20 @@ export default function Designer() {
             </div>
             <div>
               <span>
-                <Clock3 />
-                Duration
+                <GitCompareArrows />
+                Alternative rate
               </span>
               <strong>
-                {applied.duration} <small>min</small>
+                {r.alternativeRate.toFixed(2)} <small>h⁻¹</small>
               </strong>
             </div>
             <div>
               <span>
                 <Layers3 />
-                Observations
+                Alternative fit RMSE
               </span>
               <strong>
-                {r.minutes.length} <small>samples</small>
+                {r.alternativeRmse.toFixed(1)} <small>ppm</small>
               </strong>
             </div>
           </div>
@@ -221,7 +266,9 @@ export default function Designer() {
           <button
             className="primary"
             onClick={() => {
-              setApplied({ ...draft }); setPair(null); setGuide(0)
+              setApplied({ ...draft })
+              setPair(null)
+              setGuide(0)
               setRun((n) => n + 1)
             }}
           >
@@ -238,13 +285,44 @@ export default function Designer() {
           </div>
         </aside>
       </div>
-      <div className="section-heading"><h2 id="plan-title" tabIndex={-1}>Choose the next measurement</h2></div>
-      {guide === 2 && <section className="guide-panel"><div><small>Guided demo · 2 of 3</small><h2>Trace the band of fitting pairs</h2><p>At equilibrium, generation = 100 × air-change rate. Every physically allowed pair along that line predicts the same CO₂ level. Try repeating the experiment after the occupant leaves.</p></div><button className="subtle-btn" onClick={()=>runComparison('empty', applied.duration,'Observe an empty room')}>Compare an empty room <ArrowRight size={16}/></button></section>}
-      <div className="analysis-grid">
-        <Surface r={r}/>
-        <Planner key={JSON.stringify(applied)} design={applied} result={r} onCompare={runComparison} onInvalidate={()=>{setPair(null);if(guide===3)setGuide(0)}}/>
+      <div className="section-heading">
+        <h2 id="plan-title" tabIndex={-1}>
+          Choose the next measurement
+        </h2>
       </div>
-      {pair && <Comparison pair={pair} guided={guide === 3} finishGuide={()=>setGuide(0)}/>}
+      {guide === 2 && (
+        <section className="guide-panel">
+          <div>
+            <small>Guided demo · 2 of 3</small>
+            <h2>Trace the band of fitting pairs</h2>
+            <p>
+              At equilibrium, generation = 100 × air-change rate. Every physically allowed pair
+              along that line predicts the same CO₂ level. Try repeating the experiment after the
+              occupant leaves.
+            </p>
+          </div>
+          <button
+            className="subtle-btn"
+            onClick={() => runComparison('empty', applied.duration, 'Observe an empty room')}
+          >
+            Compare an empty room <ArrowRight size={16} />
+          </button>
+        </section>
+      )}
+      <div className="analysis-grid">
+        <Surface r={r} empty={applied.occupancy === 0} />
+        <Planner
+          key={JSON.stringify(applied)}
+          design={applied}
+          result={r}
+          onCompare={runComparison}
+          onInvalidate={() => {
+            setPair(null)
+            if (guide === 3) setGuide(0)
+          }}
+        />
+      </div>
+      {pair && <Comparison pair={pair} guided={guide === 3} finishGuide={() => setGuide(0)} />}
       <div className="insight">
         <FlaskConical size={21} />
         <p>

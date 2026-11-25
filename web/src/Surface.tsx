@@ -1,12 +1,27 @@
-import {useState,useMemo} from 'react'
-import {scaleSequential,interpolateRgbBasis,scaleLinear} from 'd3'
-import {Grid2X2} from 'lucide-react'
-import type {experiment} from './design'
+import { useState, useMemo, useId } from 'react'
+import { scaleSequential, interpolateRgbBasis, scaleLinear } from 'd3'
+import { Grid2X2 } from 'lucide-react'
+import type { experiment } from './design'
 type Result = ReturnType<typeof experiment>
 export type Probe = [number, number] | null
-export function Surface({ r, label = 'Identifiability map', limits, sharedProbe, onProbe, paired = false }: {
-  r: Result; label?: string; limits?: [number, number]; sharedProbe?: Probe; onProbe?: (p: Probe)=>void; paired?:boolean
+export function Surface({
+  r,
+  label = 'Identifiability map',
+  limits,
+  sharedProbe,
+  onProbe,
+  paired = false,
+  empty = false,
+}: {
+  r: Result
+  label?: string
+  limits?: [number, number]
+  sharedProbe?: Probe
+  onProbe?: (p: Probe) => void
+  paired?: boolean
+  empty?: boolean
 }) {
+  const readoutId = useId()
   const [localProbe, setLocal] = useState<Probe>(null)
   const picked = sharedProbe === undefined ? localProbe : sharedProbe
   const setPicked = onProbe ?? setLocal
@@ -50,12 +65,17 @@ export function Surface({ r, label = 'Identifiability map', limits, sharedProbe,
         <Grid2X2 size={19} />
         <h2>{label}</h2>
       </div>
-      <p>{paired ? "Shared axes and residual scale · lower values fit better." : "Follow the pale band to find different sources and rates that fit the same trace."}</p>
+      <p>
+        {paired
+          ? 'Shared axes and residual scale · lower values fit better.'
+          : 'Follow the pale band to find different sources and rates that fit the same trace.'}
+      </p>
       <div className="plot-unit">Total generation (ppm/h)</div>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         role="img"
-        aria-label="Residual surface. Use arrow keys or point to inspect the ventilation and generation grid."
+        aria-label={label + ' · Residual surface. Use arrow keys or point to inspect.'}
+        aria-describedby={readoutId}
         tabIndex={0}
         onKeyDown={(e) => {
           if (!['ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp'].includes(e.key)) return
@@ -114,6 +134,17 @@ export function Surface({ r, label = 'Identifiability map', limits, sharedProbe,
             {+r.rates[i].toFixed(2)}
           </text>
         ))}
+        {empty && (
+          <line
+            x1={L}
+            x2={W - R}
+            y1={yf(0.5)}
+            y2={yf(0.5)}
+            stroke="white"
+            strokeDasharray="4 3"
+            strokeWidth={1.3}
+          />
+        )}
         {active && (
           <circle
             cx={xf(active[0] + 0.5)}
@@ -131,11 +162,16 @@ export function Surface({ r, label = 'Identifiability map', limits, sharedProbe,
         <i />
         <span>{hi.toFixed(0)} ppm RMSE</span>
       </div>
-      <div className="map-readout">
+      <div className="map-readout" id={readoutId}>
         {active
           ? `${r.rates[active[0]].toFixed(2)} h⁻¹ · ${r.sources[active[1]].toFixed(0)} ppm/h · RMSE ${r.surface[active[1]][active[0]].toFixed(1)} ppm`
           : `Best grid fit · ${r.fitRate.toFixed(2)} h⁻¹ · ${r.fitGeneration.toFixed(0)} ppm/h`}
       </div>
+      {empty && (
+        <p className="map-caveat">
+          Empty room · the marked zero-source row contains the admissible fits.
+        </p>
+      )}
       <details>
         <summary>Surface assumptions</summary>
         <p>

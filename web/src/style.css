@@ -5,7 +5,7 @@
   font-synthesis: none;
   --ink: #142d36;
   --muted: #53676c;
-  --teal: #087b6b;
+  --teal: #066e5e;
   --line: #d4ddda;
   --mono: 'IBM Plex Mono', monospace;
   --serif: 'Instrument Serif', Georgia, serif;
@@ -1137,4 +1137,132 @@ td {
     align-content: center;
     row-gap: 10px;
   }
+}
+
+/* Scientific workflow controls and paired reading */
+.designer-actions,
+.mode-switch,
+.guide-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.designer-actions {
+  flex-wrap: wrap;
+}
+.page-heading p {
+  max-width: 670px;
+}
+.guide-panel {
+  background: #e4f1eb;
+  border: 1px solid #94c7b7;
+  border-left: 4px solid #0b7664;
+  border-radius: 9px;
+  padding: 18px 20px;
+  justify-content: space-between;
+  margin: 0 0 16px;
+}
+.guide-panel small {
+  font: 11px var(--mono);
+  color: #226452;
+}
+.guide-panel h2 {
+  margin: 4px 0;
+}
+.guide-panel p,
+.planner .field {
+  font-size: 13px;
+}
+.guide-panel button {
+  flex-shrink: 0;
+}
+.mode-switch {
+  background: #eef3f0;
+  border-radius: 7px;
+  padding: 4px;
+  margin-top: 16px;
+  gap: 3px;
+}
+.mode-switch button {
+  flex: 1;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 8px 4px;
+  color: #314c4d;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mode-switch button[aria-pressed='true'] {
+  background: white;
+  border-color: #a5c8bd;
+  color: #116b5d;
+}
+.planner > select {
+  display: block;
+  width: 100%;
+  background: white;
+  border: 1px solid #9eafa9;
+  border-radius: 5px;
+  padding: 9px;
+  color: var(--ink);
+  margin: 6px 0;
+}
+.planner .field {
+  margin: 12px 0 4px;
+}
+.plan-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  border-block: 1px solid var(--line);
+  margin: 14px 0;
+  padding: 12px 0;
+}
+.plan-metrics small,
+.plan-metrics b {
+  display: block;
+}
+.plan-metrics small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.plan-metrics b {
+  font: 14px var(--mono);
+  margin-top: 6px;
+}
+.planner > .primary {
+  width: 100%;
+  margin-top: 14px;
+}
+.paired .chart svg {
+  max-height: 290px;
+}
+.paired .trajectory .card-head > svg {
+  color: #88d6c6;
+}
+.comparison-finding {
+  padding: 10px 14px;
+  border-left: 3px solid var(--teal);
+  background: #eff6f1;
+}
+@media (max-width: 790px) {
+  .guide-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .page-heading:has(.designer-actions) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.plot-context {
+  font: 11px var(--mono);
+  color: #c5d6d2;
+  padding: 0 24px 13px;
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
 }

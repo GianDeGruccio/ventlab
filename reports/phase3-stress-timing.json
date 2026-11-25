@@ -1,0 +1,273 @@
+{
+  "node": "v24.22.3",
+  "platform": "linux",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "warmup": 1,
+  "repetitions": 11,
+  "cases": [
+    {
+      "name": "Fan cycling",
+      "operations": {
+        "nominalWidthEvaluations": 5,
+        "nominalCandidateRateLosses": 805,
+        "robustWidthEvaluations": 1080,
+        "robustCandidateRateLosses": 173880,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00015099999998824387,
+          "medianMs": 0.0003399999999942338,
+          "maxMs": 0.0011119999999920083
+        },
+        "nominal": {
+          "minMs": 0.7118020000000058,
+          "medianMs": 0.8906320000000107,
+          "maxMs": 1.0594760000000036
+        },
+        "rule": {
+          "minMs": 0.000580999999996834,
+          "medianMs": 0.0007710000000002992,
+          "maxMs": 0.004576999999997611
+        },
+        "robust": {
+          "minMs": 7.906519999999972,
+          "medianMs": 9.024925999999994,
+          "maxMs": 15.288160000000005
+        }
+      }
+    },
+    {
+      "name": "Changing occupied source",
+      "operations": {
+        "nominalWidthEvaluations": 4,
+        "nominalCandidateRateLosses": 644,
+        "robustWidthEvaluations": 864,
+        "robustCandidateRateLosses": 139104,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00018999999997504347,
+          "medianMs": 0.00032999999999105967,
+          "maxMs": 0.000981999999993377
+        },
+        "nominal": {
+          "minMs": 0.4886860000000013,
+          "medianMs": 0.5244000000000142,
+          "maxMs": 0.6042499999999791
+        },
+        "rule": {
+          "minMs": 0.0006109999999921456,
+          "medianMs": 0.0006309999999984939,
+          "maxMs": 0.001031999999980826
+        },
+        "robust": {
+          "minMs": 3.67299399999996,
+          "medianMs": 3.8757289999999784,
+          "maxMs": 5.76655599999998
+        }
+      }
+    },
+    {
+      "name": "Persistent sensor noise",
+      "operations": {
+        "nominalWidthEvaluations": 4,
+        "nominalCandidateRateLosses": 644,
+        "robustWidthEvaluations": 864,
+        "robustCandidateRateLosses": 139104,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00009000000000014552,
+          "medianMs": 0.00010000000003174137,
+          "maxMs": 0.000559999999950378
+        },
+        "nominal": {
+          "minMs": 0.42060400000002574,
+          "medianMs": 0.4236590000000433,
+          "maxMs": 0.47036800000000767
+        },
+        "rule": {
+          "minMs": 0.0005109999999604042,
+          "medianMs": 0.0005310000000235959,
+          "maxMs": 0.0007709999999860884
+        },
+        "robust": {
+          "minMs": 3.6230069999999728,
+          "medianMs": 3.8109810000000266,
+          "maxMs": 4.302150999999981
+        }
+      }
+    },
+    {
+      "name": "Opposed calibration biases",
+      "operations": {
+        "nominalWidthEvaluations": 4,
+        "nominalCandidateRateLosses": 644,
+        "robustWidthEvaluations": 288,
+        "robustCandidateRateLosses": 46368,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00009000000000014552,
+          "medianMs": 0.00010000000003174137,
+          "maxMs": 0.0005609999999478532
+        },
+        "nominal": {
+          "minMs": 0.5636789999999792,
+          "medianMs": 0.5964290000000005,
+          "maxMs": 0.6866640000000075
+        },
+        "rule": {
+          "minMs": 0.0008309999999482898,
+          "medianMs": 0.000872000000015305,
+          "maxMs": 0.0013020000000096843
+        },
+        "robust": {
+          "minMs": 1.9502479999999878,
+          "medianMs": 2.179412999999954,
+          "maxMs": 2.3925239999999803
+        }
+      }
+    },
+    {
+      "name": "Weak empty contrast",
+      "operations": {
+        "nominalWidthEvaluations": 4,
+        "nominalCandidateRateLosses": 644,
+        "robustWidthEvaluations": 288,
+        "robustCandidateRateLosses": 46368,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00009000000000014552,
+          "medianMs": 0.00009999999997489795,
+          "maxMs": 0.0006910000000175387
+        },
+        "nominal": {
+          "minMs": 0.3322300000000382,
+          "medianMs": 0.34613100000001396,
+          "maxMs": 0.396207000000004
+        },
+        "rule": {
+          "minMs": 0.0008609999999862339,
+          "medianMs": 0.0009009999999989304,
+          "maxMs": 0.0033349999999927604
+        },
+        "robust": {
+          "minMs": 1.404455999999982,
+          "medianMs": 1.4774349999999572,
+          "maxMs": 1.824528999999984
+        }
+      }
+    },
+    {
+      "name": "Drifting source and fan",
+      "operations": {
+        "nominalWidthEvaluations": 4,
+        "nominalCandidateRateLosses": 644,
+        "robustWidthEvaluations": 864,
+        "robustCandidateRateLosses": 139104,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00006999999999379725,
+          "medianMs": 0.00006999999999379725,
+          "maxMs": 0.0004610000000297987
+        },
+        "nominal": {
+          "minMs": 0.5752169999999523,
+          "medianMs": 0.5933039999999892,
+          "maxMs": 0.6450920000000337
+        },
+        "rule": {
+          "minMs": 0.0004799999999818283,
+          "medianMs": 0.0004899999999565807,
+          "maxMs": 0.0006809999999859428
+        },
+        "robust": {
+          "minMs": 6.266199000000029,
+          "medianMs": 8.514505999999983,
+          "maxMs": 15.500078999999971
+        }
+      }
+    },
+    {
+      "name": "Time-limited occupied survey",
+      "operations": {
+        "nominalWidthEvaluations": 3,
+        "nominalCandidateRateLosses": 483,
+        "robustWidthEvaluations": 648,
+        "robustCandidateRateLosses": 104328,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00006999999993695383,
+          "medianMs": 0.00007100000004811591,
+          "maxMs": 0.00048100000003614696
+        },
+        "nominal": {
+          "minMs": 0.21350199999994857,
+          "medianMs": 0.21901000000002568,
+          "maxMs": 0.3272230000000036
+        },
+        "rule": {
+          "minMs": 0.0008709999999609863,
+          "medianMs": 0.0008920000000216532,
+          "maxMs": 0.0011820000000852815
+        },
+        "robust": {
+          "minMs": 2.278722000000016,
+          "medianMs": 2.642470000000003,
+          "maxMs": 2.8104739999999993
+        }
+      }
+    },
+    {
+      "name": "Outside planning envelope",
+      "operations": {
+        "nominalWidthEvaluations": 3,
+        "nominalCandidateRateLosses": 483,
+        "robustWidthEvaluations": 648,
+        "robustCandidateRateLosses": 104328,
+        "ruleWidthEvaluations": 0,
+        "unchangedWidthEvaluations": 0
+      },
+      "planningTime": {
+        "unchanged": {
+          "minMs": 0.00006999999993695383,
+          "medianMs": 0.00007000000005064066,
+          "maxMs": 0.0005909999999857973
+        },
+        "nominal": {
+          "minMs": 0.36690299999997933,
+          "medianMs": 0.40250700000001416,
+          "maxMs": 0.6821479999999838
+        },
+        "rule": {
+          "minMs": 0.0005810000000110449,
+          "medianMs": 0.0006109999999353022,
+          "maxMs": 0.0011020000000598884
+        },
+        "robust": {
+          "minMs": 2.952778999999964,
+          "medianMs": 3.188803000000007,
+          "maxMs": 5.889482000000044
+        }
+      }
+    }
+  ]
+}

@@ -133,7 +133,7 @@ function loss(p: Quadratic, h: number) {
   return p.minLoss + p.curvature * (h - p.hBest) ** 2
 }
 
-function compatible(profiles: Quadratic[], d: Design) {
+function compatible(profiles: Quadratic[], d: Pick<Design, 'occupancy' | 'noise' | 'supplyKnown'>) {
   const maxSource = MAX_SOURCE_PER_PERSON * d.occupancy
   const delta = 30 + (d.supplyKnown ? 10 : 75)
   const losses = profiles.map((p) => {
@@ -141,15 +141,19 @@ function compatible(profiles: Quadratic[], d: Design) {
     const h = clamp(p.hBest, -p.k * delta, maxSource + p.k * delta)
     return loss(p, h)
   })
-  const threshold = Math.min(...losses) + 4 * Math.max(d.noise, 1) ** 2
+  return compatibilitySpan(profiles.map(p => p.k), losses, d.noise)
+}
+
+/** Finite rate-grid envelope using the frozen Phase 2 relative-SSE threshold. */
+export function compatibilitySpan(rates: number[], losses: number[], noise: number) {
+  const threshold = Math.min(...losses) + 4 * Math.max(noise, 1) ** 2
   const inside = losses.map((value) => value <= threshold)
   const first = inside.indexOf(true),
     last = inside.lastIndexOf(true)
   const crossing = (i: number, j: number) =>
-    profiles[i].k +
-    ((profiles[j].k - profiles[i].k) * (threshold - losses[i])) / (losses[j] - losses[i])
+    rates[i] + ((rates[j] - rates[i]) * (threshold - losses[i])) / (losses[j] - losses[i])
   const low = first === 0 ? 0 : crossing(first - 1, first)
-  const high = last === profiles.length - 1 ? MAX_RATE : crossing(last, last + 1)
+  const high = last === rates.length - 1 ? MAX_RATE : crossing(last, last + 1)
   return { low, high, width: high - low }
 }
 
@@ -167,7 +171,7 @@ function nominal(profiles: Quadratic[], occupancy: number) {
 }
 
 /** Width of the expected-trace separation band, conditional on this proposed design. */
-function plannedWidth(d: Design) {
+export function plannedWidth(d: Design) {
   const { minutes, truth } = observe(d)
   const expected = truth.map((c) => c + d.offset)
   const rates = RATES.includes(d.rate) ? RATES : [...RATES, d.rate].sort((a, b) => a - b)
@@ -215,20 +219,44 @@ export function recommend(d: Design) {
   return { width, strategies }
 }
 
-/** Used for seeded trials. Profile the rate from measurements, without supplying its true value. */
-export function recover(d: Design) {
-  const { minutes, observed } = observe(d)
-  const profiles = profile(minutes, observed, background(d), RATES)
-  const fit = nominal(profiles, d.occupancy)
+/** Fit supplied observations without access to the simulated ventilation or generation. */
+export function analyzeTrace(
+  minutes: number[],
+  observed: number[],
+  settings: Pick<Design, 'occupancy' | 'noise' | 'supplyKnown'> & { nominalSupply: number },
+) {
+  if (
+    minutes.length < 2 ||
+    minutes.length !== observed.length ||
+    minutes[0] !== 0 ||
+    minutes.some((t, i) => !Number.isFinite(t) || (i > 0 && t <= minutes[i - 1])) ||
+    observed.some((c) => !Number.isFinite(c)) ||
+    !Number.isFinite(settings.nominalSupply) ||
+    settings.nominalSupply <= 0 ||
+    !Number.isInteger(settings.occupancy) ||
+    settings.occupancy < 0 ||
+    settings.occupancy > 4 ||
+    !Number.isFinite(settings.noise) ||
+    settings.noise < 0 ||
+    typeof settings.supplyKnown !== 'boolean'
+  ) throw new RangeError('Invalid synthetic recovery observations or sensor settings.')
+  const profiles = profile(minutes, observed, settings.nominalSupply, RATES)
+  const fit = nominal(profiles, settings.occupancy)
   return {
     rate: fit.p.k,
     generation: fit.g,
     rmse: Math.sqrt(fit.sse / minutes.length),
-    ...compatible(profiles, d),
+    ...compatible(profiles, settings),
   }
 }
 
-export function experiment(d: Design) {
+/** Used by the original Phase 2 seeded benchmark. */
+export function recover(d: Design) {
+  const { minutes, observed } = observe(d)
+  return analyzeTrace(minutes, observed, { ...d, nominalSupply: background(d) })
+}
+
+export function experiment(d: Design, maxDisplayGeneration?: number) {
   const trace = observe(d)
   const b = background(d)
   const profiles = profile(trace.minutes, trace.observed, b, RATES)
@@ -244,10 +272,14 @@ export function experiment(d: Design) {
     (t) => b + Math.exp((-alt.p.k * t) / 60) * start + basis(alt.p.k, t) * alt.g,
   )
   const displayed = profiles.filter((_, i) => i % 4 === 0)
-  const upper = MAX_SOURCE_PER_PERSON * Math.max(d.occupancy, 1)
+  const upper = maxDisplayGeneration ?? MAX_SOURCE_PER_PERSON * Math.max(d.occupancy, 1)
+  if (!Number.isFinite(upper) || upper <= 0 || upper > 4 * MAX_SOURCE_PER_PERSON)
+    throw new RangeError('Display generation limit must lie in (0, 4800] ppm/h.')
+  const band = compatible(profiles, d)
   const sources = Array.from({ length: 33 }, (_, i) => (upper * i) / 32)
   return {
     ...trace,
+    compatibleLow: band.low, compatibleHigh: band.high, compatibleWidth: band.width,
     alternative,
     alternativeRate: alt.p.k,
     alternativeGeneration: alt.g,

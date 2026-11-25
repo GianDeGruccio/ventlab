@@ -1,3 +1,4 @@
+import { StressEvidence } from './StressEvidence'
 import { useEffect, useState } from 'react'
 import { BookOpen, Download, ExternalLink, FlaskConical } from 'lucide-react'
 import { benchmarkLinks, bundledFiles, loadBenchmark, type BundledFile } from './recordings'
@@ -37,6 +38,7 @@ export default function Methods() {
           <p>Inspect the assumptions, recorded failures, and reproducible benchmarks.</p>
         </div>
       </div>
+      <StressEvidence />
       <section className="panel details-box">
         <div className="card-head">
           <BookOpen size={20} />
@@ -50,7 +52,12 @@ export default function Methods() {
         {error && <p role="alert">{error}</p>}
         {data && (
           <>
-            <div className="table-wrap">
+            <div
+              className="table-wrap"
+              role="region"
+              aria-label="Retrospective evidence table"
+              tabIndex={0}
+            >
               <table>
                 <caption>Mean absolute error on common scored windows (h⁻¹)</caption>
                 <thead>
@@ -102,7 +109,12 @@ export default function Methods() {
                   ))}
                 </select>
               </label>
-              <div className="table-wrap">
+              <div
+                className="table-wrap"
+                role="region"
+                aria-label="Complete period ledger"
+                tabIndex={0}
+              >
                 <table>
                   <caption>Rates in h⁻¹ · inclusive source periods</caption>
                   <thead>
@@ -169,7 +181,12 @@ export default function Methods() {
           Three development scenarios precede six separate evaluation scenarios, with 32 seeded
           noise draws per scenario. Each strategy is evaluated against known simulated parameters.
         </p>
-        <div className="table-wrap">
+        <div
+          className="table-wrap"
+          role="region"
+          aria-label="Phase 2 synthetic evaluation results"
+          tabIndex={0}
+        >
           <table>
             <caption>Evaluation across {s.observations} seeded trials</caption>
             <thead>
@@ -259,7 +276,14 @@ export default function Methods() {
           <a href="https://github.com/GianDeGruccio/ventlab">
             Source repository <ExternalLink />
           </a>
-          <a href={import.meta.env.PROD ? import.meta.env.BASE_URL + 'licenses.txt' : 'https://github.com/GianDeGruccio/ventlab/blob/main/LICENSE'} download="licenses.txt">
+          <a
+            href={
+              import.meta.env.PROD
+                ? import.meta.env.BASE_URL + 'licenses.txt'
+                : 'https://github.com/GianDeGruccio/ventlab/blob/main/LICENSE'
+            }
+            download="licenses.txt"
+          >
             Software & font notices <Download />
           </a>
         </div>

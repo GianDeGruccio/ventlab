@@ -4,6 +4,8 @@ import { Activity, BookOpen, Database, FlaskConical, Wind } from 'lucide-react'
 import Designer from './Designer'
 import RecordLab from './RecordLab'
 import Methods from './Methods'
+import RecordingPlan from './RecordingPlan'
+import type { ObservedWindow } from './recording-plan'
 import type { Recording } from './recordings'
 import '@fontsource-variable/dm-sans/wght.css'
 import '@fontsource/instrument-serif/latin-400.css'
@@ -16,11 +18,15 @@ const views = [
   { id: 'explorer', name: 'Data explorer', Icon: Database },
   { id: 'methods', name: 'Methods', Icon: BookOpen },
 ] as const
-type View = (typeof views)[number]['id']
-const current = (): View => views.find((v) => '#' + v.id === window.location.hash)?.id ?? 'designer'
+type View = (typeof views)[number]['id'] | 'plan'
+const current = (): View =>
+  window.location.hash === '#plan'
+    ? 'plan'
+    : (views.find((v) => '#' + v.id === window.location.hash)?.id ?? 'designer')
 function App() {
   const [view, setView] = useState<View>(current),
     [custom, setCustom] = useState<Recording | null>(null)
+  const [observed, setObserved] = useState<ObservedWindow | null>(null)
   useEffect(() => {
     const change = () => {
       setView(current())
@@ -30,7 +36,9 @@ function App() {
     return () => window.removeEventListener('hashchange', change)
   }, [])
   useEffect(() => {
-    document.title = 'VentLab · ' + views.find((v) => v.id === view)?.name
+    document.title =
+      'VentLab · ' +
+      (view === 'plan' ? 'Plan my next measurement' : views.find((v) => v.id === view)?.name)
   }, [view])
   return (
     <>
@@ -72,7 +80,17 @@ function App() {
         </div>
       </header>
       <main id="workspace" tabIndex={-1}>
-        {view === 'designer' ? (
+        {view === 'plan' ? (
+          observed ? (
+            <RecordingPlan window={observed} />
+          ) : (
+            <section className="panel details-box">
+              <h1>Choose a recording window</h1>
+              <p>Recording plans stay in tab memory. Select a window to start a plan.</p>
+              <a href="#explorer">Open Data explorer</a>
+            </section>
+          )
+        ) : view === 'designer' ? (
           <Designer />
         ) : view === 'methods' ? (
           <Methods />
@@ -80,6 +98,10 @@ function App() {
           <RecordLab
             key={view}
             blind={view === 'validation'}
+            onPlan={(w) => {
+              setObserved(w)
+              window.location.hash = 'plan'
+            }}
             custom={custom}
             onCustom={setCustom}
             onBench={() => {

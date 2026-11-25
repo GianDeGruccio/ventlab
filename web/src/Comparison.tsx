@@ -39,7 +39,8 @@ export function Comparison({
             <h2>Read the new decay</h2>
             <p>
               Removing the simulated source breaks the balance. Check how much the compatible range
-              narrowed and whether the fitted rate moved closer to the known rate.
+              narrowed and whether the fitted rate moved closer to the known rate.{' '}
+              <a href="#explorer">Plan from a recording</a>.
             </p>
           </div>
           <button onClick={finishGuide} className="subtle-btn">

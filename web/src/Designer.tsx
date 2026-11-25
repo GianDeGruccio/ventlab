@@ -1,5 +1,6 @@
 import { useMemo, useState, useId } from 'react'
 import { Surface } from './Surface'
+import { downloadReport, simulationReport } from './report'
 import { Planner } from './Planner'
 import { Comparison, compareMeasurement, type PairedResult } from './Comparison'
 import { type OptionId } from './robust'
@@ -132,7 +133,7 @@ export default function Designer() {
           <h1>Experiment designer</h1>
           <p>
             Two ventilation rates can explain a similar CO₂ trace. Test which measurement helps tell
-            them apart.
+            them apart. Have a recording? <a href="#explorer">Plan from your measurements</a>.
           </p>
         </div>
         <div className="designer-actions">
@@ -316,6 +317,7 @@ export default function Designer() {
           design={applied}
           result={r}
           onCompare={runComparison}
+          onExport={(decision) => downloadReport(simulationReport(applied, r, decision, pair))}
           onInvalidate={() => {
             setPair(null)
             if (guide === 3) setGuide(0)

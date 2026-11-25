@@ -11,6 +11,7 @@ import {
   ScanLine,
   SlidersHorizontal,
 } from 'lucide-react'
+import { captureWindow, type ObservedWindow } from './recording-plan'
 import { Chart } from './Chart'
 import {
   type ColumnMapping,
@@ -218,10 +219,12 @@ function ResultView({
 function WindowView({
   recording: r,
   session: s,
+  onPlan,
   blind,
 }: {
   recording: Recording
   session: Session
+  onPlan: (w: ObservedWindow) => void
   blind: boolean
 }) {
   const [start, setStart] = useState(s.periods[0].start),
@@ -238,6 +241,26 @@ function WindowView({
     setRef(null)
   }
   const periodIndex = s.periods.findIndex((p) => p.start === start && p.end === end)
+  const periodSelector = (
+    <label className="field">
+      Occupancy period
+      <select
+        aria-label="Occupancy period"
+        value={periodIndex}
+        onChange={(e) => {
+          const p = s.periods[+e.target.value]
+          if (p) select(p.start, p.end)
+        }}
+      >
+        {periodIndex < 0 && <option value={-1}>Custom window</option>}
+        {s.periods.map((p, i) => (
+          <option key={i} value={i}>
+            {i + 1} · {p.state} · {+minutes[p.start].toFixed(1)}–{+minutes[p.end].toFixed(1)} min
+          </option>
+        ))}
+      </select>
+    </label>
+  )
   const span = s.rows.slice(start, end + 1),
     occupants = Array.from(
       new Set(span.map((x) => (Number.isFinite(x.occupancy) ? x.occupancy : 'unknown'))),
@@ -269,7 +292,7 @@ function WindowView({
             dark
             title={'Session ' + s.id + ' ' + channel}
             minutes={minutes}
-            selected={blind ? [minutes[start], minutes[end]] : undefined}
+            selected={[minutes[start], minutes[end]]}
             unit={channel === 'co2' ? 'ppm' : 'Occupancy (people)'}
             traces={
               channel === 'co2'
@@ -298,7 +321,7 @@ function WindowView({
           <div className="trace-note">
             {blind
               ? 'Shading marks the selected window.'
-              : 'The full uninterrupted session is shown.'}{' '}
+              : 'Shading marks the selected planning period.'}{' '}
             {s.rows[0].stamp} to {s.rows[n - 1].stamp}
           </div>
         </section>
@@ -308,25 +331,7 @@ function WindowView({
               <SlidersHorizontal size={18} />
               <h2>Measurement window</h2>
             </div>
-            <label className="field">
-              Occupancy period
-              <select
-                aria-label="Occupancy period"
-                value={periodIndex}
-                onChange={(e) => {
-                  const p = s.periods[+e.target.value]
-                  if (p) select(p.start, p.end)
-                }}
-              >
-                {periodIndex < 0 && <option value={-1}>Custom window</option>}
-                {s.periods.map((p, i) => (
-                  <option key={i} value={i}>
-                    {i + 1} · {p.state} · {+minutes[p.start].toFixed(1)}–
-                    {+minutes[p.end].toFixed(1)} min
-                  </option>
-                ))}
-              </select>
-            </label>
+            {periodSelector}
             <label className="field">
               Start · {+minutes[start].toFixed(2)} min
               <input
@@ -386,8 +391,21 @@ function WindowView({
                 </div>
               ))}
             </dl>
+            {periodSelector}
           </aside>
         )}
+      </div>
+      <div className="guide-panel">
+        <div>
+          <h2>Design a repeat measurement</h2>
+          <p>
+            Carry the selected window’s timing, room CO₂ and occupancy into the robust planner.
+            Airflow stays withheld from planning.
+          </p>
+        </div>
+        <button className="primary" onClick={() => onPlan(captureWindow(r, s, start, end))}>
+          Plan my next measurement <ArrowRight size={16} />
+        </button>
       </div>
       {blind && result && (
         <ResultView
@@ -416,10 +434,12 @@ export default function RecordLab({
   blind,
   custom,
   onCustom,
+  onPlan,
   onBench,
 }: {
   blind: boolean
   custom: Recording | null
+  onPlan: (w: ObservedWindow) => void
   onCustom: (r: Recording) => void
   onBench: () => void
 }) {
@@ -515,6 +535,7 @@ export default function RecordLab({
           key={recording.name + sid + blind}
           recording={recording}
           session={recording.sessions[sid]}
+          onPlan={onPlan}
           blind={blind}
         />
       )}

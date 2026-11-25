@@ -40,6 +40,12 @@ def check_browser(context, engine, width, args, report):
     p.get_by_role("link", name="VentLab home").focus()
     p.evaluate("scrollTo(0,0)")
 
+    def download_report(label, filename):
+        with p.expect_download() as save:
+            p.get_by_role("button", name=label, exact=True).click()
+        assert save.value.suggested_filename == filename
+        return json.loads(save.value.path().read_text())
+
     def audit(name):
         if args.axe_script:
             report["accessibility"].append(audit_accessibility(p, args.axe_script, name))
@@ -77,6 +83,9 @@ def check_browser(context, engine, width, args, report):
 
     if not args.phase2:
         phase3_journey(p, report, audit, snap)
+        simulation = download_report("Download experiment report", "ventlab-simulation-report.json")
+        assert simulation["executedComparison"]["after"]["configuration"]["occupancy"] == 0
+        assert simulation["plannedSelection"]["selected"] == "empty"
     nav.get_by_text("Blind validation").click()
     expect(p.get_by_role("heading", name="Blind validation", exact=True)).to_be_visible()
     period = p.get_by_label("Occupancy period")
@@ -100,6 +109,16 @@ def check_browser(context, engine, width, args, report):
     p.evaluate("scrollTo(0, 0)")
     audit("blind reference revealed")
     snap("validation")
+    if not args.phase2:
+        p.get_by_role("button", name="Plan my next measurement").click()
+        expect(p.get_by_role("heading", name="From the recording")).to_be_visible()
+        real = download_report("Download recording report", "ventlab-recording-report.json")
+        assert real["source"]["file"] == "ventilation_test.csv"
+        assert abs(real["estimator"]["results"]["rate_ach"] - 1.51) < 0.01
+        assert "proposedRepeat" in real and real["proposedRepeat"] is None
+        p.evaluate("scrollTo(0,0)")
+        snap("recording-window")
+        nav.get_by_text("Blind validation").click()
     p.get_by_label("Session", exact=True).select_option("1")
     expect(p.locator(".results")).to_have_count(0)
 
@@ -116,6 +135,25 @@ def check_browser(context, engine, width, args, report):
     p.get_by_label("Volume (m³, optional)").fill("21.87")
     p.get_by_role("button", name="Load recording").click()
     expect(p.locator(".metadata")).to_contain_text("custom")
+    if not args.phase2:
+        p.get_by_role("button", name="Plan my next measurement").click()
+        expect(p.get_by_label("Assumed room sensor noise (SD) (ppm)")).to_have_value("")
+        expect(p.get_by_label("Starting room CO₂ (ppm)")).to_have_value("1020")
+        p.get_by_label("Assumed room sensor noise (SD) (ppm)").fill("12")
+        p.get_by_role("button", name="Evaluate repeat strategies").click()
+        strategy = p.get_by_label("Measurement strategy", exact=True)
+        strategy.select_option("precision")
+        plan = download_report("Download experiment report", "ventlab-recording-report.json")
+        assert plan["source"]["file"] == "custom.csv" and plan["source"]["role"] == "custom"
+        assert plan["proposedRepeat"]["decision"]["selected"] == "precision"
+        assert plan["proposedRepeat"]["assumptions"]["noise"] == 12 and plan["afterMeasurement"] is None
+        assert abs(plan["estimator"]["results"]["rate_ach"] - 2) < 1e-6
+        expect(p.get_by_role("button", name="Configured scenario")).to_have_count(0)
+        audit("recording-based repeat plan")
+        p.locator(".recording-plan-results").scroll_into_view_if_needed()
+        snap("repeat-plan")
+        p.get_by_label("Assumed room sensor noise (SD) (ppm)").fill("13")
+        expect(strategy).to_have_count(0)
     nav.get_by_text("Blind validation").click()
     expect(p.get_by_role("heading", name="Blind validation", exact=True)).to_be_visible()
     p.get_by_role("button", name="Run both estimators").click()
@@ -137,7 +175,17 @@ def check_browser(context, engine, width, args, report):
         assert p.get_by_role("link", name="All paired outcomes").evaluate(
             "async el => {const r=await fetch(el.href); return r.ok && (await r.json()).evaluation.cases.length > 0}"
         ), "Full synthetic evaluation download failed"
-        stress.scroll_into_view_if_needed()
+        p.get_by_label("Stress case", exact=True).select_option("Drifting source and fan")
+        p.get_by_label("Outcome", exact=True).select_option("inside")
+        expect(p.locator(".policy-chart tr").filter(has_text="Robust ensemble")).to_contain_text("0 / 32")
+        p.get_by_text("Why precision can mislead").click()
+        p.get_by_label("Stress case", exact=True).select_option("")
+        p.get_by_label("Outcome", exact=True).select_option("rateMAE")
+        expect(p.locator(".policy-chart")).to_contain_text("1.106")
+        if width < 640:
+            p.locator(".policy-chart").evaluate("table => table.scrollIntoView({block:'center'})")
+        else:
+            stress.scroll_into_view_if_needed()
         snap("evidence")
     fits()
     audit("methods and open archive ledger")

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "study": "Frozen pre-comparison synthetic stress protocol",
+  "trialsPerCase": 32,
+  "planningNominal": {"rate":2,"generation":450,"supply":430,"offset":0,"seed":0},
+  "planning": "Only planned initial reading, duration, interval, noise, occupancy, whether supply is measured, and action constraints are visible. Phase 2 uses the fixed nominal design; Phase 3 uses its independently fixed ensemble. Use 0.25 h^-1 penalty per extra hour and the same feasible actions for all policies. Nominal ranks its original expected spans (unpenalized), filters to feasible actions and falls back to unchanged. Longer is capped as for robust. Rule prefers empty, then longer, precision, supply, unchanged. Choose actions before generating observations.",
+  "policies": ["unchanged","nominal","rule","robust"],
+  "seeds": "For the zero-based case index within split, use consecutive seeds start + 1000*index + [0,31]. Development starts at 31000, evaluation at 731000. Use separate uint32 LCG streams (seed XOR 0x13579bdf for Gaussian room noise, XOR 0x2468ace0 for room calibration, XOR 0x53417021 for duct calibration, XOR 0x9f27cafe for jitter). Pair streams across actions.",
+  "generator": "Within each repeating block of the original duration, exchange and per-person generation take the listed first and second levels for equal-length halves. Empty sets source to zero. Integrate the single-zone balance exactly through physical boundaries. True physical initial equals planned initial reading minus sensor bias. Record true room + room bias + Gaussian AR(1) noise with stationary SD sigma and rho per nominal interval (exponential time scaling). Each run draws independent constant room and duct biases from center +/- uniform halfwidth. Measure-supply uses true supply plus duct bias; assumed uses 420. Halving noise leaves both biases intact. Jitter fraction shifts each internal nominal sample by Uniform(-fraction, fraction)*interval; endpoints fixed.",
+  "metrics": "Use frozen Phase 2 recovery on each raw observed trace. Target ACH and total generation are elapsed-time averages over each action; for periodic profiles mean ACH is identical across unchanged and doubled durations. Report rate/source MAE, mean profiled compatible-span width, target containment, mean fit RMSE, boundary fits, and elapsed minutes. Positive width/error reduction means improvement vs unchanged. Report worst case, individual paired harms, narrower-yet-less-accurate cases, per-case pooled means and equally weighted split means. Count an increased rate error or span only when difference exceeds 1e-9. No fitted model or threshold is selected based on outcomes.",
+  "caseFields": "d=[initial ppm,duration min,interval min,noise SD ppm,occupancy,supplyKnown]; k=two exchange levels h^-1; g=two per-person source levels ppm/h; b=true supply ppm; biases=[room center,room halfwidth,duct center,duct halfwidth] ppm. cap is max duration in minutes. All actions enabled unless listed in unavailable.",
+  "development": [
+    {"name":"Constant occupied control","d":[1200,40,2,15,1,false],"k":[1.4,1.4],"g":[400,400],"b":425,"biases":[0,10,0,4],"rho":0,"jitter":0,"cap":80,"unavailable":[]},
+    {"name":"Constant empty, measured duct","d":[850,32,2,12,0,true],"k":[2.8,2.8],"g":[0,0],"b":460,"biases":[5,12,0,5],"rho":0,"jitter":0,"cap":64,"unavailable":[]}
+  ],
+  "evaluation": [
+    {"name":"Fan cycling","d":[1280,48,2,16,1,false],"k":[0.45,3.15],"g":[420,420],"b":452,"biases":[0,12,0,5],"rho":0.2,"jitter":0,"cap":96,"unavailable":[]},
+    {"name":"Changing occupied source","d":[970,42,2,20,2,false],"k":[1.6,1.6],"g":[120,850],"b":475,"biases":[5,20,0,10],"rho":0.3,"jitter":0,"cap":84,"unavailable":["empty"]},
+    {"name":"Persistent sensor noise","d":[1320,36,2,24,1,true],"k":[2.45,2.45],"g":[560,560],"b":450,"biases":[0,18,0,8],"rho":0.88,"jitter":0,"cap":72,"unavailable":[]},
+    {"name":"Opposed calibration biases","d":[880,48,2,16,0,false],"k":[1.05,1.05],"g":[0,0],"b":540,"biases":[54,14,-22,9],"rho":0.25,"jitter":0,"cap":96,"unavailable":[]},
+    {"name":"Weak empty contrast","d":[455,28,2,26,0,false],"k":[1.35,1.35],"g":[0,0],"b":445,"biases":[0,8,0,7],"rho":0.55,"jitter":0.18,"cap":56,"unavailable":[]},
+    {"name":"Drifting source and fan","d":[910,50,2,19,2,true],"k":[3.4,0.7],"g":[720,180],"b":467,"biases":[-20,12,10,8],"rho":0.65,"jitter":0.12,"cap":100,"unavailable":[]},
+    {"name":"Time-limited occupied survey","d":[720,30,2,28,1,false],"k":[2.0,2.0],"g":[600,600],"b":420,"biases":[-18,12,0,9],"rho":0.45,"jitter":0,"cap":30,"unavailable":["empty"]},
+    {"name":"Outside planning envelope","d":[1050,40,2,20,3,false],"k":[5.9,6.7],"g":[980,1120],"b":560,"biases":[-42,15,26,12],"rho":0.72,"jitter":0.16,"cap":80,"unavailable":["empty","precision"]}
+  ]
+}

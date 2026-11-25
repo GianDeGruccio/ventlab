@@ -10,13 +10,13 @@ An indoor CO₂ sensor can give the same reading in two rooms with different ven
 2. **Inspect the map** to see how different combinations of generation and ventilation can sustain that reading.
 3. **Compare an empty room**. Removing the source lets the CO₂ decay. Compare the compatible ranges. The equilibrium admits many rates, so directional point accuracy is unavailable.
 
-![Linked maps showing the change from an occupied equilibrium to an empty-room repeat](docs/screenshots/phase3/paired-maps-1440.png)
+![Linked maps showing the change from an occupied equilibrium to an empty-room repeat](docs/screenshots/rc1/paired-maps-1440.png)
 
 ## Plan from a recording
 
 Choose **Plan my next measurement** in Blind validation or Data explorer. Select a window from a bundled recording or import a local CSV. Review its measured starting level, timing, occupancy and supply availability, enter an assumed sensor noise level and set practical constraints. The robust planner ranks feasible repeat measurements across plausible room conditions. The recording report preserves estimator flags and abstentions. A separate synthetic report can compare estimated and known parameters.
 
-[Recording and report guide](docs/recording-to-plan.md) · [Recording workflow screenshot](docs/screenshots/phase4/recording-window-1440.png) · [Interactive evidence on mobile](docs/screenshots/phase4/evidence-390.png)
+[Recording and report guide](docs/recording-to-plan.md) · [Recording workflow screenshot](docs/screenshots/rc1/recording-window-1440.png) · [Interactive evidence on mobile](docs/screenshots/rc1/evidence-390.png)
 
 ## What the evidence supports
 

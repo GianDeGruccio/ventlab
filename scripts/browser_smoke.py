@@ -109,6 +109,17 @@ def check_browser(context, engine, width, args, report):
         assert a["before"]["configuration"]["initial"] != b["before"]["configuration"]["initial"]
         assert a["plannedSelection"]["recommended"] == "empty"
         report["identicalRankingAt790ppm"] = True
+        p.get_by_text("Planning constraints",exact=True).click()
+        p.get_by_label("Allow an empty room").uncheck()
+        expect(p.get_by_label("Measurement strategy",exact=True).locator('option[value="empty"]')).to_have_count(0)
+        restricted=download_report("Download experiment report","ventlab-simulation-report.json")
+        set_slider("Physical initial room CO₂",760)
+        set_slider("Supply-air CO₂",430)
+        set_slider("Room calibration offset",30)
+        p.get_by_role("button",name="Run simulation").click()
+        restricted_again=download_report("Download experiment report","ventlab-simulation-report.json")
+        assert restricted["plannedSelection"] == restricted_again["plannedSelection"]
+        assert restricted_again["plannedSelection"]["constraints"]["allowEmpty"] is False
         p.get_by_role("button",name="Reset experiment").click()
         phase3_journey(p, report, audit, snap)
         simulation = download_report("Download experiment report", "ventlab-simulation-report.json")

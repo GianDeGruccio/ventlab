@@ -75,7 +75,7 @@ export default function Designer() {
         noise: applied.noise,
         supplyKnown: applied.supplyKnown,
       }),
-    [applied, expectedReading],
+    [applied.occupancy, applied.duration, applied.interval, applied.noise, applied.supplyKnown, expectedReading],
   )
   const [run, setRun] = useState(0)
   const r = useMemo(() => experiment(applied), [applied])
@@ -356,7 +356,7 @@ export default function Designer() {
             Set the expected instrument reading independently of the physical simulation.
           </label>
           <Planner
-            key={JSON.stringify([applied, expectedReading])}
+            key={JSON.stringify(planInput)}
             design={planInput}
             result={r}
             onCompare={runComparison}

@@ -60,7 +60,7 @@ The browser test opens the actual built HTML, scripts, CSS, fonts and data in Ch
 
 ## GitHub Pages
 
-The build output is `web/dist/`. Relative asset URLs and hash routes support hosting under `/ventlab/` without rewrite rules. The repository workflow validates a pull request and builds the static distribution. After the reviewed changes are merged, a maintainer can select **GitHub Actions** under **Settings → Pages** and manually run **Validate and build VentLab** on `main` to publish the verified artifact. The deployment job requires `pages: write` and `id-token: write` and runs only on a manual dispatch from `main`. [Deployment workflow](../.github/workflows/ventlab-pages.yml)
+The build output is `web/dist/`. Relative asset URLs and hash routes support hosting under `/ventlab/` without rewrite rules. The repository workflow validates a pull request and attaches the tested static distribution as the seven-day `ventlab-web` Actions artifact. For local review, unpack it and run `python -m http.server --bind 127.0.0.1 8080` from the directory containing `index.html`, then open `http://localhost:8080/`. After the reviewed changes are merged, a maintainer can select **GitHub Actions** under **Settings → Pages** and manually run **Validate and build VentLab** on `main` to publish the verified artifact. The deployment job requires `pages: write` and `id-token: write` and runs only on a manual dispatch from `main`. [Deployment workflow](../.github/workflows/ventlab-pages.yml)
 
 ## Limits and follow-up
 

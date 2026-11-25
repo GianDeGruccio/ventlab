@@ -23,7 +23,8 @@ export function Comparison({
     return [Math.min(...values), Math.max(...values)]
   }, [first, second])
   const err = compareErrors(pair)
-  const range = (r: typeof first) => r.compatibleLow.toFixed(2) + '–' + r.compatibleHigh.toFixed(2)
+  const range = (r: typeof first) =>
+    r.compatibleRegions.map(([lo, hi]) => lo.toFixed(5) + '–' + hi.toFixed(5)).join(' ∪ ')
   return (
     <section className="paired">
       <div className="section-heading">
@@ -98,7 +99,7 @@ export function Comparison({
                 ],
                 ['True rate (h⁻¹)', before.rate.toFixed(2), after.rate.toFixed(2)],
                 ['Fitted rate (h⁻¹)', first.fitRate.toFixed(2), second.fitRate.toFixed(2)],
-                ['Absolute rate error (h⁻¹)', err.before.toFixed(2), err.after.toFixed(2)],
+                ['Absolute rate error (h⁻¹)', err.before?.toFixed(2), err.after?.toFixed(2)],
                 [
                   'True total source (ppm/h)',
                   before.occupancy * before.generation,
@@ -118,7 +119,9 @@ export function Comparison({
                 <tr key={k}>
                   <th>{k}</th>
                   <td>{first.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : a}</td>
-                  <td>{second.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : b}</td>
+                  <td>
+                    {second.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : b}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -130,9 +133,11 @@ export function Comparison({
               ? 'The compatible range narrowed.'
               : 'The compatible range stayed as wide or grew.'}
           </strong>{' '}
-          {first.nonUnique || second.nonUnique ? 'A point fit is non-unique. Directional accuracy is unavailable.' : err.improved
-            ? 'The absolute rate error fell.'
-            : 'The absolute rate error did not improve.'}{' '}
+          {first.nonUnique || second.nonUnique
+            ? 'A point fit is non-unique. Directional accuracy is unavailable.'
+            : err.improved
+              ? 'The absolute rate error fell.'
+              : 'The absolute rate error did not improve.'}{' '}
           This is one paired synthetic run.
         </p>
       </div>

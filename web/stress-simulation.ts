@@ -105,6 +105,7 @@ export function assessTrial(c: StressCase, action: Action, seed: number, analyze
   return {
     seed, minutes:t.settings.duration, rate:fit.rate, source:fit.generation, rmse:fit.rmse,
     targetRate:t.targetRate, targetSource:t.targetSource, width:fit.width, low:fit.low, high:fit.high,
+    ...("regions" in fit ? {regions:fit.regions} : {}),
     inside: "regions" in fit ? (fit.regions as [number,number][]).some(([lo,hi])=>lo<=t.targetRate && t.targetRate<=hi) : fit.low<=t.targetRate && t.targetRate<=fit.high,
     boundary:fit.rate===0 || fit.rate===8,
     rateError:Math.abs(fit.rate-t.targetRate), sourceError:Math.abs(fit.generation-t.targetSource),

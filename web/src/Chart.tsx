@@ -1,5 +1,5 @@
-import { useId, useState, useSyncExternalStore } from 'react'
-import { extent, line, scaleLinear } from 'd3'
+import { useId, useMemo, useState, useSyncExternalStore } from 'react'
+import { bisectCenter, extent, line, scaleLinear } from 'd3'
 
 const narrowViewport = window.matchMedia('(max-width: 560px)')
 function subscribeViewport(notify: () => void) {
@@ -26,37 +26,36 @@ export function Chart({ minutes, traces, title, dark = false, unit = 'ppm', sele
   const [hidden, setHidden] = useState<string[]>([])
   const id = useId()
   const narrow = useSyncExternalStore(subscribeViewport, () => narrowViewport.matches)
+  // Keep full-resolution curves. Pointer movement only updates the cursor and readout.
+  const { show, x, y, W, H, L, R, T, B, paths } = useMemo(() => {
+    const show = traces.filter((s) => !hidden.includes(s.label))
+    const values = show.flatMap((s) => s.values).filter(Number.isFinite)
+    const [lo, hi] = extent(values)
+    const first = minutes[0],
+      last = minutes.at(-1)!
+    const W = narrow ? 375 : 680,
+      H = narrow ? 190 : 228,
+      L = narrow ? 41 : 54,
+      R = 13,
+      T = 10,
+      B = 28
+    const x = scaleLinear()
+      .domain([first, last > first ? last : first + 1])
+      .range([L, W - R])
+    const pad = Math.max(1, ((hi ?? 1) - (lo ?? 0)) * 0.1)
+    const y = scaleLinear()
+      .domain([(lo ?? 0) - pad, (hi ?? 1) + pad])
+      .nice(4)
+      .range([H - B, T])
+    const path = line<number>()
+      .defined(Number.isFinite)
+      .x((_, i) => x(minutes[i]))
+      .y((v) => y(v))
+    const paths = show.map((s) => (s.style === 'dots' ? '' : (path(s.values) ?? '')))
+    return { show, x, y, W, H, L, R, T, B, paths }
+  }, [minutes, traces, hidden, narrow])
   if (!minutes.length) return <p>No observations in this period.</p>
-  const show = traces.filter((s) => !hidden.includes(s.label))
-  const values = show.flatMap((s) => s.values).filter(Number.isFinite)
-  const [lo, hi] = extent(values)
-  const first = minutes[0],
-    last = minutes.at(-1)!
-  const W = narrow ? 375 : 680,
-    H = narrow ? 190 : 228,
-    L = narrow ? 41 : 54,
-    R = 13,
-    T = 10,
-    B = 28
-  const x = scaleLinear()
-    .domain([first, last > first ? last : first + 1])
-    .range([L, W - R])
-  const pad = Math.max(1, ((hi ?? 1) - (lo ?? 0)) * 0.1)
-  const y = scaleLinear()
-    .domain([(lo ?? 0) - pad, (hi ?? 1) + pad])
-    .nice(4)
-    .range([H - B, T])
-  const path = line<number>()
-    .defined(Number.isFinite)
-    .x((_, i) => x(minutes[i]))
-    .y((v) => y(v))
   const ix = focus === null ? null : Math.min(focus, minutes.length - 1)
-  function nearest(target: number) {
-    let best = 0
-    for (let i = 1; i < minutes.length; i++)
-      if (Math.abs(minutes[i] - target) < Math.abs(minutes[best] - target)) best = i
-    return best
-  }
   return (
     <div className={'chart ' + (dark ? 'dark-chart' : '')}>
       <div className="plot-unit">{unit === 'ppm' ? 'CO₂ concentration (ppm)' : unit}</div>
@@ -85,7 +84,7 @@ export function Chart({ minutes, traces, title, dark = false, unit = 'ppm', sele
           p.x = e.clientX
           p.y = e.clientY
           const mat = svg.getScreenCTM()
-          if (mat) setFocus(nearest(x.invert(p.matrixTransform(mat.inverse()).x)))
+          if (mat) setFocus(bisectCenter(minutes, x.invert(p.matrixTransform(mat.inverse()).x)))
         }}
         onPointerLeave={() => setFocus(null)}
       >
@@ -116,7 +115,7 @@ export function Chart({ minutes, traces, title, dark = false, unit = 'ppm', sele
             </text>
           </g>
         ))}
-        {show.map((s) =>
+        {show.map((s, index) =>
           s.style === 'dots' ? (
             <g key={s.label}>
               {s.values.map((v, i) =>
@@ -128,7 +127,7 @@ export function Chart({ minutes, traces, title, dark = false, unit = 'ppm', sele
           ) : (
             <path
               key={s.label}
-              d={path(s.values) ?? ''}
+              d={paths[index]}
               fill="none"
               stroke={s.color}
               strokeWidth={2.4}

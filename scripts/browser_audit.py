@@ -14,6 +14,9 @@ def bind_fixture(context, directory, failures):
 
     def serve(route):
         url = route.request.url
+        # A browser-local File/Blob can back a large upload in WebKit.
+        if url.startswith("blob:https://ventlab.test/"):
+            return route.continue_()
         if not url.startswith(FIXTURE):
             failures.append("Unexpected request " + url)
             return route.abort()

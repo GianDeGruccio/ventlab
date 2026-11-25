@@ -2,10 +2,10 @@ import { csvParseRows } from 'd3'
 import train1Url from '../../data/raw/training_data_1.csv?url'
 import train2Url from '../../data/raw/training_data_2.csv?url'
 import testUrl from '../../data/raw/ventilation_test.csv?url'
-import windowsUrl from '../../reports/windows.csv?url'
-import metricsUrl from '../../reports/metrics.json?url'
-import findingsUrl from '../../reports/findings.md?url'
-import auditUrl from '../../reports/audit.json?url'
+import windowsUrl from '../../reports/phase6/empirical/windows.csv?url'
+import metricsUrl from '../../reports/phase6/empirical/metrics.json?url'
+import findingsUrl from '../../reports/phase6/empirical/findings.md?url'
+import auditUrl from '../../reports/phase6/empirical/audit.json?url'
 
 export const bundledFiles = [
   'training_data_1.csv',
@@ -90,13 +90,13 @@ const standardMap: ColumnMapping = {
 
 function readCsv(text: string) {
   // d3 accepts an open quoted field at EOF. Validate quote balance before parsing.
-  let quoted=false
-  for(let i=0;i<text.length;i++){
-    if(text[i]!=='"') continue
-    if(quoted && text[i+1]==='"') i++
-    else quoted=!quoted
+  let quoted = false
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] !== '"') continue
+    if (quoted && text[i + 1] === '"') i++
+    else quoted = !quoted
   }
-  if(quoted) throw new Error('Unterminated quoted CSV field.')
+  if (quoted) throw new Error('Unterminated quoted CSV field.')
   const [columns, ...rows] = csvParseRows(text.replace(/^\uFEFF/, ''))
   if (
     !columns?.length ||
@@ -264,14 +264,14 @@ export function parseCustomRecording(
 }
 
 // Only transport uses the sidecar. Restore it into the private reference store before handing a recording to the UI.
-export function prepareImport(text:string,name:string,mapping:ColumnMapping,volume?:number) {
-  const recording=parseCustomRecording(text,name,mapping,volume)
-  return {recording,referenceSidecar:recording.sessions.map(s=>referenceFlows.get(s))}
+export function prepareImport(text: string, name: string, mapping: ColumnMapping, volume?: number) {
+  const recording = parseCustomRecording(text, name, mapping, volume)
+  return { recording, referenceSidecar: recording.sessions.map((s) => referenceFlows.get(s)) }
 }
-export function receiveImport(packet:ReturnType<typeof prepareImport>) {
-  packet.recording.sessions.forEach((s,i)=>{
-    const flows=packet.referenceSidecar[i]
-    if(flows) referenceFlows.set(s,flows)
+export function receiveImport(packet: ReturnType<typeof prepareImport>) {
+  packet.recording.sessions.forEach((s, i) => {
+    const flows = packet.referenceSidecar[i]
+    if (flows) referenceFlows.set(s, flows)
   })
   return packet.recording
 }

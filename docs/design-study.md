@@ -1,5 +1,7 @@
 # Prospective measurement design
 
+This document records the historical benchmark implementation. [RC1 numerical corrections, current results and reproduction](phase6-review.md)
+
 The Experiment Designer asks which measurement would make two ventilation rates easier to distinguish **if the proposed experiment behaves as specified**. The operator chooses a rate and source to generate synthetic observations. These known settings allow experimental planning and recovery checks. The estimator used in the retrospective Blind Validation Lab continues to abstain on occupied periods. Occupied synthetic experiments here place a much stronger assumption on generation: a constant but unknown total source over the entire observation.
 
 ## Simulated record

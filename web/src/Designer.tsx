@@ -64,15 +64,31 @@ function Slider({
 export default function Designer() {
   const [draft, setDraft] = useState<Design>({ ...defaultDesign }),
     [applied, setApplied] = useState<Design>({ ...defaultDesign })
-  const [expectedReading,setExpectedReading] = useState(1300)
-  const planInput=useMemo(()=>planningInputs({...applied,initial:expectedReading}),[applied,expectedReading])
+  const [expectedReading, setExpectedReading] = useState(1300)
+  const planInput = useMemo(
+    () =>
+      planningInputs({
+        initial: expectedReading,
+        occupancy: applied.occupancy,
+        duration: applied.duration,
+        interval: applied.interval,
+        noise: applied.noise,
+        supplyKnown: applied.supplyKnown,
+      }),
+    [applied, expectedReading],
+  )
   const [run, setRun] = useState(0)
   const r = useMemo(() => experiment(applied), [applied])
   const [guide, setGuide] = useState(0)
   const [pair, setPair] = useState<PairedResult | null>(null)
-  function runComparison(id: OptionId, minutes: number, label: string) {
-    setPair(compareMeasurement(applied, r, id, minutes, label))
-    setGuide(guide && id === 'empty' ? 3 : 0)
+  function runComparison(
+    id: OptionId,
+    minutes: number,
+    label: string,
+    origin: PairedResult['origin'] = 'plan',
+  ) {
+    setPair(compareMeasurement(applied, r, id, minutes, label, origin))
+    setGuide(origin === 'teaching' ? 3 : 0)
   }
   function startGuide() {
     const demo = {
@@ -303,12 +319,20 @@ export default function Designer() {
             <p>
               At equilibrium, generation = 100 × air-change rate. Every physically allowed pair
               along that line predicts the same CO₂ level. Try repeating the experiment after the
-              occupant leaves. This fixed teaching example runs separately from the constrained plan.
+              occupant leaves with the fan held fixed. This fixed teaching example runs separately
+              from the constrained plan.
             </p>
           </div>
           <button
             className="subtle-btn"
-            onClick={() => runComparison('empty', applied.duration, 'Teaching example · Observe an empty room')}
+            onClick={() =>
+              runComparison(
+                'empty',
+                applied.duration,
+                'Teaching example · Observe an empty room',
+                'teaching',
+              )
+            }
           >
             Compare an empty room <ArrowRight size={16} />
           </button>
@@ -317,21 +341,31 @@ export default function Designer() {
       <div className="analysis-grid">
         <Surface r={r} empty={applied.occupancy === 0} />
         <div className="designer-plan">
-          <label className="field panel details-box">Expected initial sensor reading for robust planning (ppm)
-            <input type="number" min={31} max={10000} value={expectedReading || ''} onChange={e=>{setExpectedReading(Number(e.target.value));setPair(null)}}/>
+          <label className="field panel details-box">
+            Expected initial sensor reading for robust planning (ppm)
+            <input
+              type="number"
+              min={31}
+              max={10000}
+              value={expectedReading || ''}
+              onChange={(e) => {
+                setExpectedReading(Number(e.target.value))
+                setPair(null)
+              }}
+            />
             Set the expected instrument reading independently of the physical simulation.
           </label>
-        <Planner
-          key={JSON.stringify([applied,expectedReading])}
-          design={planInput}
-          result={r}
-          onCompare={runComparison}
-          onExport={(decision) => downloadReport(simulationReport(applied, r, decision, pair))}
-          onInvalidate={() => {
-            setPair(null)
-            if (guide === 3) setGuide(0)
-          }}
-        />
+          <Planner
+            key={JSON.stringify([applied, expectedReading])}
+            design={planInput}
+            result={r}
+            onCompare={runComparison}
+            onExport={(decision) => downloadReport(simulationReport(applied, r, decision, pair))}
+            onInvalidate={() => {
+              setPair(null)
+              if (guide === 3) setGuide(0)
+            }}
+          />
         </div>
       </div>
       {pair && <Comparison pair={pair} guided={guide === 3} finishGuide={() => setGuide(0)} />}

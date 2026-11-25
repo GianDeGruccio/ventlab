@@ -28,7 +28,6 @@ import {
   scoreEstimate,
   receiveImport,
   guessMapping,
-
 } from './recordings'
 import { inferWindow, type InferenceResult } from './physics'
 
@@ -39,33 +38,52 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
     [mapping, setMapping] = useState<ColumnMapping>({ time: '', room: '', occupancy: '' }),
     [volume, setVolume] = useState(''),
     [error, setError] = useState('')
-  const active=useRef<Worker|null>(null)
-  const [busy,setBusy]=useState(false)
+  const active = useRef<Worker | null>(null)
+  const [busy, setBusy] = useState(false)
   function cancel() {
     active.current?.terminate()
-    active.current=null
+    active.current = null
     setFile(null)
     setBusy(false)
   }
-  useEffect(()=>()=>active.current?.terminate(),[])
-  function open(f:File) {
+  useEffect(() => () => active.current?.terminate(), [])
+  function open(f: File) {
     cancel()
     setError('')
-    if(f.size>4*1024*1024) {setError('Choose a CSV under 4 MiB for interactive analysis.');return}
+    if (f.size > 4 * 1024 * 1024) {
+      setError('Choose a CSV under 4 MiB for interactive analysis.')
+      return
+    }
     try {
-      const worker=new Worker(new URL('./import.worker.ts',import.meta.url),{type:'module'})
-      active.current=worker
+      const worker = new Worker(new URL('./import.worker.ts', import.meta.url), { type: 'module' })
+      active.current = worker
       setBusy(true)
-      worker.onmessage=({data})=>{
-        if(worker!==active.current) return
+      worker.onmessage = ({ data }) => {
+        if (worker !== active.current) return
         setBusy(false)
-        if(data.error) {setError(data.error);return}
-        if(data.cols) {setFile({name:f.name,cols:data.cols});setMapping(guessMapping(data.cols))}
-        else {onLoad(receiveImport(data.packet));cancel()}
+        if (data.error) {
+          setError(data.error)
+          return
+        }
+        if (data.cols) {
+          setFile({ name: f.name, cols: data.cols })
+          setMapping(guessMapping(data.cols))
+        } else {
+          onLoad(receiveImport(data.packet))
+          cancel()
+        }
       }
-      worker.onerror=()=>{if(active.current===worker){cancel();setError('CSV worker failed. Select the file to retry.')}}
-      worker.postMessage({file:f})
-    } catch(err){cancel();setError(String(err))}
+      worker.onerror = () => {
+        if (active.current === worker) {
+          cancel()
+          setError('CSV worker failed. Select the file to retry.')
+        }
+      }
+      worker.postMessage({ file: f })
+    } catch (err) {
+      cancel()
+      setError(String(err))
+    }
   }
   const labels: Record<keyof ColumnMapping, string> = {
     time: 'Time (ISO or seconds)',
@@ -88,10 +106,10 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
         <input
           type="file"
           accept=".csv,text/csv"
-          onChange={e=>{
-            const f=e.target.files?.[0]
-            e.target.value=''
-            if(f) open(f)
+          onChange={(e) => {
+            const f = e.target.files?.[0]
+            e.target.value = ''
+            if (f) open(f)
           }}
         />
       </label>
@@ -101,7 +119,10 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
             e.preventDefault()
             setBusy(true)
             setError('')
-            active.current?.postMessage({mapping,volume:volume.trim()?Number(volume):undefined})
+            active.current?.postMessage({
+              mapping,
+              volume: volume.trim() ? Number(volume) : undefined,
+            })
           }}
         >
           <div className="fields">
@@ -138,7 +159,11 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
         </form>
       )}
       {busy && <p role="status">Reading the CSV…</p>}
-      {(busy || file) && <button className="subtle-btn" onClick={cancel}>Cancel import</button>}
+      {(busy || file) && (
+        <button className="subtle-btn" onClick={cancel}>
+          Cancel import
+        </button>
+      )}
       {error && <p role="alert">{error}</p>}
     </details>
   )

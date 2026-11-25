@@ -26,6 +26,12 @@ jobs:
         working-directory: web
       - run: npm test
         working-directory: web
+      - name: Reproduce the revised synthetic evidence
+        working-directory: web
+        run: |
+          npm run benchmark
+          npm run stress
+          git diff --exit-code -- ../reports/phase6/scenario-study.json ../reports/phase6/stress.json fixtures/phase6-stress-summary.json
       - run: npm run build
         working-directory: web
       - run: python -m pip install playwright==1.62.0

@@ -1,5 +1,7 @@
 # Independent synthetic stress evaluation
 
+This document records the historical benchmark implementation. [RC1 numerical corrections, current results and reproduction](phase6-review.md)
+
 ## Design and provenance
 
 This study asks how the measurement policies behave when the physical room and sensor errors depart from the constant-source, constant-rate, independent-noise model used to rank experiments. We fixed the case definitions, feasibility constraints, interventions, metrics, and seed sequences before running the comparison. The protocol is committed at `95bf08b` with SHA-256 `48071511f08fa9f5fb947981edb82d4330a62a6dddab03c203439c56fed65dc2`. The planner and observation-fit functions were frozen at `2e92c0c`. Neither file's parameters were tuned on these results. The original Phase 2 evidence is preserved separately. [Frozen protocol](../web/fixtures/phase3-stress-protocol.json) · [Original Phase 2 study](design-study.md)

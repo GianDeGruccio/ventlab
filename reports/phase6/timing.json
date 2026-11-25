@@ -1,0 +1,88 @@
+{
+  "node": "v24.22.3",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "warmup": 1,
+  "samples": [
+    {
+      "name": "Fan cycling",
+      "milliseconds": [
+        62.92887999999999,
+        112.731158,
+        64.457357
+      ],
+      "medianMs": 64.457357
+    },
+    {
+      "name": "Changing occupied source",
+      "milliseconds": [
+        53.06331,
+        159.2977709999999,
+        50.51689299999998
+      ],
+      "medianMs": 53.06331
+    },
+    {
+      "name": "Persistent sensor noise",
+      "milliseconds": [
+        58.35035400000004,
+        60.962171999999896,
+        73.171472
+      ],
+      "medianMs": 60.962171999999896
+    },
+    {
+      "name": "Opposed calibration biases",
+      "milliseconds": [
+        97.50214700000015,
+        49.24608399999988,
+        106.65484600000013
+      ],
+      "medianMs": 97.50214700000015
+    },
+    {
+      "name": "Weak empty contrast",
+      "milliseconds": [
+        11.485783999999967,
+        12.341282999999976,
+        11.38368000000014
+      ],
+      "medianMs": 11.485783999999967
+    },
+    {
+      "name": "Drifting source and fan",
+      "milliseconds": [
+        63.7722389999999,
+        67.54934899999989,
+        55.843474000000015
+      ],
+      "medianMs": 63.7722389999999
+    },
+    {
+      "name": "Time-limited occupied survey",
+      "milliseconds": [
+        28.00244799999996,
+        31.487368999999944,
+        30.160539999999855
+      ],
+      "medianMs": 30.160539999999855
+    },
+    {
+      "name": "Outside planning envelope",
+      "milliseconds": [
+        38.57838700000002,
+        45.78168400000004,
+        33.28761099999997
+      ],
+      "medianMs": 38.57838700000002
+    },
+    {
+      "name": "Dense supported schedule",
+      "milliseconds": [
+        915.648666,
+        770.8069020000003,
+        712.9922889999998
+      ],
+      "medianMs": 770.8069020000003
+    }
+  ]
+}

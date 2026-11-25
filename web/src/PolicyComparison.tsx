@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import study from '../fixtures/phase3-stress-summary.json'
+import study from '../fixtures/phase6-stress-summary.json'
 
 export const policyNames = {
   unchanged: 'Keep current measurement',
@@ -42,7 +42,11 @@ export function PolicyComparison() {
       <div className="fields">
         <label className="field">
           Stress case
-          <select aria-label="Stress case" value={caseName} onChange={(e) => setCase(e.target.value)}>
+          <select
+            aria-label="Stress case"
+            value={caseName}
+            onChange={(e) => setCase(e.target.value)}
+          >
             <option value="">All evaluation cases</option>
             {cases.map((c) => (
               <option key={c.name}>{c.name}</option>
@@ -102,7 +106,7 @@ export function PolicyComparison() {
         <p>
           With opposing calibration biases, improving precision reduced mean width from{' '}
           {bias.policies.unchanged.meanWidth.toFixed(3)} to{' '}
-          {bias.policies.robust.meanWidth.toFixed(3)} h⁻¹ while error rose from{' '}
+          {bias.policies.robust.meanWidth.toFixed(3)} h⁻¹ while error changed from{' '}
           {bias.policies.unchanged.rateMAE.toFixed(3)} to {bias.policies.robust.rateMAE.toFixed(3)}{' '}
           h⁻¹. Check sensors against an independent calibration reference.
         </p>

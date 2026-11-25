@@ -165,7 +165,9 @@ export function Surface({
       <div className="map-readout" id={readoutId}>
         {active
           ? `${r.rates[active[0]].toFixed(2)} h⁻¹ · ${r.sources[active[1]].toFixed(0)} ppm/h · RMSE ${r.surface[active[1]][active[0]].toFixed(1)} ppm`
-          : r.nonUnique ? 'Non-unique fit · several rates explain these observations' : `Profile fit · ${r.fitRate.toFixed(2)} h⁻¹ · ${r.fitGeneration.toFixed(0)} ppm/h`}
+          : r.nonUnique
+            ? 'Non-unique fit · several rates explain these observations'
+            : `Profile fit · ${r.fitRate.toFixed(2)} h⁻¹ · ${r.fitGeneration.toFixed(0)} ppm/h`}
       </div>
       {empty && (
         <p className="map-caveat">

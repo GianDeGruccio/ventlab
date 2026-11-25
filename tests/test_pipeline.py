@@ -6,7 +6,7 @@ from numpy.testing import assert_allclose
 from ventlab.audit import audit
 from ventlab.data import periods
 from ventlab.evaluation import mechanical_reference, score, summarize
-from ventlab.inference import infer_periods
+from ventlab.inference import characterize, infer_periods
 from ventlab.protocol import FLOW, OCC, ROOM, SUPPLY, TIME, VOLUME_M3
 
 
@@ -18,6 +18,12 @@ def fixture(n=91):
 
 
 class PipelineTests(unittest.TestCase):
+    def test_two_observation_fit_has_no_independent_residual_check(self):
+        result = characterize(np.array([0., 3600.]), np.array([1500., 700.]), np.array([420., 420.]), True)
+        self.assertIn("insufficient_residual_information", result["flags"])
+        self.assertEqual(result["rate_change_check"], "insufficient_half_window_signal_or_duration")
+        self.assertEqual(result["status"], "flagged")
+
     def test_reference_units_time_weighted(self):
         r = mechanical_reference([0, 60, 240], [1., 3., 7.])
         self.assertAlmostEqual(r["mean_supply_lps"], (2+3*5)/4)

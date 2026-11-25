@@ -1,4 +1,4 @@
-import {repeatEligibility} from './repeat-eligibility'
+import { repeatEligibility } from './repeat-eligibility'
 import type { Design, experiment } from './design'
 import type { PairedResult } from './comparison-model'
 import type { ObservedWindow } from './recording-plan'
@@ -16,13 +16,14 @@ export interface Decision {
 }
 const methods = 'https://github.com/GianDeGruccio/ventlab/blob/main/docs/'
 const provenance = {
-  reportVersion: 1,
+  reportVersion: 2,
   model: 'Single well-mixed zone. dC/dt = k(B − C) + G with time in hours.',
   units:
     'Concentrations, offsets and sensor SD in ppm. Rates, widths, reductions and scores in h⁻¹. Generation in ppm/h, duration and planning interval in minutes.',
   citations: {
     recordingMethod: methods + 'science.md',
     profileFitter: methods + 'design-study.md',
+    releaseCandidate: methods + 'phase6-review.md',
     robustPlanning: methods + 'robust-planning.md',
     stressEvidence: methods + 'stress-protocol.md',
   },
@@ -34,6 +35,10 @@ const planningModel =
 function plannedDecision(d: Decision) {
   return {
     ...d,
+    operatingCondition:
+      d.selected === 'empty'
+        ? 'Emptying the room must preserve the ventilation operating condition to address the original rate. A responsive fan changes the target.'
+        : 'The design assumes a fixed ventilation operating condition.',
     model:
       d.mode === 'robust'
         ? planningModel
@@ -78,14 +83,17 @@ export function recordingReport(
         'Constant rate, zero generation for unoccupied decay; supplied CO₂ uses the left endpoint of each interval. If absent, background is assumed at 420 ppm. Rate search 0–30 h⁻¹.',
       results: w.result,
       rangeInterpretation:
-        'Sensitivity endpoints across room and background perturbations. No calibrated coverage probability. Abstention leaves estimates unavailable.',
+        'Sensitivity endpoints across room and background perturbations. No calibrated coverage probability. Abstention leaves estimates unavailable. Missing rate-change checks indicate no assessment.',
     },
     proposedRepeat: planned
       ? {
           assumptions: planned.inputs,
           decision: plannedDecision(planned.decision),
-          eligibility: repeatEligibility(planned.inputs,planned.decision.selected,
-            planned.decision.alternatives.find(a=>a.id===planned.decision.selected)!.minutes),
+          eligibility: repeatEligibility(
+            planned.inputs,
+            planned.decision.selected,
+            planned.decision.alternatives.find((a) => a.id === planned.decision.selected)!.minutes,
+          ),
           interpretation:
             'Planned inputs are user-confirmed expectations for the repeat. Sensor noise is a user assumption. Widths describe modeled scenarios. Future rate and accuracy are unknown.',
         }
@@ -98,14 +106,17 @@ function syntheticFit(d: Design, r: Run) {
     configuration: d,
     elapsedMinutes: r.minutes,
     roomObservationsPpm: r.observed,
-    compatibleRegionsAch:r.compatibleRegions, nonUnique:r.nonUnique,
+    compatibleRegionsAch: r.compatibleRegions,
+    nonUnique: r.nonUnique,
     fitRateAch: r.nonUnique ? null : r.fitRate,
     fitGenerationPpmPerHour: r.nonUnique ? null : r.fitGeneration,
     rmsePpm: r.rmse,
     compatibleRangeAch: [r.compatibleLow, r.compatibleHigh],
     widthAch: r.compatibleWidth,
     absoluteRateErrorAch: r.nonUnique ? null : Math.abs(d.rate - r.fitRate),
-    absoluteSourceErrorPpmPerHour: r.nonUnique ? null : Math.abs(d.occupancy * d.generation - r.fitGeneration),
+    absoluteSourceErrorPpmPerHour: r.nonUnique
+      ? null
+      : Math.abs(d.occupancy * d.generation - r.fitGeneration),
     diagnostics: {
       touchesSearchBoundary: r.compatibleLow === 0 || r.compatibleHigh === 8,
       occupiedUnknownSource: d.occupancy > 0,
@@ -124,11 +135,17 @@ export function simulationReport(d: Design, r: Run, decision: Decision, pair: Pa
     executedComparison: pair
       ? {
           strategy: pair.label,
+          context:
+            pair.origin === 'teaching'
+              ? 'Fixed teaching intervention outside the constrained plan'
+              : 'User-selected planned intervention',
           after: syntheticFit(pair.after, pair.second),
           widthChangeAch: pair.second.compatibleWidth - pair.first.compatibleWidth,
-          absoluteErrorChangeAch: pair.first.nonUnique || pair.second.nonUnique ? null :
-            Math.abs(pair.after.rate - pair.second.fitRate) -
-            Math.abs(pair.before.rate - pair.first.fitRate),
+          absoluteErrorChangeAch:
+            pair.first.nonUnique || pair.second.nonUnique
+              ? null
+              : Math.abs(pair.after.rate - pair.second.fitRate) -
+                Math.abs(pair.before.rate - pair.first.fitRate),
         }
       : null,
   }

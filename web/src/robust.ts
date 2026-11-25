@@ -54,7 +54,6 @@ const SUPPLIES = [370, 430, 490]
 const ROOM_OFFSETS = [-30, 0, 30]
 const DUCT_OFFSETS = [-8, 8]
 
-
 function validate(p: PlanningInput, c: PlanningConstraints) {
   const bounds = [
     [p.initial, 31, 10_000],
@@ -95,10 +94,10 @@ function projectShapes(duration: number, interval: number) {
   )
   hours.push(duration / 60)
   const shapes = ENSEMBLE_RATES.map((r) => hours.map((t) => Math.exp(-r * t)))
-  const caches = shapes.map(()=>new Map<number,Shape>())
-  return (j:number,k:number):Shape => {
-    const cached=caches[j].get(k)
-    if(cached) return cached
+  const caches = shapes.map(() => new Map<number, Shape>())
+  return (j: number, k: number): Shape => {
+    const cached = caches[j].get(k)
+    if (cached) return cached
     const e = hours.map((t) => Math.exp(-k * t))
     const phi = hours.map((t) => (k === 0 ? t : -Math.expm1(-k * t) / k))
     let ee = 0,
@@ -109,21 +108,21 @@ function projectShapes(duration: number, interval: number) {
     }
     const orthogonal = phi.map((value, i) => value - (e[i] * ep) / ee)
     const curvature = orthogonal.reduce((sum, x) => sum + x * x, 0)
-    const shape=shapes[j]
-      let ez = 0,
-        pz = 0
-      for (let i = 0; i < hours.length; i++) {
-        ez += e[i] * shape[i]
-        pz += orthogonal[i] * shape[i]
-      }
-      const bestSource = pz / curvature
-      let residual = 0
-      for (let i = 0; i < hours.length; i++) {
-        const err = shape[i] - (e[i] * ez) / ee - orthogonal[i] * bestSource
-        residual += err * err
-      }
-    const point={curvature,bestSource,residual}
-    caches[j].set(k,point)
+    const shape = shapes[j]
+    let ez = 0,
+      pz = 0
+    for (let i = 0; i < hours.length; i++) {
+      ez += e[i] * shape[i]
+      pz += orthogonal[i] * shape[i]
+    }
+    const bestSource = pz / curvature
+    let residual = 0
+    for (let i = 0; i < hours.length; i++) {
+      const err = shape[i] - (e[i] * ez) / ee - orthogonal[i] * bestSource
+      residual += err * err
+    }
+    const point = { curvature, bestSource, residual }
+    caches[j].set(k, point)
     return point
   }
 }
@@ -155,12 +154,12 @@ function worldWidth(p: PlanningInput, world: World, shapes: ReturnType<typeof pr
   const a = steady - nominalSupply,
     b = p.initial - steady
   const maxG = p.occupancy * 1200
-  return continuousBand(k=>{
-    const shape=shapes(rateIndex,k)
+  return continuousBand((k) => {
+    const shape = shapes(rateIndex, k)
     const h = a * k + b * shape.bestSource
     const constrained = Math.min(maxG + k * delta, Math.max(-k * delta, h))
     return b * b * shape.residual + shape.curvature * (constrained - h) ** 2
-  },p.noise).width
+  }, p.noise).width
 }
 
 interface Candidate {

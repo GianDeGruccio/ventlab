@@ -8,6 +8,7 @@ export interface PairedResult {
   first: Run
   second: Run
   label: string
+  origin: 'plan' | 'teaching'
 }
 export function compareMeasurement(
   before: Design,
@@ -15,6 +16,7 @@ export function compareMeasurement(
   id: OptionId,
   minutes: number,
   label: string,
+  origin: PairedResult['origin'] = 'plan',
 ): PairedResult {
   const option = interventions(before).find((o) => o.id === id)
   if (id !== 'baseline' && !option)
@@ -27,7 +29,7 @@ export function compareMeasurement(
   }
   // Reuse the original source grid so equal pixels denote equal hypotheses on both maps.
   const second = id === 'baseline' ? first : experiment(after, first.sources.at(-1))
-  return { before, after, first, second, label }
+  return { before, after, first, second, label, origin }
 }
 export function chartSamples(first: Run, second: Run) {
   const minutes = [...new Set([...first.minutes, ...second.minutes])].sort((a, b) => a - b)
@@ -44,12 +46,12 @@ export function chartSamples(first: Run, second: Run) {
   }
 }
 export function compareErrors(pair: PairedResult) {
-  const before = Math.abs(pair.first.fitRate - pair.before.rate),
-    after = Math.abs(pair.second.fitRate - pair.after.rate)
+  const before = pair.first.nonUnique ? null : Math.abs(pair.first.fitRate - pair.before.rate),
+    after = pair.second.nonUnique ? null : Math.abs(pair.second.fitRate - pair.after.rate)
   return {
     before,
     after,
     narrower: pair.second.compatibleWidth < pair.first.compatibleWidth - 1e-9,
-    improved: after < before - 1e-9,
+    improved: before === null || after === null ? null : after < before - 1e-9,
   }
 }

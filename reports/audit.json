@@ -1,0 +1,1214 @@
+{
+  "training_data_1.csv": {
+    "rows": 8444,
+    "time_start": "2024-02-28 10:25:00",
+    "time_end": "2025-03-25 10:01:00",
+    "invalid_timestamps": 0,
+    "duplicate_timestamp_rows_beyond_first": 0,
+    "reverse_steps": 0,
+    "off_cadence_steps": 50,
+    "interval_seconds_histogram": {
+      "60.0": 8393,
+      "120.0": 1,
+      "180.0": 1,
+      "240.0": 1,
+      "360.0": 1,
+      "420.0": 1,
+      "480.0": 1,
+      "540.0": 1,
+      "600.0": 1,
+      "720.0": 1,
+      "1320.0": 1,
+      "1800.0": 1,
+      "2100.0": 1,
+      "2640.0": 1,
+      "47820.0": 1,
+      "75660.0": 1,
+      "90180.0": 1,
+      "90240.0": 1,
+      "127920.0": 1,
+      "151980.0": 1,
+      "155820.0": 1,
+      "161700.0": 1,
+      "235500.0": 1,
+      "246000.0": 1,
+      "250680.0": 1,
+      "263580.0": 1,
+      "263820.0": 1,
+      "316680.0": 1,
+      "319500.0": 1,
+      "333600.0": 1,
+      "334560.0": 1,
+      "336180.0": 1,
+      "336960.0": 1,
+      "337080.0": 1,
+      "408000.0": 1,
+      "517260.0": 1,
+      "530040.0": 1,
+      "568440.0": 1,
+      "571920.0": 1,
+      "854220.0": 1,
+      "1041780.0": 1,
+      "1088580.0": 1,
+      "1108080.0": 1,
+      "1441560.0": 1,
+      "1565160.0": 1,
+      "1632840.0": 1,
+      "1798620.0": 1,
+      "2050200.0": 1,
+      "2935200.0": 1,
+      "3533700.0": 1,
+      "7144800.0": 1
+    },
+    "columns": {
+      "time": {
+        "unit": "local clock as recorded (zone unspecified)",
+        "missing": 0,
+        "dtype": "object",
+        "min": "2024-02-28 10:25:00",
+        "max": "2025-03-25 10:01:00"
+      },
+      "Room CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 410.5,
+        "max": 1622.976,
+        "median": 668.99,
+        "invalid_numeric": 0
+      },
+      "Temperature (°C)": {
+        "unit": "°C",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 19.5896,
+        "max": 23.133,
+        "median": 21.2364,
+        "invalid_numeric": 0
+      },
+      "Relative Humidity (%)": {
+        "unit": "%",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 18.21,
+        "max": 665.99,
+        "median": 37.9315,
+        "invalid_numeric": 0
+      },
+      "Pressure (mbar)": {
+        "unit": "mbar",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 984.497,
+        "max": 1051.2192,
+        "median": 1016.17675,
+        "invalid_numeric": 0
+      },
+      "Supply airflow (l/s)": {
+        "unit": "L/s",
+        "missing": 0,
+        "dtype": "float64",
+        "min": -6.401975154876709,
+        "max": 362.3630676269531,
+        "median": 20.191702382509234,
+        "invalid_numeric": 0
+      },
+      "Extract airflow (l/s)": {
+        "unit": "L/s",
+        "missing": 0,
+        "dtype": "float64",
+        "min": -0.6318134069442749,
+        "max": 173.0113983154297,
+        "median": 19.29905891418457,
+        "invalid_numeric": 0
+      },
+      "Occupant count": {
+        "unit": "persons",
+        "missing": 0,
+        "dtype": "int64",
+        "min": 0.0,
+        "max": 4.0,
+        "median": 1.0,
+        "invalid_numeric": 0
+      }
+    },
+    "observations": {
+      "Room CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Relative Humidity (%)": {
+        "outside_0_to_100": 1
+      },
+      "Supply airflow (l/s)": {
+        "upper_outer_fence_lps": 69.4809292793274,
+        "above_upper_outer_fence": 191,
+        "negative": 52,
+        "zero": 0,
+        "nonnegative_at_most_1_lps": 27
+      },
+      "Extract airflow (l/s)": {
+        "upper_outer_fence_lps": 67.8552970091502,
+        "above_upper_outer_fence": 186,
+        "negative": 25,
+        "zero": 0,
+        "nonnegative_at_most_1_lps": 52
+      },
+      "Occupant count": {
+        "outside_capacity_or_fractional": 0
+      }
+    },
+    "sessions": [
+      {
+        "session": 1,
+        "start": "2024-02-28 10:25:00",
+        "end": "2024-02-28 12:56:00",
+        "first_data_row": 1,
+        "last_data_row": 152,
+        "elapsed_minutes": 151.0,
+        "preceding_interval_s": null,
+        "rows": 152,
+        "unoccupied_rows": 109
+      },
+      {
+        "session": 2,
+        "start": "2024-04-09 10:31:00",
+        "end": "2024-04-09 11:14:00",
+        "first_data_row": 153,
+        "last_data_row": 196,
+        "elapsed_minutes": 43.0,
+        "preceding_interval_s": 3533700.0,
+        "rows": 44,
+        "unoccupied_rows": 42
+      },
+      {
+        "session": 3,
+        "start": "2024-04-09 11:49:00",
+        "end": "2024-04-09 15:18:00",
+        "first_data_row": 197,
+        "last_data_row": 406,
+        "elapsed_minutes": 209.0,
+        "preceding_interval_s": 2100.0,
+        "rows": 210,
+        "unoccupied_rows": 48
+      },
+      {
+        "session": 4,
+        "start": "2024-05-03 08:48:00",
+        "end": "2024-05-03 10:14:00",
+        "first_data_row": 407,
+        "last_data_row": 493,
+        "elapsed_minutes": 86.0,
+        "preceding_interval_s": 2050200.0,
+        "rows": 87,
+        "unoccupied_rows": 53
+      },
+      {
+        "session": 5,
+        "start": "2024-05-21 13:00:00",
+        "end": "2024-05-21 14:17:00",
+        "first_data_row": 494,
+        "last_data_row": 571,
+        "elapsed_minutes": 77.0,
+        "preceding_interval_s": 1565160.0,
+        "rows": 78,
+        "unoccupied_rows": 46
+      },
+      {
+        "session": 6,
+        "start": "2024-08-12 06:57:00",
+        "end": "2024-08-12 11:37:00",
+        "first_data_row": 572,
+        "last_data_row": 852,
+        "elapsed_minutes": 280.0,
+        "preceding_interval_s": 7144800.0,
+        "rows": 281,
+        "unoccupied_rows": 57
+      },
+      {
+        "session": 7,
+        "start": "2024-08-13 12:40:00",
+        "end": "2024-08-13 13:42:00",
+        "first_data_row": 853,
+        "last_data_row": 915,
+        "elapsed_minutes": 62.0,
+        "preceding_interval_s": 90180.0,
+        "rows": 63,
+        "unoccupied_rows": 63
+      },
+      {
+        "session": 8,
+        "start": "2024-08-30 06:08:00",
+        "end": "2024-08-30 06:14:00",
+        "first_data_row": 916,
+        "last_data_row": 922,
+        "elapsed_minutes": 6.0,
+        "preceding_interval_s": 1441560.0,
+        "rows": 7,
+        "unoccupied_rows": 7
+      },
+      {
+        "session": 9,
+        "start": "2024-09-02 07:27:00",
+        "end": "2024-09-02 08:30:00",
+        "first_data_row": 923,
+        "last_data_row": 986,
+        "elapsed_minutes": 63.0,
+        "preceding_interval_s": 263580.0,
+        "rows": 64,
+        "unoccupied_rows": 55
+      },
+      {
+        "session": 10,
+        "start": "2024-09-06 05:53:00",
+        "end": "2024-09-06 11:46:00",
+        "first_data_row": 987,
+        "last_data_row": 1340,
+        "elapsed_minutes": 353.0,
+        "preceding_interval_s": 336180.0,
+        "rows": 354,
+        "unoccupied_rows": 354
+      },
+      {
+        "session": 11,
+        "start": "2024-09-06 11:55:00",
+        "end": "2024-09-06 12:12:00",
+        "first_data_row": 1341,
+        "last_data_row": 1358,
+        "elapsed_minutes": 17.0,
+        "preceding_interval_s": 540.0,
+        "rows": 18,
+        "unoccupied_rows": 18
+      },
+      {
+        "session": 12,
+        "start": "2024-09-06 12:14:00",
+        "end": "2024-09-06 12:34:00",
+        "first_data_row": 1359,
+        "last_data_row": 1379,
+        "elapsed_minutes": 20.0,
+        "preceding_interval_s": 120.0,
+        "rows": 21,
+        "unoccupied_rows": 21
+      },
+      {
+        "session": 13,
+        "start": "2024-09-09 05:59:00",
+        "end": "2024-09-09 12:01:00",
+        "first_data_row": 1380,
+        "last_data_row": 1742,
+        "elapsed_minutes": 362.0,
+        "preceding_interval_s": 235500.0,
+        "rows": 363,
+        "unoccupied_rows": 201
+      },
+      {
+        "session": 14,
+        "start": "2024-09-09 12:11:00",
+        "end": "2024-09-09 14:54:00",
+        "first_data_row": 1743,
+        "last_data_row": 1906,
+        "elapsed_minutes": 163.0,
+        "preceding_interval_s": 600.0,
+        "rows": 164,
+        "unoccupied_rows": 102
+      },
+      {
+        "session": 15,
+        "start": "2024-09-16 05:46:00",
+        "end": "2024-09-16 12:53:00",
+        "first_data_row": 1907,
+        "last_data_row": 2334,
+        "elapsed_minutes": 427.0,
+        "preceding_interval_s": 571920.0,
+        "rows": 428,
+        "unoccupied_rows": 191
+      },
+      {
+        "session": 16,
+        "start": "2024-09-19 10:31:00",
+        "end": "2024-09-19 13:06:00",
+        "first_data_row": 2335,
+        "last_data_row": 2490,
+        "elapsed_minutes": 155.0,
+        "preceding_interval_s": 250680.0,
+        "rows": 156,
+        "unoccupied_rows": 156
+      },
+      {
+        "session": 17,
+        "start": "2024-09-23 05:51:00",
+        "end": "2024-09-23 13:05:00",
+        "first_data_row": 2491,
+        "last_data_row": 2925,
+        "elapsed_minutes": 434.0,
+        "preceding_interval_s": 319500.0,
+        "rows": 435,
+        "unoccupied_rows": 144
+      },
+      {
+        "session": 18,
+        "start": "2024-09-25 08:22:00",
+        "end": "2024-09-25 18:03:00",
+        "first_data_row": 2926,
+        "last_data_row": 3507,
+        "elapsed_minutes": 581.0,
+        "preceding_interval_s": 155820.0,
+        "rows": 582,
+        "unoccupied_rows": 359
+      },
+      {
+        "session": 19,
+        "start": "2024-09-27 05:35:00",
+        "end": "2024-09-27 08:33:00",
+        "first_data_row": 3508,
+        "last_data_row": 3686,
+        "elapsed_minutes": 178.0,
+        "preceding_interval_s": 127920.0,
+        "rows": 179,
+        "unoccupied_rows": 132
+      },
+      {
+        "session": 20,
+        "start": "2024-10-03 11:47:00",
+        "end": "2024-10-03 15:07:00",
+        "first_data_row": 3687,
+        "last_data_row": 3887,
+        "elapsed_minutes": 200.0,
+        "preceding_interval_s": 530040.0,
+        "rows": 201,
+        "unoccupied_rows": 83
+      },
+      {
+        "session": 21,
+        "start": "2024-10-07 07:05:00",
+        "end": "2024-10-07 08:27:00",
+        "first_data_row": 3888,
+        "last_data_row": 3970,
+        "elapsed_minutes": 82.0,
+        "preceding_interval_s": 316680.0,
+        "rows": 83,
+        "unoccupied_rows": 49
+      },
+      {
+        "session": 22,
+        "start": "2024-10-10 09:44:00",
+        "end": "2024-10-10 10:19:00",
+        "first_data_row": 3971,
+        "last_data_row": 4006,
+        "elapsed_minutes": 35.0,
+        "preceding_interval_s": 263820.0,
+        "rows": 36,
+        "unoccupied_rows": 36
+      },
+      {
+        "session": 23,
+        "start": "2024-10-22 11:42:00",
+        "end": "2024-10-22 13:06:00",
+        "first_data_row": 4007,
+        "last_data_row": 4091,
+        "elapsed_minutes": 84.0,
+        "preceding_interval_s": 1041780.0,
+        "rows": 85,
+        "unoccupied_rows": 23
+      },
+      {
+        "session": 24,
+        "start": "2024-10-22 13:13:00",
+        "end": "2024-10-22 14:37:00",
+        "first_data_row": 4092,
+        "last_data_row": 4176,
+        "elapsed_minutes": 84.0,
+        "preceding_interval_s": 420.0,
+        "rows": 85,
+        "unoccupied_rows": 19
+      },
+      {
+        "session": 25,
+        "start": "2024-11-01 11:54:00",
+        "end": "2024-11-01 12:18:00",
+        "first_data_row": 4177,
+        "last_data_row": 4201,
+        "elapsed_minutes": 24.0,
+        "preceding_interval_s": 854220.0,
+        "rows": 25,
+        "unoccupied_rows": 23
+      },
+      {
+        "session": 26,
+        "start": "2024-11-05 09:54:00",
+        "end": "2024-11-05 10:02:00",
+        "first_data_row": 4202,
+        "last_data_row": 4210,
+        "elapsed_minutes": 8.0,
+        "preceding_interval_s": 336960.0,
+        "rows": 9,
+        "unoccupied_rows": 9
+      },
+      {
+        "session": 27,
+        "start": "2024-11-05 10:24:00",
+        "end": "2024-11-05 13:55:00",
+        "first_data_row": 4211,
+        "last_data_row": 4422,
+        "elapsed_minutes": 211.0,
+        "preceding_interval_s": 1320.0,
+        "rows": 212,
+        "unoccupied_rows": 79
+      },
+      {
+        "session": 28,
+        "start": "2024-11-06 14:59:00",
+        "end": "2024-11-06 17:51:00",
+        "first_data_row": 4423,
+        "last_data_row": 4595,
+        "elapsed_minutes": 172.0,
+        "preceding_interval_s": 90240.0,
+        "rows": 173,
+        "unoccupied_rows": 49
+      },
+      {
+        "session": 29,
+        "start": "2024-11-07 14:52:00",
+        "end": "2024-11-07 17:43:00",
+        "first_data_row": 4596,
+        "last_data_row": 4767,
+        "elapsed_minutes": 171.0,
+        "preceding_interval_s": 75660.0,
+        "rows": 172,
+        "unoccupied_rows": 47
+      },
+      {
+        "session": 30,
+        "start": "2024-11-12 11:03:00",
+        "end": "2024-11-12 11:39:00",
+        "first_data_row": 4768,
+        "last_data_row": 4804,
+        "elapsed_minutes": 36.0,
+        "preceding_interval_s": 408000.0,
+        "rows": 37,
+        "unoccupied_rows": 37
+      },
+      {
+        "session": 31,
+        "start": "2024-11-18 11:20:00",
+        "end": "2024-11-18 12:14:00",
+        "first_data_row": 4805,
+        "last_data_row": 4859,
+        "elapsed_minutes": 54.0,
+        "preceding_interval_s": 517260.0,
+        "rows": 55,
+        "unoccupied_rows": 55
+      },
+      {
+        "session": 32,
+        "start": "2024-12-07 09:48:00",
+        "end": "2024-12-07 11:19:00",
+        "first_data_row": 4860,
+        "last_data_row": 4951,
+        "elapsed_minutes": 91.0,
+        "preceding_interval_s": 1632840.0,
+        "rows": 92,
+        "unoccupied_rows": 31
+      },
+      {
+        "session": 33,
+        "start": "2025-01-10 10:39:00",
+        "end": "2025-01-10 10:40:00",
+        "first_data_row": 4952,
+        "last_data_row": 4953,
+        "elapsed_minutes": 1.0,
+        "preceding_interval_s": 2935200.0,
+        "rows": 2,
+        "unoccupied_rows": 2
+      },
+      {
+        "session": 34,
+        "start": "2025-01-13 07:00:00",
+        "end": "2025-01-13 11:24:00",
+        "first_data_row": 4954,
+        "last_data_row": 5218,
+        "elapsed_minutes": 264.0,
+        "preceding_interval_s": 246000.0,
+        "rows": 265,
+        "unoccupied_rows": 102
+      },
+      {
+        "session": 35,
+        "start": "2025-01-13 11:32:00",
+        "end": "2025-01-13 11:37:00",
+        "first_data_row": 5219,
+        "last_data_row": 5224,
+        "elapsed_minutes": 5.0,
+        "preceding_interval_s": 480.0,
+        "rows": 6,
+        "unoccupied_rows": 6
+      },
+      {
+        "session": 36,
+        "start": "2025-02-03 07:14:00",
+        "end": "2025-02-03 13:14:00",
+        "first_data_row": 5225,
+        "last_data_row": 5585,
+        "elapsed_minutes": 360.0,
+        "preceding_interval_s": 1798620.0,
+        "rows": 361,
+        "unoccupied_rows": 217
+      },
+      {
+        "session": 37,
+        "start": "2025-02-07 09:54:00",
+        "end": "2025-02-07 09:55:00",
+        "first_data_row": 5586,
+        "last_data_row": 5587,
+        "elapsed_minutes": 1.0,
+        "preceding_interval_s": 333600.0,
+        "rows": 2,
+        "unoccupied_rows": 0
+      },
+      {
+        "session": 38,
+        "start": "2025-02-11 07:33:00",
+        "end": "2025-02-11 07:37:00",
+        "first_data_row": 5588,
+        "last_data_row": 5592,
+        "elapsed_minutes": 4.0,
+        "preceding_interval_s": 337080.0,
+        "rows": 5,
+        "unoccupied_rows": 5
+      },
+      {
+        "session": 39,
+        "start": "2025-02-11 07:40:00",
+        "end": "2025-02-11 10:46:00",
+        "first_data_row": 5593,
+        "last_data_row": 5779,
+        "elapsed_minutes": 186.0,
+        "preceding_interval_s": 180.0,
+        "rows": 187,
+        "unoccupied_rows": 69
+      },
+      {
+        "session": 40,
+        "start": "2025-02-24 06:34:00",
+        "end": "2025-02-24 09:44:00",
+        "first_data_row": 5780,
+        "last_data_row": 5970,
+        "elapsed_minutes": 190.0,
+        "preceding_interval_s": 1108080.0,
+        "rows": 191,
+        "unoccupied_rows": 104
+      },
+      {
+        "session": 41,
+        "start": "2025-02-24 09:50:00",
+        "end": "2025-02-24 16:57:00",
+        "first_data_row": 5971,
+        "last_data_row": 6398,
+        "elapsed_minutes": 427.0,
+        "preceding_interval_s": 360.0,
+        "rows": 428,
+        "unoccupied_rows": 156
+      },
+      {
+        "session": 42,
+        "start": "2025-03-03 06:51:00",
+        "end": "2025-03-03 12:59:00",
+        "first_data_row": 6399,
+        "last_data_row": 6767,
+        "elapsed_minutes": 368.0,
+        "preceding_interval_s": 568440.0,
+        "rows": 369,
+        "unoccupied_rows": 139
+      },
+      {
+        "session": 43,
+        "start": "2025-03-05 07:12:00",
+        "end": "2025-03-05 11:15:00",
+        "first_data_row": 6768,
+        "last_data_row": 7011,
+        "elapsed_minutes": 243.0,
+        "preceding_interval_s": 151980.0,
+        "rows": 244,
+        "unoccupied_rows": 113
+      },
+      {
+        "session": 44,
+        "start": "2025-03-05 11:59:00",
+        "end": "2025-03-05 13:11:00",
+        "first_data_row": 7012,
+        "last_data_row": 7084,
+        "elapsed_minutes": 72.0,
+        "preceding_interval_s": 2640.0,
+        "rows": 73,
+        "unoccupied_rows": 34
+      },
+      {
+        "session": 45,
+        "start": "2025-03-07 10:06:00",
+        "end": "2025-03-07 12:53:00",
+        "first_data_row": 7085,
+        "last_data_row": 7252,
+        "elapsed_minutes": 167.0,
+        "preceding_interval_s": 161700.0,
+        "rows": 168,
+        "unoccupied_rows": 33
+      },
+      {
+        "session": 46,
+        "start": "2025-03-11 09:49:00",
+        "end": "2025-03-11 13:01:00",
+        "first_data_row": 7253,
+        "last_data_row": 7445,
+        "elapsed_minutes": 192.0,
+        "preceding_interval_s": 334560.0,
+        "rows": 193,
+        "unoccupied_rows": 16
+      },
+      {
+        "session": 47,
+        "start": "2025-03-11 13:13:00",
+        "end": "2025-03-11 16:39:00",
+        "first_data_row": 7446,
+        "last_data_row": 7652,
+        "elapsed_minutes": 206.0,
+        "preceding_interval_s": 720.0,
+        "rows": 207,
+        "unoccupied_rows": 64
+      },
+      {
+        "session": 48,
+        "start": "2025-03-24 07:02:00",
+        "end": "2025-03-24 07:26:00",
+        "first_data_row": 7653,
+        "last_data_row": 7677,
+        "elapsed_minutes": 24.0,
+        "preceding_interval_s": 1088580.0,
+        "rows": 25,
+        "unoccupied_rows": 25
+      },
+      {
+        "session": 49,
+        "start": "2025-03-24 07:30:00",
+        "end": "2025-03-24 13:40:00",
+        "first_data_row": 7678,
+        "last_data_row": 8048,
+        "elapsed_minutes": 370.0,
+        "preceding_interval_s": 240.0,
+        "rows": 371,
+        "unoccupied_rows": 209
+      },
+      {
+        "session": 50,
+        "start": "2025-03-24 14:10:00",
+        "end": "2025-03-24 17:39:00",
+        "first_data_row": 8049,
+        "last_data_row": 8258,
+        "elapsed_minutes": 209.0,
+        "preceding_interval_s": 1800.0,
+        "rows": 210,
+        "unoccupied_rows": 80
+      },
+      {
+        "session": 51,
+        "start": "2025-03-25 06:56:00",
+        "end": "2025-03-25 10:01:00",
+        "first_data_row": 8259,
+        "last_data_row": 8444,
+        "elapsed_minutes": 185.0,
+        "preceding_interval_s": 47820.0,
+        "rows": 186,
+        "unoccupied_rows": 91
+      }
+    ],
+    "sha256": "83e269aaf9ebfcb2bc6c449a3153c81d7fd38080271f3b33d618e274e1e74558",
+    "role": "development"
+  },
+  "training_data_2.csv": {
+    "rows": 4089,
+    "time_start": "2025-10-13 07:03:00",
+    "time_end": "2025-11-20 13:16:00",
+    "invalid_timestamps": 0,
+    "duplicate_timestamp_rows_beyond_first": 0,
+    "reverse_steps": 0,
+    "off_cadence_steps": 12,
+    "interval_seconds_histogram": {
+      "60.0": 4076,
+      "1320.0": 1,
+      "56760.0": 1,
+      "56940.0": 1,
+      "78840.0": 1,
+      "143520.0": 1,
+      "233340.0": 1,
+      "235440.0": 1,
+      "252060.0": 1,
+      "259080.0": 1,
+      "562140.0": 1,
+      "574980.0": 1,
+      "606600.0": 1
+    },
+    "columns": {
+      "time": {
+        "unit": "local clock as recorded (zone unspecified)",
+        "missing": 0,
+        "dtype": "object",
+        "min": "2025-10-13 07:03:00",
+        "max": "2025-11-20 13:16:00"
+      },
+      "Room CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 426.994,
+        "max": 1727.974,
+        "median": 699.99,
+        "invalid_numeric": 0
+      },
+      "Temperature (°C)": {
+        "unit": "°C",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 19.699,
+        "max": 22.009,
+        "median": 20.882,
+        "invalid_numeric": 0
+      },
+      "Relative Humidity (%)": {
+        "unit": "%",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 28.993,
+        "max": 52.454,
+        "median": 37.342,
+        "invalid_numeric": 0
+      },
+      "Pressure (mbar)": {
+        "unit": "mbar",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 986.646,
+        "max": 1013.151,
+        "median": 1009.066,
+        "invalid_numeric": 0
+      },
+      "Supply airflow (l/s)": {
+        "unit": "L/s",
+        "missing": 0,
+        "dtype": "float64",
+        "min": -4.165716171264648,
+        "max": 66.01154327392578,
+        "median": 15.87340641021728,
+        "invalid_numeric": 0
+      },
+      "Extract airflow (l/s)": {
+        "unit": "L/s",
+        "missing": 0,
+        "dtype": "float64",
+        "min": -0.0745064541697502,
+        "max": 58.30515289306641,
+        "median": 15.93429183959961,
+        "invalid_numeric": 0
+      },
+      "Supply air CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 403.0,
+        "max": 564.0,
+        "median": 428.0,
+        "invalid_numeric": 0
+      },
+      "Exhaust air CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 398.0,
+        "max": 1646.0,
+        "median": 672.0,
+        "invalid_numeric": 0
+      },
+      "Occupant count (ML estimate)": {
+        "unit": "persons (estimate)",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 0.0,
+        "max": 6.0,
+        "median": 1.0,
+        "invalid_numeric": 0
+      },
+      "Occupant count": {
+        "unit": "persons",
+        "missing": 0,
+        "dtype": "int64",
+        "min": 0.0,
+        "max": 4.0,
+        "median": 1.0,
+        "invalid_numeric": 0
+      }
+    },
+    "observations": {
+      "Room CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Relative Humidity (%)": {
+        "outside_0_to_100": 0
+      },
+      "Supply airflow (l/s)": {
+        "upper_outer_fence_lps": 101.87359380722044,
+        "above_upper_outer_fence": 0,
+        "negative": 47,
+        "zero": 0,
+        "nonnegative_at_most_1_lps": 29
+      },
+      "Extract airflow (l/s)": {
+        "upper_outer_fence_lps": 102.11452341079713,
+        "above_upper_outer_fence": 0,
+        "negative": 4,
+        "zero": 0,
+        "nonnegative_at_most_1_lps": 68
+      },
+      "Supply air CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Exhaust air CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Occupant count (ML estimate)": {
+        "outside_capacity_or_fractional": 222
+      },
+      "Occupant count": {
+        "outside_capacity_or_fractional": 0
+      }
+    },
+    "sessions": [
+      {
+        "session": 1,
+        "start": "2025-10-13 07:03:00",
+        "end": "2025-10-13 14:10:00",
+        "first_data_row": 1,
+        "last_data_row": 428,
+        "elapsed_minutes": 427.0,
+        "preceding_interval_s": null,
+        "rows": 428,
+        "unoccupied_rows": 297
+      },
+      {
+        "session": 2,
+        "start": "2025-10-15 06:02:00",
+        "end": "2025-10-15 14:09:00",
+        "first_data_row": 429,
+        "last_data_row": 916,
+        "elapsed_minutes": 487.0,
+        "preceding_interval_s": 143520.0,
+        "rows": 488,
+        "unoccupied_rows": 228
+      },
+      {
+        "session": 3,
+        "start": "2025-10-16 05:55:00",
+        "end": "2025-10-16 14:07:00",
+        "first_data_row": 917,
+        "last_data_row": 1409,
+        "elapsed_minutes": 492.0,
+        "preceding_interval_s": 56760.0,
+        "rows": 493,
+        "unoccupied_rows": 116
+      },
+      {
+        "session": 4,
+        "start": "2025-10-17 05:56:00",
+        "end": "2025-10-17 13:06:00",
+        "first_data_row": 1410,
+        "last_data_row": 1840,
+        "elapsed_minutes": 430.0,
+        "preceding_interval_s": 56940.0,
+        "rows": 431,
+        "unoccupied_rows": 149
+      },
+      {
+        "session": 5,
+        "start": "2025-10-20 05:55:00",
+        "end": "2025-10-20 07:12:00",
+        "first_data_row": 1841,
+        "last_data_row": 1918,
+        "elapsed_minutes": 77.0,
+        "preceding_interval_s": 233340.0,
+        "rows": 78,
+        "unoccupied_rows": 5
+      },
+      {
+        "session": 6,
+        "start": "2025-10-21 05:06:00",
+        "end": "2025-10-21 13:46:00",
+        "first_data_row": 1919,
+        "last_data_row": 2439,
+        "elapsed_minutes": 520.0,
+        "preceding_interval_s": 78840.0,
+        "rows": 521,
+        "unoccupied_rows": 279
+      },
+      {
+        "session": 7,
+        "start": "2025-10-24 11:47:00",
+        "end": "2025-10-24 14:19:00",
+        "first_data_row": 2440,
+        "last_data_row": 2592,
+        "elapsed_minutes": 152.0,
+        "preceding_interval_s": 252060.0,
+        "rows": 153,
+        "unoccupied_rows": 73
+      },
+      {
+        "session": 8,
+        "start": "2025-10-27 14:17:00",
+        "end": "2025-10-27 18:07:00",
+        "first_data_row": 2593,
+        "last_data_row": 2823,
+        "elapsed_minutes": 230.0,
+        "preceding_interval_s": 259080.0,
+        "rows": 231,
+        "unoccupied_rows": 96
+      },
+      {
+        "session": 9,
+        "start": "2025-11-03 06:16:00",
+        "end": "2025-11-03 12:15:00",
+        "first_data_row": 2824,
+        "last_data_row": 3183,
+        "elapsed_minutes": 359.0,
+        "preceding_interval_s": 562140.0,
+        "rows": 360,
+        "unoccupied_rows": 182
+      },
+      {
+        "session": 10,
+        "start": "2025-11-10 12:45:00",
+        "end": "2025-11-10 14:40:00",
+        "first_data_row": 3184,
+        "last_data_row": 3299,
+        "elapsed_minutes": 115.0,
+        "preceding_interval_s": 606600.0,
+        "rows": 116,
+        "unoccupied_rows": 89
+      },
+      {
+        "session": 11,
+        "start": "2025-11-10 15:02:00",
+        "end": "2025-11-10 15:12:00",
+        "first_data_row": 3300,
+        "last_data_row": 3310,
+        "elapsed_minutes": 10.0,
+        "preceding_interval_s": 1320.0,
+        "rows": 11,
+        "unoccupied_rows": 11
+      },
+      {
+        "session": 12,
+        "start": "2025-11-17 06:55:00",
+        "end": "2025-11-17 14:16:00",
+        "first_data_row": 3311,
+        "last_data_row": 3752,
+        "elapsed_minutes": 441.0,
+        "preceding_interval_s": 574980.0,
+        "rows": 442,
+        "unoccupied_rows": 122
+      },
+      {
+        "session": 13,
+        "start": "2025-11-20 07:40:00",
+        "end": "2025-11-20 13:16:00",
+        "first_data_row": 3753,
+        "last_data_row": 4089,
+        "elapsed_minutes": 336.0,
+        "preceding_interval_s": 235440.0,
+        "rows": 337,
+        "unoccupied_rows": 47
+      }
+    ],
+    "sha256": "cbec60981fdb3cccbf865750d3ee1afb289f64aea9f64fb8d8a3719380810909",
+    "role": "development"
+  },
+  "ventilation_test.csv": {
+    "rows": 1430,
+    "time_start": "2025-11-24 06:42:00",
+    "time_end": "2025-11-27 14:00:00",
+    "invalid_timestamps": 0,
+    "duplicate_timestamp_rows_beyond_first": 0,
+    "reverse_steps": 0,
+    "off_cadence_steps": 2,
+    "interval_seconds_histogram": {
+      "60.0": 1427,
+      "56160.0": 1,
+      "143700.0": 1
+    },
+    "columns": {
+      "time": {
+        "unit": "local clock as recorded (zone unspecified)",
+        "missing": 0,
+        "dtype": "object",
+        "min": "2025-11-24 06:42:00",
+        "max": "2025-11-27 14:00:00"
+      },
+      "Room CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 427.994,
+        "max": 1419.979,
+        "median": 856.487,
+        "invalid_numeric": 0
+      },
+      "Temperature (°C)": {
+        "unit": "°C",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 19.656,
+        "max": 22.433,
+        "median": 20.981,
+        "invalid_numeric": 0
+      },
+      "Relative Humidity (%)": {
+        "unit": "%",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 24.127,
+        "max": 38.667,
+        "median": 33.166,
+        "invalid_numeric": 0
+      },
+      "Pressure (mbar)": {
+        "unit": "mbar",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 998.635,
+        "max": 1012.69,
+        "median": 1007.469,
+        "invalid_numeric": 0
+      },
+      "Supply airflow (l/s)": {
+        "unit": "L/s",
+        "missing": 0,
+        "dtype": "float64",
+        "min": -0.4405183494091034,
+        "max": 64.94943237304688,
+        "median": 10.045821189880375,
+        "invalid_numeric": 0
+      },
+      "Extract airflow (l/s)": {
+        "unit": "L/s",
+        "missing": 0,
+        "dtype": "float64",
+        "min": -0.594770073890686,
+        "max": 58.35587692260742,
+        "median": 10.004505634307861,
+        "invalid_numeric": 0
+      },
+      "Supply air CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 405.0,
+        "max": 494.0,
+        "median": 434.0,
+        "invalid_numeric": 0
+      },
+      "Exhaust air CO2 (ppm)": {
+        "unit": "ppm",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 410.0,
+        "max": 1410.0,
+        "median": 848.0,
+        "invalid_numeric": 0
+      },
+      "Occupant count (ML estimate)": {
+        "unit": "persons (estimate)",
+        "missing": 0,
+        "dtype": "float64",
+        "min": 0.0,
+        "max": 4.0,
+        "median": 1.0,
+        "invalid_numeric": 0
+      },
+      "Occupant count": {
+        "unit": "persons",
+        "missing": 0,
+        "dtype": "int64",
+        "min": 0.0,
+        "max": 4.0,
+        "median": 1.0,
+        "invalid_numeric": 0
+      }
+    },
+    "observations": {
+      "Room CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Relative Humidity (%)": {
+        "outside_0_to_100": 0
+      },
+      "Supply airflow (l/s)": {
+        "upper_outer_fence_lps": 51.95620894432069,
+        "above_upper_outer_fence": 2,
+        "negative": 14,
+        "zero": 0,
+        "nonnegative_at_most_1_lps": 1
+      },
+      "Extract airflow (l/s)": {
+        "upper_outer_fence_lps": 51.91762149333954,
+        "above_upper_outer_fence": 3,
+        "negative": 12,
+        "zero": 0,
+        "nonnegative_at_most_1_lps": 3
+      },
+      "Supply air CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Exhaust air CO2 (ppm)": {
+        "nonpositive": 0
+      },
+      "Occupant count (ML estimate)": {
+        "outside_capacity_or_fractional": 0
+      },
+      "Occupant count": {
+        "outside_capacity_or_fractional": 0
+      }
+    },
+    "sessions": [
+      {
+        "session": 1,
+        "start": "2025-11-24 06:42:00",
+        "end": "2025-11-24 14:34:00",
+        "first_data_row": 1,
+        "last_data_row": 473,
+        "elapsed_minutes": 472.0,
+        "preceding_interval_s": null,
+        "rows": 473,
+        "unoccupied_rows": 121
+      },
+      {
+        "session": 2,
+        "start": "2025-11-25 06:10:00",
+        "end": "2025-11-25 14:13:00",
+        "first_data_row": 474,
+        "last_data_row": 957,
+        "elapsed_minutes": 483.0,
+        "preceding_interval_s": 56160.0,
+        "rows": 484,
+        "unoccupied_rows": 245
+      },
+      {
+        "session": 3,
+        "start": "2025-11-27 06:08:00",
+        "end": "2025-11-27 14:00:00",
+        "first_data_row": 958,
+        "last_data_row": 1430,
+        "elapsed_minutes": 472.0,
+        "preceding_interval_s": 143700.0,
+        "rows": 473,
+        "unoccupied_rows": 227
+      }
+    ],
+    "sha256": "bf0617f9c273e64f100f2e9303e4104d5346ebab1c3060fa8a9cc88850e596b2",
+    "role": "evaluation"
+  }
+}

@@ -69,6 +69,7 @@ export default function RecordingPlan({ window: w }: { window: ObservedWindow })
               'Median cadence': value(w.interval, 'min') + (w.irregular ? ' · irregular' : ''),
               Occupancy: w.occupancy === null ? 'Variable or unknown' : String(w.occupancy),
               'Valid supply CO₂ samples': w.supplyCount + ' / ' + w.input.room.length,
+              'Rate-change diagnostic':(result.rate_change_check ?? 'unavailable').replaceAll('_',' '),
               'Physics estimate': value(result.rate_ach, 'h⁻¹'),
               'Log-linear estimate': value(result.baseline_ach, 'h⁻¹'),
               'Sensitivity range':

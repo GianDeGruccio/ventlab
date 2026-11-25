@@ -48,6 +48,8 @@ def characterize(t, room, supply, measured):
     except ValueError as err:
         return dict(r, status="abstained", reason=str(err), flags=flags)
     r.update(rate_ach=rate, rmse_ppm=rmse, scenario_rates={"nominal": rate})
+    if len(t) == 2:
+        flags.append("insufficient_residual_information")
     if at_bound(rate):
         flags.append("nominal_rate_at_bound")
     if rate * t[-1] / 3600 < .25:

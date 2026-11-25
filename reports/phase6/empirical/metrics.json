@@ -1,0 +1,3971 @@
+{
+  "training_data_1.csv": {
+    "all": {
+      "periods": 239,
+      "unoccupied": 137,
+      "status": {
+        "flagged": 92,
+        "abstained": 147
+      },
+      "abstention_reasons": {
+        "unknown_generation": 102,
+        "under_minimum_duration": 45
+      },
+      "flags": {
+        "low_variation": 82,
+        "assumed_background": 137,
+        "short_relative_to_time_constant": 32,
+        "scenario_at_bound": 45,
+        "occupied_occupancy": 102,
+        "unknown_generation": 102,
+        "parameter_sensitive": 66,
+        "short_duration": 73,
+        "weak_room_supply_contrast": 47,
+        "no_net_decay": 47,
+        "nominal_rate_at_bound": 19,
+        "large_fit_residual": 22,
+        "possible_rate_change": 6
+      },
+      "reference_status": {
+        "usable": 225,
+        "negative_flow": 12,
+        "invalid_time_or_no_interval": 2
+      },
+      "estimated": 92,
+      "scored": 83,
+      "mae_ach": 2.196749181102103,
+      "mean_signed_error_ach": -1.7270025753555938,
+      "relative_n": 83,
+      "mape_percent": 74.3847080654369,
+      "sensitivity_n": 92,
+      "mean_sensitivity_width_ach": 8.83533960693576,
+      "inside_scenario_n": 49,
+      "scenario_comparable_n": 83,
+      "inside_scenario_fraction": 0.5903614457831325,
+      "baseline_estimated": 71,
+      "baseline_scored": 65,
+      "baseline_mae_ach": 1.8892890566912746,
+      "baseline_relative_n": 65,
+      "baseline_mape_percent": 48.019757917180804,
+      "paired_n": 65,
+      "paired_physics_mae_ach": 1.9903604867320308,
+      "paired_baseline_mae_ach": 1.8892890566912746
+    },
+    "unoccupied": {
+      "periods": 137,
+      "unoccupied": 137,
+      "status": {
+        "flagged": 92,
+        "abstained": 45
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 45
+      },
+      "flags": {
+        "low_variation": 82,
+        "assumed_background": 137,
+        "short_relative_to_time_constant": 32,
+        "scenario_at_bound": 45,
+        "parameter_sensitive": 66,
+        "short_duration": 73,
+        "weak_room_supply_contrast": 47,
+        "no_net_decay": 47,
+        "nominal_rate_at_bound": 19,
+        "large_fit_residual": 22,
+        "possible_rate_change": 6
+      },
+      "reference_status": {
+        "usable": 125,
+        "negative_flow": 11,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 92,
+      "scored": 83,
+      "mae_ach": 2.196749181102103,
+      "mean_signed_error_ach": -1.7270025753555938,
+      "relative_n": 83,
+      "mape_percent": 74.3847080654369,
+      "sensitivity_n": 92,
+      "mean_sensitivity_width_ach": 8.83533960693576,
+      "inside_scenario_n": 49,
+      "scenario_comparable_n": 83,
+      "inside_scenario_fraction": 0.5903614457831325,
+      "baseline_estimated": 71,
+      "baseline_scored": 65,
+      "baseline_mae_ach": 1.8892890566912746,
+      "baseline_relative_n": 65,
+      "baseline_mape_percent": 48.019757917180804,
+      "paired_n": 65,
+      "paired_physics_mae_ach": 1.9903604867320308,
+      "paired_baseline_mae_ach": 1.8892890566912746
+    },
+    "duration_under_20_min": {
+      "periods": 73,
+      "unoccupied": 73,
+      "status": {
+        "flagged": 28,
+        "abstained": 45
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 45
+      },
+      "flags": {
+        "short_duration": 73,
+        "low_variation": 60,
+        "assumed_background": 73,
+        "weak_room_supply_contrast": 27,
+        "no_net_decay": 36,
+        "nominal_rate_at_bound": 10,
+        "short_relative_to_time_constant": 17,
+        "parameter_sensitive": 23,
+        "scenario_at_bound": 21,
+        "large_fit_residual": 3
+      },
+      "reference_status": {
+        "usable": 68,
+        "negative_flow": 4,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 28,
+      "scored": 26,
+      "mae_ach": 2.4999659649233097,
+      "mean_signed_error_ach": -1.7718239284214135,
+      "relative_n": 26,
+      "mape_percent": 108.11955974807536,
+      "sensitivity_n": 28,
+      "mean_sensitivity_width_ach": 12.117506026188066,
+      "inside_scenario_n": 15,
+      "scenario_comparable_n": 26,
+      "inside_scenario_fraction": 0.5769230769230769,
+      "baseline_estimated": 19,
+      "baseline_scored": 18,
+      "baseline_mae_ach": 2.7627213446930527,
+      "baseline_relative_n": 18,
+      "baseline_mape_percent": 83.75958545442441,
+      "paired_n": 18,
+      "paired_physics_mae_ach": 2.745203840137933,
+      "paired_baseline_mae_ach": 2.7627213446930527
+    },
+    "duration_at_least_20_min": {
+      "periods": 64,
+      "unoccupied": 64,
+      "status": {
+        "flagged": 64
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 22,
+        "assumed_background": 64,
+        "short_relative_to_time_constant": 15,
+        "scenario_at_bound": 24,
+        "parameter_sensitive": 43,
+        "no_net_decay": 11,
+        "nominal_rate_at_bound": 9,
+        "large_fit_residual": 19,
+        "possible_rate_change": 6,
+        "weak_room_supply_contrast": 20
+      },
+      "reference_status": {
+        "usable": 57,
+        "negative_flow": 7
+      },
+      "estimated": 64,
+      "scored": 57,
+      "mae_ach": 2.058439770938045,
+      "mean_signed_error_ach": -1.7065577476413605,
+      "relative_n": 57,
+      "mape_percent": 58.996880982128125,
+      "sensitivity_n": 64,
+      "mean_sensitivity_width_ach": 7.399391798512877,
+      "inside_scenario_n": 34,
+      "scenario_comparable_n": 57,
+      "inside_scenario_fraction": 0.5964912280701754,
+      "baseline_estimated": 52,
+      "baseline_scored": 47,
+      "baseline_mae_ach": 1.5547830740522954,
+      "baseline_relative_n": 47,
+      "baseline_mape_percent": 34.332164392279,
+      "paired_n": 47,
+      "paired_physics_mae_ach": 1.7012715428744507,
+      "paired_baseline_mae_ach": 1.5547830740522954
+    },
+    "span_at_most_60_ppm": {
+      "periods": 82,
+      "unoccupied": 82,
+      "status": {
+        "flagged": 41,
+        "abstained": 41
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 41
+      },
+      "flags": {
+        "low_variation": 82,
+        "assumed_background": 82,
+        "short_relative_to_time_constant": 30,
+        "scenario_at_bound": 40,
+        "short_duration": 60,
+        "weak_room_supply_contrast": 47,
+        "no_net_decay": 46,
+        "nominal_rate_at_bound": 18,
+        "parameter_sensitive": 37
+      },
+      "reference_status": {
+        "usable": 75,
+        "negative_flow": 6,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 41,
+      "scored": 37,
+      "mae_ach": 3.5271788982400802,
+      "mean_signed_error_ach": -2.7436960583449412,
+      "relative_n": 37,
+      "mape_percent": 127.47777039554357,
+      "sensitivity_n": 41,
+      "mean_sensitivity_width_ach": 14.934151788607274,
+      "inside_scenario_n": 25,
+      "scenario_comparable_n": 37,
+      "inside_scenario_fraction": 0.6756756756756757,
+      "baseline_estimated": 20,
+      "baseline_scored": 19,
+      "baseline_mae_ach": 3.7602380531274617,
+      "baseline_relative_n": 19,
+      "baseline_mape_percent": 99.86732924133757,
+      "paired_n": 19,
+      "paired_physics_mae_ach": 4.081519412683703,
+      "paired_baseline_mae_ach": 3.7602380531274617
+    },
+    "span_above_60_ppm": {
+      "periods": 55,
+      "unoccupied": 55,
+      "status": {
+        "flagged": 51,
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 4
+      },
+      "flags": {
+        "assumed_background": 55,
+        "parameter_sensitive": 29,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 2,
+        "large_fit_residual": 22,
+        "scenario_at_bound": 5,
+        "possible_rate_change": 6,
+        "short_duration": 13
+      },
+      "reference_status": {
+        "usable": 50,
+        "negative_flow": 5
+      },
+      "estimated": 51,
+      "scored": 46,
+      "mae_ach": 1.1266209303606876,
+      "mean_signed_error_ach": -0.9092273825163366,
+      "relative_n": 46,
+      "mape_percent": 31.6794187999163,
+      "sensitivity_n": 51,
+      "mean_sensitivity_width_ach": 3.932372951082191,
+      "inside_scenario_n": 24,
+      "scenario_comparable_n": 46,
+      "inside_scenario_fraction": 0.5217391304347826,
+      "baseline_estimated": 51,
+      "baseline_scored": 46,
+      "baseline_mae_ach": 1.1165057755545882,
+      "baseline_relative_n": 46,
+      "baseline_mape_percent": 26.604456718072573,
+      "paired_n": 46,
+      "paired_physics_mae_ach": 1.1266209303606876,
+      "paired_baseline_mae_ach": 1.1165057755545882
+    },
+    "passes_checks": {
+      "periods": 0,
+      "unoccupied": 0,
+      "status": {},
+      "abstention_reasons": {},
+      "flags": {},
+      "reference_status": {},
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "flagged": {
+      "periods": 92,
+      "unoccupied": 92,
+      "status": {
+        "flagged": 92
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 41,
+        "assumed_background": 92,
+        "short_relative_to_time_constant": 32,
+        "scenario_at_bound": 45,
+        "parameter_sensitive": 66,
+        "short_duration": 28,
+        "weak_room_supply_contrast": 31,
+        "no_net_decay": 20,
+        "nominal_rate_at_bound": 19,
+        "large_fit_residual": 22,
+        "possible_rate_change": 6
+      },
+      "reference_status": {
+        "usable": 83,
+        "negative_flow": 9
+      },
+      "estimated": 92,
+      "scored": 83,
+      "mae_ach": 2.196749181102103,
+      "mean_signed_error_ach": -1.7270025753555938,
+      "relative_n": 83,
+      "mape_percent": 74.3847080654369,
+      "sensitivity_n": 92,
+      "mean_sensitivity_width_ach": 8.83533960693576,
+      "inside_scenario_n": 49,
+      "scenario_comparable_n": 83,
+      "inside_scenario_fraction": 0.5903614457831325,
+      "baseline_estimated": 71,
+      "baseline_scored": 65,
+      "baseline_mae_ach": 1.8892890566912746,
+      "baseline_relative_n": 65,
+      "baseline_mape_percent": 48.019757917180804,
+      "paired_n": 65,
+      "paired_physics_mae_ach": 1.9903604867320308,
+      "paired_baseline_mae_ach": 1.8892890566912746
+    },
+    "session_1": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 3,
+        "short_relative_to_time_constant": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "parameter_sensitive": 2
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 4.149527960728094,
+      "mean_signed_error_ach": -4.149527960728094,
+      "relative_n": 3,
+      "mape_percent": 77.87033130766791,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 1.3076290928611194,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 3.2305833934070183,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 60.80527675844422,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 3.6039701275747067,
+      "paired_baseline_mae_ach": 3.2305833934070183
+    },
+    "session_2": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 2,
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 3
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 4.9173739820439994,
+      "mean_signed_error_ach": -4.9173739820439994,
+      "relative_n": 2,
+      "mape_percent": 100.0,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 17.442292511242226,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 3.329213193875498,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 67.29130764232852,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 4.947463960087038,
+      "paired_baseline_mae_ach": 3.329213193875498
+    },
+    "session_3": {
+      "periods": 11,
+      "unoccupied": 6,
+      "status": {
+        "flagged": 2,
+        "abstained": 9
+      },
+      "abstention_reasons": {
+        "unknown_generation": 5,
+        "under_minimum_duration": 4
+      },
+      "flags": {
+        "short_duration": 6,
+        "low_variation": 6,
+        "assumed_background": 6,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "nominal_rate_at_bound": 1,
+        "no_net_decay": 2
+      },
+      "reference_status": {
+        "usable": 10,
+        "negative_flow": 1
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 4.2888798197685745,
+      "mean_signed_error_ach": -4.2888798197685745,
+      "relative_n": 2,
+      "mape_percent": 98.68818522538632,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 3.096398129506211,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 4.264754918055757,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 98.00525482659873,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 4.2888798197685745,
+      "paired_baseline_mae_ach": 4.264754918055757
+    },
+    "session_4": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "abstained": 2,
+        "flagged": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1,
+        "unknown_generation": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "parameter_sensitive": 1
+      },
+      "reference_status": {
+        "invalid_time_or_no_interval": 1,
+        "usable": 2
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 1.9965083675352222,
+      "mean_signed_error_ach": -1.9965083675352222,
+      "relative_n": 1,
+      "mape_percent": 35.76159373648694,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 5.083835505295721,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 2.896990916992567,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 51.891098437859775,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 1.9965083675352222,
+      "paired_baseline_mae_ach": 2.896990916992567
+    },
+    "session_5": {
+      "periods": 2,
+      "unoccupied": 1,
+      "status": {
+        "abstained": 1,
+        "flagged": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1
+      },
+      "flags": {
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "assumed_background": 1,
+        "large_fit_residual": 1,
+        "parameter_sensitive": 1
+      },
+      "reference_status": {
+        "usable": 1,
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 2.538983945125488,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 1,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_6": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "abstained": 3,
+        "flagged": 2
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1,
+        "unknown_generation": 2
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 1,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "large_fit_residual": 1,
+        "possible_rate_change": 1,
+        "parameter_sensitive": 1
+      },
+      "reference_status": {
+        "usable": 4,
+        "negative_flow": 1
+      },
+      "estimated": 2,
+      "scored": 1,
+      "mae_ach": 0.5699877854150608,
+      "mean_signed_error_ach": -0.5699877854150608,
+      "relative_n": 1,
+      "mape_percent": 28.079469019751446,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 1.1410476430813217,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.005054843763222294,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 0.2490181938648502,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.5699877854150608,
+      "paired_baseline_mae_ach": 0.005054843763222294
+    },
+    "session_7": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "assumed_background": 1,
+        "large_fit_residual": 1,
+        "parameter_sensitive": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 0.019628048866632497,
+      "mean_signed_error_ach": -0.019628048866632497,
+      "relative_n": 1,
+      "mape_percent": 0.3197684455797404,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 5.487497899575946,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 3.7248773940688276,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 60.68347711836806,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.019628048866632497,
+      "paired_baseline_mae_ach": 3.7248773940688276
+    },
+    "session_8": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_9": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 2,
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "assumed_background": 2,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 3
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 4.111846260809063,
+      "mean_signed_error_ach": -4.111846260809063,
+      "relative_n": 2,
+      "mape_percent": 97.73292216411475,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 26.906013178607097,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 5.726397803411678,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 94.93952191906152,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 5.758143607759791,
+      "paired_baseline_mae_ach": 5.726397803411678
+    },
+    "session_10": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 0.43305868139874676,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 1,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_11": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 27.291157940076243,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_12": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 23.905106206255972,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_13": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 4,
+        "abstained": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3
+      },
+      "flags": {
+        "low_variation": 2,
+        "assumed_background": 4,
+        "weak_room_supply_contrast": 1,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "short_duration": 1,
+        "short_relative_to_time_constant": 2
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 4,
+      "scored": 4,
+      "mae_ach": 5.602735186487818,
+      "mean_signed_error_ach": -5.602735186487818,
+      "relative_n": 4,
+      "mape_percent": 74.72789686229078,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 3.019623536915827,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 4,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 4,
+      "baseline_scored": 4,
+      "baseline_mae_ach": 5.610677835288252,
+      "baseline_relative_n": 4,
+      "baseline_mape_percent": 72.19225365596981,
+      "paired_n": 4,
+      "paired_physics_mae_ach": 5.602735186487818,
+      "paired_baseline_mae_ach": 5.610677835288252
+    },
+    "session_14": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "abstained": 4,
+        "flagged": 3
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1,
+        "unknown_generation": 3
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "assumed_background": 4,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "scenario_at_bound": 1,
+        "parameter_sensitive": 1,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "usable": 6,
+        "negative_flow": 1
+      },
+      "estimated": 3,
+      "scored": 2,
+      "mae_ach": 1.4802637638047382,
+      "mean_signed_error_ach": -1.4802637638047382,
+      "relative_n": 2,
+      "mape_percent": 59.81845002939235,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 1.106084846339619,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.380755126481096,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 15.41442536576397,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.48505540674812186,
+      "paired_baseline_mae_ach": 0.380755126481096
+    },
+    "session_15": {
+      "periods": 19,
+      "unoccupied": 10,
+      "status": {
+        "flagged": 5,
+        "abstained": 14
+      },
+      "abstention_reasons": {
+        "unknown_generation": 9,
+        "under_minimum_duration": 5
+      },
+      "flags": {
+        "short_duration": 8,
+        "low_variation": 8,
+        "assumed_background": 10,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 7,
+        "nominal_rate_at_bound": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 9,
+        "unknown_generation": 9,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 19
+      },
+      "estimated": 5,
+      "scored": 5,
+      "mae_ach": 3.2153120168178213,
+      "mean_signed_error_ach": -3.2153120168178213,
+      "relative_n": 5,
+      "mape_percent": 75.66630108547547,
+      "sensitivity_n": 5,
+      "mean_sensitivity_width_ach": 7.3466617941990835,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 5,
+      "inside_scenario_fraction": 0.2,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 4.208991766070137,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 53.439597891726265,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 4.356109977343905,
+      "paired_baseline_mae_ach": 4.208991766070137
+    },
+    "session_16": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 7.354852415351879,
+      "mean_signed_error_ach": -7.354852415351879,
+      "relative_n": 1,
+      "mape_percent": 99.51781382850417,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 6.267218497420573,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_17": {
+      "periods": 15,
+      "unoccupied": 8,
+      "status": {
+        "abstained": 13,
+        "flagged": 2
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 6,
+        "unknown_generation": 7
+      },
+      "flags": {
+        "short_duration": 6,
+        "low_variation": 5,
+        "assumed_background": 8,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 7,
+        "unknown_generation": 7,
+        "parameter_sensitive": 2,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "usable": 14,
+        "negative_flow": 1
+      },
+      "estimated": 2,
+      "scored": 1,
+      "mae_ach": 2.0885693029089483,
+      "mean_signed_error_ach": -2.0885693029089483,
+      "relative_n": 1,
+      "mape_percent": 59.686019968169816,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 1.4527342611956016,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 1.7283912433057065,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 49.39304341832107,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 2.0885693029089483,
+      "paired_baseline_mae_ach": 1.7283912433057065
+    },
+    "session_18": {
+      "periods": 9,
+      "unoccupied": 5,
+      "status": {
+        "flagged": 4,
+        "abstained": 5
+      },
+      "abstention_reasons": {
+        "unknown_generation": 4,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "assumed_background": 5,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 4,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 4,
+        "unknown_generation": 4,
+        "short_duration": 1,
+        "large_fit_residual": 2
+      },
+      "reference_status": {
+        "usable": 8,
+        "negative_flow": 1
+      },
+      "estimated": 4,
+      "scored": 3,
+      "mae_ach": 1.173718400915962,
+      "mean_signed_error_ach": -0.8460747159890499,
+      "relative_n": 3,
+      "mape_percent": 40.82416449085677,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 3.0953637721714835,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 3,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.3363039982094287,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 6.654000065073687,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.49758453117036194,
+      "paired_baseline_mae_ach": 0.3363039982094287
+    },
+    "session_19": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 3,
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "assumed_background": 4,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "short_duration": 1
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 0.9917577815558268,
+      "mean_signed_error_ach": -0.9917577815558268,
+      "relative_n": 3,
+      "mape_percent": 63.07362973415737,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 10.56231989958063,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.6666666666666666,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.23182445427399279,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 16.57493567946321,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.49875186144012074,
+      "paired_baseline_mae_ach": 0.23182445427399279
+    },
+    "session_20": {
+      "periods": 4,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 2,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 2,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 3,
+        "negative_flow": 1
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 2.6298704987885793,
+      "mean_signed_error_ach": -2.6298704987885793,
+      "relative_n": 2,
+      "mape_percent": 64.37277505425129,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 16.078575981865356,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 1.7616976199241139,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 46.62804595603411,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 2.6298704987885793,
+      "paired_baseline_mae_ach": 1.7616976199241139
+    },
+    "session_21": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 1,
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2,
+        "under_minimum_duration": 2
+      },
+      "flags": {
+        "low_variation": 3,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "short_duration": 2,
+        "no_net_decay": 2
+      },
+      "reference_status": {
+        "usable": 4,
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 3.0712763025246756,
+      "mean_signed_error_ach": -3.0712763025246756,
+      "relative_n": 1,
+      "mape_percent": 92.28371052972265,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 30.0,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 3.1713143486436257,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 95.2895886014583,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 3.0712763025246756,
+      "paired_baseline_mae_ach": 3.1713143486436257
+    },
+    "session_22": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 30.0,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_23": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 1,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 2,
+        "assumed_background": 2,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1
+      },
+      "reference_status": {
+        "usable": 3
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 0.16948124563591183,
+      "mean_signed_error_ach": -0.16948124563591183,
+      "relative_n": 1,
+      "mape_percent": 3.9209664525906156,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 29.038745282856567,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.4521156335238903,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 10.459742758483115,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.16948124563591183,
+      "paired_baseline_mae_ach": 0.4521156335238903
+    },
+    "session_24": {
+      "periods": 2,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1,
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "assumed_background": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1
+      },
+      "reference_status": {
+        "usable": 2
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 4.179465752111883,
+      "mean_signed_error_ach": 4.179465752111883,
+      "relative_n": 1,
+      "mape_percent": 95.34828480923501,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 26.05428555100386,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 1.178986160611224,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 26.89681286927702,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 4.179465752111883,
+      "paired_baseline_mae_ach": 1.178986160611224
+    },
+    "session_25": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "abstained": 2,
+        "flagged": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1,
+        "unknown_generation": 1
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "assumed_background": 2,
+        "weak_room_supply_contrast": 2,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 3
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 3.4089402013665007,
+      "mean_signed_error_ach": -3.4089402013665007,
+      "relative_n": 1,
+      "mape_percent": 77.90099779301931,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 6.883982366253151,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 3.2236684007009258,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 73.66717223956076,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 3.4089402013665007,
+      "paired_baseline_mae_ach": 3.2236684007009258
+    },
+    "session_26": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_27": {
+      "periods": 6,
+      "unoccupied": 3,
+      "status": {
+        "abstained": 4,
+        "flagged": 2
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1,
+        "unknown_generation": 3
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 2,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 2,
+        "no_net_decay": 1,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 6
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 0.9242996652826285,
+      "mean_signed_error_ach": -0.9242996652826285,
+      "relative_n": 2,
+      "mape_percent": 43.0469175162948,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 2.3717680899189473,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.8353468884770283,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 23.333960641605238,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.9242996652826285,
+      "paired_baseline_mae_ach": 0.8353468884770283
+    },
+    "session_28": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "abstained": 4,
+        "flagged": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 2,
+        "unknown_generation": 2
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "parameter_sensitive": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 0.7555930568329785,
+      "mean_signed_error_ach": -0.7555930568329785,
+      "relative_n": 1,
+      "mape_percent": 13.655189056633336,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 4.9948305171566245,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 1.3029318038058273,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 23.54677554005328,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.7555930568329785,
+      "paired_baseline_mae_ach": 1.3029318038058273
+    },
+    "session_29": {
+      "periods": 4,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 2,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 2,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 4
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 1.1103770785247438,
+      "mean_signed_error_ach": -1.1103770785247438,
+      "relative_n": 2,
+      "mape_percent": 29.772829110857593,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 6.179447150625352,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.67270676808221,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 22.424895343930082,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 1.1103770785247438,
+      "paired_baseline_mae_ach": 0.67270676808221
+    },
+    "session_30": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 3.568279821132388,
+      "mean_signed_error_ach": -3.568279821132388,
+      "relative_n": 1,
+      "mape_percent": 79.82710962985223,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 30.0,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 3.1908103705694257,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 71.38262188717088,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 3.568279821132388,
+      "paired_baseline_mae_ach": 3.1908103705694257
+    },
+    "session_31": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 3.746966183062082,
+      "mean_signed_error_ach": -3.746966183062082,
+      "relative_n": 1,
+      "mape_percent": 77.49500990677154,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 30.0,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 3.6313520501429646,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 75.10387053208736,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 3.746966183062082,
+      "paired_baseline_mae_ach": 3.6313520501429646
+    },
+    "session_32": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "abstained": 4,
+        "flagged": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 2,
+        "unknown_generation": 2
+      },
+      "flags": {
+        "short_duration": 3,
+        "low_variation": 2,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 1.0622211703950057,
+      "mean_signed_error_ach": -1.0622211703950057,
+      "relative_n": 1,
+      "mape_percent": 20.12479245305808,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 29.722339521982367,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 4.323959927096293,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 81.92154189112385,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 1.0622211703950057,
+      "paired_baseline_mae_ach": 4.323959927096293
+    },
+    "session_33": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_34": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "short_duration": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 0.7657915347035811,
+      "mean_signed_error_ach": -0.7657915347035811,
+      "relative_n": 3,
+      "mape_percent": 23.92144893304881,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 4.692386944391621,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.6666666666666666,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.08691379757578988,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 3.819007971492202,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.45009376347371577,
+      "paired_baseline_mae_ach": 0.08691379757578988
+    },
+    "session_35": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "no_net_decay": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_36": {
+      "periods": 10,
+      "unoccupied": 5,
+      "status": {
+        "flagged": 4,
+        "abstained": 6
+      },
+      "abstention_reasons": {
+        "unknown_generation": 5,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 4,
+        "assumed_background": 5,
+        "weak_room_supply_contrast": 2,
+        "no_net_decay": 2,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 3,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 2,
+        "short_duration": 2
+      },
+      "reference_status": {
+        "usable": 9,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 4,
+      "scored": 4,
+      "mae_ach": 0.8880308938138097,
+      "mean_signed_error_ach": -0.8880308938138097,
+      "relative_n": 4,
+      "mape_percent": 56.471139444740416,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 5.458093680674498,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 4,
+      "inside_scenario_fraction": 0.75,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 0.8694015133952369,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 46.26120778496307,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 1.0839509737791913,
+      "paired_baseline_mae_ach": 0.8694015133952369
+    },
+    "session_37": {
+      "periods": 1,
+      "unoccupied": 0,
+      "status": {
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1
+      },
+      "flags": {
+        "occupied_occupancy": 1,
+        "unknown_generation": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_38": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_39": {
+      "periods": 6,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "large_fit_residual": 1,
+        "short_relative_to_time_constant": 1
+      },
+      "reference_status": {
+        "usable": 6
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 2.6639036451081037,
+      "mean_signed_error_ach": 0.8603501698337407,
+      "relative_n": 3,
+      "mape_percent": 385.8854452281252,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 10.696540365499176,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.3333333333333333,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 1.5374819240400575,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 197.57071671095358,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 2.6639036451081037,
+      "paired_baseline_mae_ach": 1.5374819240400575
+    },
+    "session_40": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "short_duration": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 1.059619683548734,
+      "mean_signed_error_ach": 1.0492366680746164,
+      "relative_n": 3,
+      "mape_percent": 94.37852838432956,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 3.5255360049980027,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.2330815132969739,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 9.873704728028189,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.16883461354329532,
+      "paired_baseline_mae_ach": 0.2330815132969739
+    },
+    "session_41": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 2,
+        "abstained": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "assumed_background": 3,
+        "parameter_sensitive": 2,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "short_duration": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 0.09224933496994375,
+      "mean_signed_error_ach": -0.09224933496994375,
+      "relative_n": 2,
+      "mape_percent": 8.190160291831573,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 1.325310927482429,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.3676335328416955,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 30.556695305069724,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.09224933496994375,
+      "paired_baseline_mae_ach": 0.3676335328416955
+    },
+    "session_42": {
+      "periods": 10,
+      "unoccupied": 5,
+      "status": {
+        "flagged": 4,
+        "abstained": 6
+      },
+      "abstention_reasons": {
+        "unknown_generation": 5,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "assumed_background": 5,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "large_fit_residual": 2,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "usable": 10
+      },
+      "estimated": 4,
+      "scored": 4,
+      "mae_ach": 0.9594489200916727,
+      "mean_signed_error_ach": -0.9594489200916727,
+      "relative_n": 4,
+      "mape_percent": 47.86976301500657,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 6.266167419900254,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 4,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 0.3446769730054983,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 14.689028780855372,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 0.7339469235670633,
+      "paired_baseline_mae_ach": 0.3446769730054983
+    },
+    "session_43": {
+      "periods": 8,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 3,
+        "abstained": 5
+      },
+      "abstention_reasons": {
+        "unknown_generation": 4,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "assumed_background": 4,
+        "weak_room_supply_contrast": 2,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 4,
+        "unknown_generation": 4,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 8
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 0.46154419865526847,
+      "mean_signed_error_ach": -0.45686045396033076,
+      "relative_n": 3,
+      "mape_percent": 42.079221611252855,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 10.58944038027868,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.6666666666666666,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.3743390837050853,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 13.843806137826896,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.3577888647462948,
+      "paired_baseline_mae_ach": 0.3743390837050853
+    },
+    "session_44": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "abstained": 2,
+        "flagged": 1
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 1,
+        "unknown_generation": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 2,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "large_fit_residual": 1,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "usable": 3
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 0.6286304316002607,
+      "mean_signed_error_ach": -0.6286304316002607,
+      "relative_n": 1,
+      "mape_percent": 20.811726097007686,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 0.6852086491364178,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.01854803360151669,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 0.6140596693198654,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.6286304316002607,
+      "paired_baseline_mae_ach": 0.01854803360151669
+    },
+    "session_45": {
+      "periods": 6,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 2,
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 3,
+        "low_variation": 2,
+        "assumed_background": 3,
+        "weak_room_supply_contrast": 2,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 6
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 1.9564284303547592,
+      "mean_signed_error_ach": -1.9564284303547592,
+      "relative_n": 2,
+      "mape_percent": 80.54581607461522,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 15.429205645803169,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 1.6134546618496435,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 42.22914678891369,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 2.334136163912655,
+      "paired_baseline_mae_ach": 1.6134546618496435
+    },
+    "session_46": {
+      "periods": 2,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1,
+        "abstained": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "assumed_background": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1
+      },
+      "reference_status": {
+        "usable": 2
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 0.9357551242473218,
+      "mean_signed_error_ach": -0.9357551242473218,
+      "relative_n": 1,
+      "mape_percent": 100.0,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 1.9707168496396148,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.8842690333366449,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 94.49790980817872,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.9357551242473218,
+      "paired_baseline_mae_ach": 0.8842690333366449
+    },
+    "session_47": {
+      "periods": 7,
+      "unoccupied": 3,
+      "status": {
+        "abstained": 5,
+        "flagged": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 4,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "occupied_occupancy": 4,
+        "unknown_generation": 4,
+        "assumed_background": 3,
+        "parameter_sensitive": 2,
+        "short_duration": 2,
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 1.1049940735786097,
+      "mean_signed_error_ach": -1.1049940735786097,
+      "relative_n": 2,
+      "mape_percent": 21.43166783321523,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 2.964902321260126,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 1.5612794200461808,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 30.497345246916282,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 1.1049940735786097,
+      "paired_baseline_mae_ach": 1.5612794200461808
+    },
+    "session_48": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 1,
+        "assumed_background": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 6.366861992087706,
+      "mean_signed_error_ach": 6.366861992087706,
+      "relative_n": 1,
+      "mape_percent": 428.2035224105591,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 12.58287800599949,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_49": {
+      "periods": 11,
+      "unoccupied": 6,
+      "status": {
+        "abstained": 8,
+        "flagged": 3
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 3,
+        "unknown_generation": 5
+      },
+      "flags": {
+        "short_duration": 3,
+        "low_variation": 2,
+        "assumed_background": 6,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "large_fit_residual": 3,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "usable": 11
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 1.2469386941233056,
+      "mean_signed_error_ach": -1.2469386941233056,
+      "relative_n": 3,
+      "mape_percent": 37.03998260338434,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 0.6041785124800579,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 0.7889287135879629,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 17.08259615428253,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 1.2469386941233056,
+      "paired_baseline_mae_ach": 0.7889287135879629
+    },
+    "session_50": {
+      "periods": 6,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3
+      },
+      "flags": {
+        "assumed_background": 3,
+        "parameter_sensitive": 2,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "scenario_at_bound": 1,
+        "short_duration": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 6
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 1.7937853711912437,
+      "mean_signed_error_ach": -1.7937853711912437,
+      "relative_n": 3,
+      "mape_percent": 44.4626043561683,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 14.039318390965013,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 2.8035483142597815,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 61.148510840525404,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 1.7937853711912437,
+      "paired_baseline_mae_ach": 2.8035483142597815
+    },
+    "session_51": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 3,
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 3,
+        "assumed_background": 4,
+        "weak_room_supply_contrast": 2,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "short_duration": 2
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 2.79227237243207,
+      "mean_signed_error_ach": -2.79227237243207,
+      "relative_n": 3,
+      "mape_percent": 70.19419201063366,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 13.891800271970668,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.005968009132683916,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 0.4352835007944475,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.14509373842665196,
+      "paired_baseline_mae_ach": 0.005968009132683916
+    }
+  },
+  "training_data_2.csv": {
+    "all": {
+      "periods": 80,
+      "unoccupied": 46,
+      "status": {
+        "flagged": 29,
+        "abstained": 48,
+        "passes_checks": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 34,
+        "under_minimum_duration": 14
+      },
+      "flags": {
+        "low_variation": 26,
+        "weak_room_supply_contrast": 14,
+        "no_net_decay": 18,
+        "nominal_rate_at_bound": 7,
+        "short_relative_to_time_constant": 12,
+        "parameter_sensitive": 26,
+        "scenario_at_bound": 12,
+        "occupied_occupancy": 34,
+        "unknown_generation": 34,
+        "short_duration": 22,
+        "possible_rate_change": 3,
+        "large_fit_residual": 8
+      },
+      "reference_status": {
+        "usable": 71,
+        "negative_flow": 7,
+        "invalid_time_or_no_interval": 2
+      },
+      "estimated": 32,
+      "scored": 26,
+      "mae_ach": 1.4412129913157712,
+      "mean_signed_error_ach": -1.1101335613780956,
+      "relative_n": 26,
+      "mape_percent": 46.91214526940175,
+      "sensitivity_n": 32,
+      "mean_sensitivity_width_ach": 8.121925849621075,
+      "inside_scenario_n": 18,
+      "scenario_comparable_n": 26,
+      "inside_scenario_fraction": 0.6923076923076923,
+      "baseline_estimated": 27,
+      "baseline_scored": 23,
+      "baseline_mae_ach": 1.3502826218341095,
+      "baseline_relative_n": 23,
+      "baseline_mape_percent": 42.57547174476929,
+      "paired_n": 23,
+      "paired_physics_mae_ach": 1.2704990778435765,
+      "paired_baseline_mae_ach": 1.3502826218341095
+    },
+    "unoccupied": {
+      "periods": 46,
+      "unoccupied": 46,
+      "status": {
+        "flagged": 29,
+        "abstained": 14,
+        "passes_checks": 3
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 14
+      },
+      "flags": {
+        "low_variation": 26,
+        "weak_room_supply_contrast": 14,
+        "no_net_decay": 18,
+        "nominal_rate_at_bound": 7,
+        "short_relative_to_time_constant": 12,
+        "parameter_sensitive": 26,
+        "scenario_at_bound": 12,
+        "short_duration": 22,
+        "possible_rate_change": 3,
+        "large_fit_residual": 8
+      },
+      "reference_status": {
+        "usable": 38,
+        "negative_flow": 7,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 32,
+      "scored": 26,
+      "mae_ach": 1.4412129913157712,
+      "mean_signed_error_ach": -1.1101335613780956,
+      "relative_n": 26,
+      "mape_percent": 46.91214526940175,
+      "sensitivity_n": 32,
+      "mean_sensitivity_width_ach": 8.121925849621075,
+      "inside_scenario_n": 18,
+      "scenario_comparable_n": 26,
+      "inside_scenario_fraction": 0.6923076923076923,
+      "baseline_estimated": 27,
+      "baseline_scored": 23,
+      "baseline_mae_ach": 1.3502826218341095,
+      "baseline_relative_n": 23,
+      "baseline_mape_percent": 42.57547174476929,
+      "paired_n": 23,
+      "paired_physics_mae_ach": 1.2704990778435765,
+      "paired_baseline_mae_ach": 1.3502826218341095
+    },
+    "duration_under_20_min": {
+      "periods": 22,
+      "unoccupied": 22,
+      "status": {
+        "abstained": 14,
+        "flagged": 8
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 14
+      },
+      "flags": {
+        "short_duration": 22,
+        "low_variation": 18,
+        "no_net_decay": 11,
+        "weak_room_supply_contrast": 7,
+        "parameter_sensitive": 7,
+        "short_relative_to_time_constant": 4,
+        "scenario_at_bound": 4,
+        "large_fit_residual": 2,
+        "nominal_rate_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 18,
+        "negative_flow": 3,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 8,
+      "scored": 6,
+      "mae_ach": 1.4093231143544245,
+      "mean_signed_error_ach": -0.6110650871107626,
+      "relative_n": 6,
+      "mape_percent": 48.74681469234691,
+      "sensitivity_n": 8,
+      "mean_sensitivity_width_ach": 12.113821320503845,
+      "inside_scenario_n": 4,
+      "scenario_comparable_n": 6,
+      "inside_scenario_fraction": 0.6666666666666666,
+      "baseline_estimated": 6,
+      "baseline_scored": 5,
+      "baseline_mae_ach": 1.5263092560725995,
+      "baseline_relative_n": 5,
+      "baseline_mape_percent": 42.81660910799139,
+      "paired_n": 5,
+      "paired_physics_mae_ach": 1.5621496961236763,
+      "paired_baseline_mae_ach": 1.5263092560725995
+    },
+    "duration_at_least_20_min": {
+      "periods": 24,
+      "unoccupied": 24,
+      "status": {
+        "flagged": 21,
+        "passes_checks": 3
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 8,
+        "weak_room_supply_contrast": 7,
+        "no_net_decay": 7,
+        "nominal_rate_at_bound": 6,
+        "short_relative_to_time_constant": 8,
+        "parameter_sensitive": 19,
+        "scenario_at_bound": 8,
+        "possible_rate_change": 3,
+        "large_fit_residual": 6
+      },
+      "reference_status": {
+        "usable": 20,
+        "negative_flow": 4
+      },
+      "estimated": 24,
+      "scored": 20,
+      "mae_ach": 1.450779954404175,
+      "mean_signed_error_ach": -1.2598541036582953,
+      "relative_n": 20,
+      "mape_percent": 46.3617444425182,
+      "sensitivity_n": 24,
+      "mean_sensitivity_width_ach": 6.791294025993487,
+      "inside_scenario_n": 14,
+      "scenario_comparable_n": 20,
+      "inside_scenario_fraction": 0.7,
+      "baseline_estimated": 21,
+      "baseline_scored": 18,
+      "baseline_mae_ach": 1.3013863345456398,
+      "baseline_relative_n": 18,
+      "baseline_mape_percent": 42.50848914387426,
+      "paired_n": 18,
+      "paired_physics_mae_ach": 1.1894850172102158,
+      "paired_baseline_mae_ach": 1.3013863345456398
+    },
+    "span_at_most_60_ppm": {
+      "periods": 26,
+      "unoccupied": 26,
+      "status": {
+        "flagged": 12,
+        "abstained": 14
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 14
+      },
+      "flags": {
+        "low_variation": 26,
+        "weak_room_supply_contrast": 14,
+        "no_net_decay": 18,
+        "nominal_rate_at_bound": 7,
+        "short_relative_to_time_constant": 12,
+        "parameter_sensitive": 12,
+        "scenario_at_bound": 12,
+        "short_duration": 18,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 19,
+        "negative_flow": 6,
+        "invalid_time_or_no_interval": 1
+      },
+      "estimated": 12,
+      "scored": 7,
+      "mae_ach": 3.449082654327642,
+      "mean_signed_error_ach": -3.449082654327642,
+      "relative_n": 7,
+      "mape_percent": 98.4241625842758,
+      "sensitivity_n": 12,
+      "mean_sensitivity_width_ach": 17.713479898382293,
+      "inside_scenario_n": 7,
+      "scenario_comparable_n": 7,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 7,
+      "baseline_scored": 4,
+      "baseline_mae_ach": 3.73381075653491,
+      "baseline_relative_n": 4,
+      "baseline_mape_percent": 90.89330967369803,
+      "paired_n": 4,
+      "paired_physics_mae_ach": 3.973379899121427,
+      "paired_baseline_mae_ach": 3.73381075653491
+    },
+    "span_above_60_ppm": {
+      "periods": 20,
+      "unoccupied": 20,
+      "status": {
+        "flagged": 17,
+        "passes_checks": 3
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "parameter_sensitive": 14,
+        "possible_rate_change": 3,
+        "large_fit_residual": 7,
+        "short_duration": 4
+      },
+      "reference_status": {
+        "usable": 19,
+        "negative_flow": 1
+      },
+      "estimated": 20,
+      "scored": 19,
+      "mae_ach": 0.701471536521924,
+      "mean_signed_error_ach": -0.24841547450194681,
+      "relative_n": 19,
+      "mape_percent": 27.934033627079724,
+      "sensitivity_n": 20,
+      "mean_sensitivity_width_ach": 2.366993420364346,
+      "inside_scenario_n": 11,
+      "scenario_comparable_n": 19,
+      "inside_scenario_fraction": 0.5789473684210527,
+      "baseline_estimated": 20,
+      "baseline_scored": 19,
+      "baseline_mae_ach": 0.8484872250549934,
+      "baseline_relative_n": 19,
+      "baseline_mape_percent": 32.40329533867903,
+      "paired_n": 19,
+      "paired_physics_mae_ach": 0.701471536521924,
+      "paired_baseline_mae_ach": 0.8484872250549934
+    },
+    "passes_checks": {
+      "periods": 3,
+      "unoccupied": 3,
+      "status": {
+        "passes_checks": 3
+      },
+      "abstention_reasons": {},
+      "flags": {},
+      "reference_status": {
+        "usable": 3
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 0.31427179559156343,
+      "mean_signed_error_ach": -0.18303931128441756,
+      "relative_n": 3,
+      "mape_percent": 23.183623510517567,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 0.5888871577862947,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.3333333333333333,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 0.23728701489915158,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 15.94729511564168,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 0.31427179559156343,
+      "paired_baseline_mae_ach": 0.23728701489915158
+    },
+    "flagged": {
+      "periods": 29,
+      "unoccupied": 29,
+      "status": {
+        "flagged": 29
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 12,
+        "weak_room_supply_contrast": 10,
+        "no_net_decay": 9,
+        "nominal_rate_at_bound": 7,
+        "short_relative_to_time_constant": 12,
+        "parameter_sensitive": 26,
+        "scenario_at_bound": 12,
+        "possible_rate_change": 3,
+        "large_fit_residual": 8,
+        "short_duration": 8
+      },
+      "reference_status": {
+        "usable": 23,
+        "negative_flow": 6
+      },
+      "estimated": 29,
+      "scored": 23,
+      "mae_ach": 1.5882053211928413,
+      "mean_signed_error_ach": -1.231058898346836,
+      "relative_n": 23,
+      "mape_percent": 50.00716984664751,
+      "sensitivity_n": 29,
+      "mean_sensitivity_width_ach": 8.90120571429364,
+      "inside_scenario_n": 17,
+      "scenario_comparable_n": 23,
+      "inside_scenario_fraction": 0.7391304347826086,
+      "baseline_estimated": 24,
+      "baseline_scored": 20,
+      "baseline_mae_ach": 1.517231962874353,
+      "baseline_relative_n": 20,
+      "baseline_mape_percent": 46.56969823913843,
+      "paired_n": 20,
+      "paired_physics_mae_ach": 1.4139331701813787,
+      "paired_baseline_mae_ach": 1.517231962874353
+    },
+    "session_1": {
+      "periods": 11,
+      "unoccupied": 6,
+      "status": {
+        "flagged": 4,
+        "abstained": 7
+      },
+      "abstention_reasons": {
+        "unknown_generation": 5,
+        "under_minimum_duration": 2
+      },
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 3,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 4,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "short_duration": 2,
+        "possible_rate_change": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 11
+      },
+      "estimated": 4,
+      "scored": 4,
+      "mae_ach": 1.5232622867727044,
+      "mean_signed_error_ach": -1.5041305827159566,
+      "relative_n": 4,
+      "mape_percent": 49.43064572512913,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 8.206049591206591,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 4,
+      "inside_scenario_fraction": 0.75,
+      "baseline_estimated": 4,
+      "baseline_scored": 4,
+      "baseline_mae_ach": 1.5127080821697647,
+      "baseline_relative_n": 4,
+      "baseline_mape_percent": 46.352683945733844,
+      "paired_n": 4,
+      "paired_physics_mae_ach": 1.5232622867727044,
+      "paired_baseline_mae_ach": 1.5127080821697647
+    },
+    "session_2": {
+      "periods": 11,
+      "unoccupied": 6,
+      "status": {
+        "flagged": 4,
+        "abstained": 6,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 5,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "weak_room_supply_contrast": 2,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 4,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "short_duration": 2,
+        "large_fit_residual": 1,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "negative_flow": 1,
+        "invalid_time_or_no_interval": 1,
+        "usable": 9
+      },
+      "estimated": 5,
+      "scored": 4,
+      "mae_ach": 0.661513570942158,
+      "mean_signed_error_ach": 0.08592125146721732,
+      "relative_n": 4,
+      "mape_percent": 38.22086385867597,
+      "sensitivity_n": 5,
+      "mean_sensitivity_width_ach": 8.296870917506594,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 4,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 5,
+      "baseline_scored": 4,
+      "baseline_mae_ach": 0.7534362281997269,
+      "baseline_relative_n": 4,
+      "baseline_mape_percent": 40.62259435991304,
+      "paired_n": 4,
+      "paired_physics_mae_ach": 0.661513570942158,
+      "paired_baseline_mae_ach": 0.7534362281997269
+    },
+    "session_3": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 3,
+        "abstained": 3,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3
+      },
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "large_fit_residual": 1,
+        "possible_rate_change": 1
+      },
+      "reference_status": {
+        "negative_flow": 2,
+        "usable": 5
+      },
+      "estimated": 4,
+      "scored": 2,
+      "mae_ach": 0.26757590967745426,
+      "mean_signed_error_ach": 0.042097260874374265,
+      "relative_n": 2,
+      "mape_percent": 12.328335110397749,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 8.2123387719543,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 4,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.15250011648557082,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 6.171083617170012,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.26757590967745426,
+      "paired_baseline_mae_ach": 0.15250011648557082
+    },
+    "session_4": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 3,
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "short_duration": 1
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 1.5616338717483231,
+      "mean_signed_error_ach": -1.4915686299967543,
+      "relative_n": 3,
+      "mape_percent": 40.18327992825295,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 12.920569852590566,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 1.081016792702632,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 24.339316465296594,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.4267452390482802,
+      "paired_baseline_mae_ach": 1.081016792702632
+    },
+    "session_5": {
+      "periods": 4,
+      "unoccupied": 2,
+      "status": {
+        "abstained": 4
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 2,
+        "unknown_generation": 2
+      },
+      "flags": {
+        "short_duration": 2,
+        "low_variation": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2
+      },
+      "reference_status": {
+        "invalid_time_or_no_interval": 1,
+        "usable": 3
+      },
+      "estimated": 0,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 0,
+      "mean_sensitivity_width_ach": null,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_6": {
+      "periods": 9,
+      "unoccupied": 5,
+      "status": {
+        "abstained": 6,
+        "flagged": 3
+      },
+      "abstention_reasons": {
+        "under_minimum_duration": 2,
+        "unknown_generation": 4
+      },
+      "flags": {
+        "short_duration": 3,
+        "low_variation": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "occupied_occupancy": 4,
+        "unknown_generation": 4,
+        "large_fit_residual": 2,
+        "parameter_sensitive": 3
+      },
+      "reference_status": {
+        "negative_flow": 1,
+        "usable": 8
+      },
+      "estimated": 3,
+      "scored": 3,
+      "mae_ach": 1.2400368176026006,
+      "mean_signed_error_ach": -0.53918741508755,
+      "relative_n": 3,
+      "mape_percent": 42.769572922797416,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 1.971394926597597,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 3,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 3,
+      "baseline_scored": 3,
+      "baseline_mae_ach": 0.9769354505082092,
+      "baseline_relative_n": 3,
+      "baseline_mape_percent": 32.808916988978844,
+      "paired_n": 3,
+      "paired_physics_mae_ach": 1.2400368176026006,
+      "paired_baseline_mae_ach": 0.9769354505082092
+    },
+    "session_7": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 1,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "large_fit_residual": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "short_duration": 1
+      },
+      "reference_status": {
+        "negative_flow": 1,
+        "usable": 2
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 1.1619498968651236,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 1,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_8": {
+      "periods": 3,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 1,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 1,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 1,
+        "unknown_generation": 1,
+        "short_duration": 1
+      },
+      "reference_status": {
+        "negative_flow": 1,
+        "usable": 2
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 18.755755356322027,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_9": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 2,
+        "abstained": 5
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3,
+        "under_minimum_duration": 2
+      },
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "short_duration": 2
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 2.4194643431803855,
+      "mean_signed_error_ach": -2.4194643431803855,
+      "relative_n": 2,
+      "mape_percent": 65.26815162749037,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 8.055505310619592,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 1.5449667166652432,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 47.05498303266875,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 1.0654710452095641,
+      "paired_baseline_mae_ach": 1.5449667166652432
+    },
+    "session_10": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 2,
+        "abstained": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "short_duration": 2,
+        "no_net_decay": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 5.7068763359826535,
+      "mean_signed_error_ach": -5.7068763359826535,
+      "relative_n": 2,
+      "mape_percent": 95.44191969313306,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 13.97561258292569,
+      "inside_scenario_n": 2,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 5.481289883256084,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 91.59749248250911,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 5.7068763359826535,
+      "paired_baseline_mae_ach": 5.481289883256084
+    },
+    "session_11": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "flagged": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "short_duration": 1,
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "negative_flow": 1
+      },
+      "estimated": 1,
+      "scored": 0,
+      "mae_ach": null,
+      "mean_signed_error_ach": null,
+      "relative_n": 0,
+      "mape_percent": null,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 6.070664317934098,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 0,
+      "inside_scenario_fraction": null,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "session_12": {
+      "periods": 7,
+      "unoccupied": 4,
+      "status": {
+        "flagged": 3,
+        "abstained": 3,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 3
+      },
+      "flags": {
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 2,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 3,
+        "unknown_generation": 3,
+        "short_duration": 1,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 7
+      },
+      "estimated": 4,
+      "scored": 4,
+      "mae_ach": 0.47807876271675553,
+      "mean_signed_error_ach": -0.3166934836846915,
+      "relative_n": 4,
+      "mape_percent": 31.992260972753353,
+      "sensitivity_n": 4,
+      "mean_sensitivity_width_ach": 1.7647866806371644,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 4,
+      "inside_scenario_fraction": 0.75,
+      "baseline_estimated": 4,
+      "baseline_scored": 4,
+      "baseline_mae_ach": 0.6476138068431515,
+      "baseline_relative_n": 4,
+      "baseline_mape_percent": 42.812305133301614,
+      "paired_n": 4,
+      "paired_physics_mae_ach": 0.47807876271675553,
+      "paired_baseline_mae_ach": 0.6476138068431515
+    },
+    "session_13": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 2,
+        "abstained": 3
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2,
+        "under_minimum_duration": 1
+      },
+      "flags": {
+        "short_duration": 3,
+        "low_variation": 2,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 2,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "large_fit_residual": 1
+      },
+      "reference_status": {
+        "usable": 5
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 0.8136370233749091,
+      "mean_signed_error_ach": 0.16844681786674182,
+      "relative_n": 2,
+      "mape_percent": 73.10266168150903,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 15.47903636468648,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 1.496081180255497,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 70.38799724434287,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.9820838412416508,
+      "paired_baseline_mae_ach": 1.496081180255497
+    }
+  },
+  "ventilation_test.csv": {
+    "all": {
+      "periods": 21,
+      "unoccupied": 12,
+      "status": {
+        "flagged": 11,
+        "abstained": 9,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 9
+      },
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 3,
+        "no_net_decay": 3,
+        "nominal_rate_at_bound": 3,
+        "short_relative_to_time_constant": 3,
+        "parameter_sensitive": 7,
+        "scenario_at_bound": 4,
+        "occupied_occupancy": 9,
+        "unknown_generation": 9,
+        "large_fit_residual": 6,
+        "short_duration": 2,
+        "possible_rate_change": 2
+      },
+      "reference_status": {
+        "negative_flow": 2,
+        "usable": 19
+      },
+      "estimated": 12,
+      "scored": 10,
+      "mae_ach": 0.7156147580660521,
+      "mean_signed_error_ach": 0.2682535360561743,
+      "relative_n": 10,
+      "mape_percent": 66.05622028886017,
+      "sensitivity_n": 12,
+      "mean_sensitivity_width_ach": 5.519298656120782,
+      "inside_scenario_n": 4,
+      "scenario_comparable_n": 10,
+      "inside_scenario_fraction": 0.4,
+      "baseline_estimated": 9,
+      "baseline_scored": 9,
+      "baseline_mae_ach": 0.3795721130284371,
+      "baseline_relative_n": 9,
+      "baseline_mape_percent": 31.891899497976915,
+      "paired_n": 9,
+      "paired_physics_mae_ach": 0.6798933318721223,
+      "paired_baseline_mae_ach": 0.3795721130284371
+    },
+    "unoccupied": {
+      "periods": 12,
+      "unoccupied": 12,
+      "status": {
+        "flagged": 11,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 3,
+        "no_net_decay": 3,
+        "nominal_rate_at_bound": 3,
+        "short_relative_to_time_constant": 3,
+        "parameter_sensitive": 7,
+        "scenario_at_bound": 4,
+        "large_fit_residual": 6,
+        "short_duration": 2,
+        "possible_rate_change": 2
+      },
+      "reference_status": {
+        "negative_flow": 2,
+        "usable": 10
+      },
+      "estimated": 12,
+      "scored": 10,
+      "mae_ach": 0.7156147580660521,
+      "mean_signed_error_ach": 0.2682535360561743,
+      "relative_n": 10,
+      "mape_percent": 66.05622028886017,
+      "sensitivity_n": 12,
+      "mean_sensitivity_width_ach": 5.519298656120782,
+      "inside_scenario_n": 4,
+      "scenario_comparable_n": 10,
+      "inside_scenario_fraction": 0.4,
+      "baseline_estimated": 9,
+      "baseline_scored": 9,
+      "baseline_mae_ach": 0.3795721130284371,
+      "baseline_relative_n": 9,
+      "baseline_mape_percent": 31.891899497976915,
+      "paired_n": 9,
+      "paired_physics_mae_ach": 0.6798933318721223,
+      "paired_baseline_mae_ach": 0.3795721130284371
+    },
+    "duration_under_20_min": {
+      "periods": 2,
+      "unoccupied": 2,
+      "status": {
+        "flagged": 2
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "short_duration": 2,
+        "parameter_sensitive": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "scenario_at_bound": 1
+      },
+      "reference_status": {
+        "usable": 2
+      },
+      "estimated": 2,
+      "scored": 2,
+      "mae_ach": 0.8350409125607946,
+      "mean_signed_error_ach": -0.3646576036771746,
+      "relative_n": 2,
+      "mape_percent": 64.85624975112563,
+      "sensitivity_n": 2,
+      "mean_sensitivity_width_ach": 1.2644747725689784,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 1.062079523723206,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 77.77917867339306,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.8350409125607946,
+      "paired_baseline_mae_ach": 1.062079523723206
+    },
+    "duration_at_least_20_min": {
+      "periods": 10,
+      "unoccupied": 10,
+      "status": {
+        "flagged": 9,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 3,
+        "no_net_decay": 3,
+        "nominal_rate_at_bound": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 6,
+        "scenario_at_bound": 3,
+        "large_fit_residual": 6,
+        "possible_rate_change": 2
+      },
+      "reference_status": {
+        "negative_flow": 2,
+        "usable": 8
+      },
+      "estimated": 10,
+      "scored": 8,
+      "mae_ach": 0.6857582194423665,
+      "mean_signed_error_ach": 0.4264813209895115,
+      "relative_n": 8,
+      "mape_percent": 66.35621292329381,
+      "sensitivity_n": 10,
+      "mean_sensitivity_width_ach": 6.370263432831143,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 8,
+      "inside_scenario_fraction": 0.375,
+      "baseline_estimated": 7,
+      "baseline_scored": 7,
+      "baseline_mae_ach": 0.18456999568707455,
+      "baseline_relative_n": 7,
+      "baseline_mape_percent": 18.781248305000872,
+      "paired_n": 7,
+      "paired_physics_mae_ach": 0.6355654516753589,
+      "paired_baseline_mae_ach": 0.18456999568707455
+    },
+    "span_at_most_60_ppm": {
+      "periods": 3,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 3,
+        "no_net_decay": 3,
+        "nominal_rate_at_bound": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 3
+      },
+      "reference_status": {
+        "negative_flow": 2,
+        "usable": 1
+      },
+      "estimated": 3,
+      "scored": 1,
+      "mae_ach": 1.0371075938114198,
+      "mean_signed_error_ach": -1.0371075938114198,
+      "relative_n": 1,
+      "mape_percent": 100.0,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 18.781618290383843,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 1.0,
+      "baseline_estimated": 0,
+      "baseline_scored": 0,
+      "baseline_mae_ach": null,
+      "baseline_relative_n": 0,
+      "baseline_mape_percent": null,
+      "paired_n": 0,
+      "paired_physics_mae_ach": null,
+      "paired_baseline_mae_ach": null
+    },
+    "span_above_60_ppm": {
+      "periods": 9,
+      "unoccupied": 9,
+      "status": {
+        "flagged": 8,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "large_fit_residual": 6,
+        "short_duration": 2,
+        "parameter_sensitive": 4,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "scenario_at_bound": 1,
+        "possible_rate_change": 2
+      },
+      "reference_status": {
+        "usable": 9
+      },
+      "estimated": 9,
+      "scored": 9,
+      "mae_ach": 0.6798933318721223,
+      "mean_signed_error_ach": 0.4132936615970182,
+      "relative_n": 9,
+      "mape_percent": 62.284689209844636,
+      "sensitivity_n": 9,
+      "mean_sensitivity_width_ach": 1.0985254446997617,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 9,
+      "inside_scenario_fraction": 0.3333333333333333,
+      "baseline_estimated": 9,
+      "baseline_scored": 9,
+      "baseline_mae_ach": 0.3795721130284371,
+      "baseline_relative_n": 9,
+      "baseline_mape_percent": 31.891899497976915,
+      "paired_n": 9,
+      "paired_physics_mae_ach": 0.6798933318721223,
+      "paired_baseline_mae_ach": 0.3795721130284371
+    },
+    "passes_checks": {
+      "periods": 1,
+      "unoccupied": 1,
+      "status": {
+        "passes_checks": 1
+      },
+      "abstention_reasons": {},
+      "flags": {},
+      "reference_status": {
+        "usable": 1
+      },
+      "estimated": 1,
+      "scored": 1,
+      "mae_ach": 0.4003199369758331,
+      "mean_signed_error_ach": 0.4003199369758331,
+      "relative_n": 1,
+      "mape_percent": 50.306682369695956,
+      "sensitivity_n": 1,
+      "mean_sensitivity_width_ach": 0.7805772588993559,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 1,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 1,
+      "baseline_scored": 1,
+      "baseline_mae_ach": 0.21262712484810675,
+      "baseline_relative_n": 1,
+      "baseline_mape_percent": 26.720041259301887,
+      "paired_n": 1,
+      "paired_physics_mae_ach": 0.4003199369758331,
+      "paired_baseline_mae_ach": 0.21262712484810675
+    },
+    "flagged": {
+      "periods": 11,
+      "unoccupied": 11,
+      "status": {
+        "flagged": 11
+      },
+      "abstention_reasons": {},
+      "flags": {
+        "low_variation": 3,
+        "weak_room_supply_contrast": 3,
+        "no_net_decay": 3,
+        "nominal_rate_at_bound": 3,
+        "short_relative_to_time_constant": 3,
+        "parameter_sensitive": 7,
+        "scenario_at_bound": 4,
+        "large_fit_residual": 6,
+        "short_duration": 2,
+        "possible_rate_change": 2
+      },
+      "reference_status": {
+        "negative_flow": 2,
+        "usable": 9
+      },
+      "estimated": 11,
+      "scored": 9,
+      "mae_ach": 0.7506475159649653,
+      "mean_signed_error_ach": 0.25357949150954556,
+      "relative_n": 9,
+      "mape_percent": 67.80616894654509,
+      "sensitivity_n": 11,
+      "mean_sensitivity_width_ach": 5.950091510413639,
+      "inside_scenario_n": 4,
+      "scenario_comparable_n": 9,
+      "inside_scenario_fraction": 0.4444444444444444,
+      "baseline_estimated": 8,
+      "baseline_scored": 8,
+      "baseline_mae_ach": 0.4004402365509783,
+      "baseline_relative_n": 8,
+      "baseline_mape_percent": 32.53838177781129,
+      "paired_n": 8,
+      "paired_physics_mae_ach": 0.7148400062341586,
+      "paired_baseline_mae_ach": 0.4004402365509783
+    },
+    "session_1": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 1,
+        "short_relative_to_time_constant": 1,
+        "parameter_sensitive": 1,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "large_fit_residual": 2
+      },
+      "reference_status": {
+        "negative_flow": 1,
+        "usable": 4
+      },
+      "estimated": 3,
+      "scored": 2,
+      "mae_ach": 0.4322312199073495,
+      "mean_signed_error_ach": 0.4322312199073495,
+      "relative_n": 2,
+      "mape_percent": 45.3010394048636,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 10.454179686447503,
+      "inside_scenario_n": 1,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.09611509382413452,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 9.6587888271839,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 0.4322312199073495,
+      "paired_baseline_mae_ach": 0.09611509382413452
+    },
+    "session_2": {
+      "periods": 11,
+      "unoccupied": 6,
+      "status": {
+        "flagged": 5,
+        "abstained": 5,
+        "passes_checks": 1
+      },
+      "abstention_reasons": {
+        "unknown_generation": 5
+      },
+      "flags": {
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "nominal_rate_at_bound": 2,
+        "short_relative_to_time_constant": 2,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 2,
+        "occupied_occupancy": 5,
+        "unknown_generation": 5,
+        "short_duration": 2,
+        "large_fit_residual": 2
+      },
+      "reference_status": {
+        "usable": 11
+      },
+      "estimated": 6,
+      "scored": 6,
+      "mae_ach": 0.7008926567537812,
+      "mean_signed_error_ach": -0.044709379929348446,
+      "relative_n": 6,
+      "mape_percent": 66.56874202004595,
+      "sensitivity_n": 6,
+      "mean_sensitivity_width_ach": 4.446387484130983,
+      "inside_scenario_n": 3,
+      "scenario_comparable_n": 6,
+      "inside_scenario_fraction": 0.5,
+      "baseline_estimated": 5,
+      "baseline_scored": 5,
+      "baseline_mae_ach": 0.5816168522129965,
+      "baseline_relative_n": 5,
+      "baseline_mape_percent": 48.85347516815091,
+      "paired_n": 5,
+      "paired_physics_mae_ach": 0.6336496693422535,
+      "paired_baseline_mae_ach": 0.5816168522129965
+    },
+    "session_3": {
+      "periods": 5,
+      "unoccupied": 3,
+      "status": {
+        "flagged": 3,
+        "abstained": 2
+      },
+      "abstention_reasons": {
+        "unknown_generation": 2
+      },
+      "flags": {
+        "low_variation": 1,
+        "weak_room_supply_contrast": 1,
+        "no_net_decay": 1,
+        "parameter_sensitive": 3,
+        "scenario_at_bound": 1,
+        "occupied_occupancy": 2,
+        "unknown_generation": 2,
+        "large_fit_residual": 2,
+        "possible_rate_change": 2
+      },
+      "reference_status": {
+        "negative_flow": 1,
+        "usable": 4
+      },
+      "estimated": 3,
+      "scored": 2,
+      "mae_ach": 1.0431646001615675,
+      "mean_signed_error_ach": 1.0431646001615675,
+      "relative_n": 2,
+      "mape_percent": 85.27383597929943,
+      "sensitivity_n": 3,
+      "mean_sensitivity_width_ach": 2.7302399697736575,
+      "inside_scenario_n": 0,
+      "scenario_comparable_n": 2,
+      "inside_scenario_fraction": 0.0,
+      "baseline_estimated": 2,
+      "baseline_scored": 2,
+      "baseline_mae_ach": 0.1579172842713411,
+      "baseline_relative_n": 2,
+      "baseline_mape_percent": 11.721070993334935,
+      "paired_n": 2,
+      "paired_physics_mae_ach": 1.0431646001615675,
+      "paired_baseline_mae_ach": 0.1579172842713411
+    }
+  }
+}

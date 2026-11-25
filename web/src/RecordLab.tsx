@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Activity,
   ArrowRight,
@@ -26,19 +26,47 @@ import {
   windowInputs,
   revealReference,
   scoreEstimate,
-  csvHeaders,
+  receiveImport,
   guessMapping,
-  parseCustomRecording,
+
 } from './recordings'
 import { inferWindow, type InferenceResult } from './physics'
 
 export const rateText = (v?: number | null) => (v == null ? 'Unavailable' : v.toFixed(2) + ' h⁻¹')
 const words = (s: string) => s.replaceAll('_', ' ')
 function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
-  const [file, setFile] = useState<{ text: string; name: string; cols: string[] } | null>(null),
+  const [file, setFile] = useState<{ name: string; cols: string[] } | null>(null),
     [mapping, setMapping] = useState<ColumnMapping>({ time: '', room: '', occupancy: '' }),
     [volume, setVolume] = useState(''),
     [error, setError] = useState('')
+  const active=useRef<Worker|null>(null)
+  const [busy,setBusy]=useState(false)
+  function cancel() {
+    active.current?.terminate()
+    active.current=null
+    setFile(null)
+    setBusy(false)
+  }
+  useEffect(()=>()=>active.current?.terminate(),[])
+  function open(f:File) {
+    cancel()
+    setError('')
+    if(f.size>4*1024*1024) {setError('Choose a CSV under 4 MiB for interactive analysis.');return}
+    try {
+      const worker=new Worker(new URL('./import.worker.ts',import.meta.url),{type:'module'})
+      active.current=worker
+      setBusy(true)
+      worker.onmessage=({data})=>{
+        if(worker!==active.current) return
+        setBusy(false)
+        if(data.error) {setError(data.error);return}
+        if(data.cols) {setFile({name:f.name,cols:data.cols});setMapping(guessMapping(data.cols))}
+        else {onLoad(receiveImport(data.packet));cancel()}
+      }
+      worker.onerror=()=>{if(active.current===worker){cancel();setError('CSV worker failed. Select the file to retry.')}}
+      worker.postMessage({file:f})
+    } catch(err){cancel();setError(String(err))}
+  }
   const labels: Record<keyof ColumnMapping, string> = {
     time: 'Time (ISO or seconds)',
     room: 'Room CO₂ (ppm)',
@@ -60,21 +88,10 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
         <input
           type="file"
           accept=".csv,text/csv"
-          onChange={async (e) => {
-            const f = e.target.files?.[0]
-            if (!f) return
-            setError('')
-            setFile(null)
-            try {
-              if (f.size > 4 * 1024 * 1024)
-                throw Error('Choose a CSV under 4 MiB for interactive analysis.')
-              const text = await f.text(),
-                cols = csvHeaders(text)
-              setFile({ text, name: f.name, cols })
-              setMapping(guessMapping(cols))
-            } catch (e) {
-              setError(String(e))
-            }
+          onChange={e=>{
+            const f=e.target.files?.[0]
+            e.target.value=''
+            if(f) open(f)
           }}
         />
       </label>
@@ -82,20 +99,9 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
         <form
           onSubmit={(e) => {
             e.preventDefault()
-            try {
-              onLoad(
-                parseCustomRecording(
-                  file.text,
-                  file.name,
-                  mapping,
-                  volume.trim() ? Number(volume) : undefined,
-                ),
-              )
-              setError('')
-              setFile(null)
-            } catch (e) {
-              setError(String(e))
-            }
+            setBusy(true)
+            setError('')
+            active.current?.postMessage({mapping,volume:volume.trim()?Number(volume):undefined})
           }}
         >
           <div className="fields">
@@ -126,11 +132,13 @@ function Upload({ onLoad }: { onLoad: (r: Recording) => void }) {
               />
             </label>
           </div>
-          <button className="primary">
+          <button className="primary" disabled={busy}>
             Load recording <ArrowRight size={15} />
           </button>
         </form>
       )}
+      {busy && <p role="status">Reading the CSV…</p>}
+      {(busy || file) && <button className="subtle-btn" onClick={cancel}>Cancel import</button>}
       {error && <p role="alert">{error}</p>}
     </details>
   )
@@ -169,6 +177,7 @@ function ResultView({
           </strong>
         </div>
       </div>
+      <p>Rate-change diagnostic · {words(r.rate_change_check ?? 'unavailable')}</p>
       {r.reason && (
         <p>
           <strong>Abstention.</strong> {words(r.reason)}

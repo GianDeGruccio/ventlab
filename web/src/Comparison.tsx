@@ -39,7 +39,7 @@ export function Comparison({
             <h2>Read the new decay</h2>
             <p>
               Removing the simulated source breaks the balance. Check how much the compatible range
-              narrowed and whether the fitted rate moved closer to the known rate.{' '}
+              narrowed. At the original equilibrium, many rate and source pairs fit exactly.{' '}
               <a href="#explorer">Plan from a recording</a>.
             </p>
           </div>
@@ -117,8 +117,8 @@ export function Comparison({
               ].map(([k, a, b]) => (
                 <tr key={k}>
                   <th>{k}</th>
-                  <td>{a}</td>
-                  <td>{b}</td>
+                  <td>{first.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : a}</td>
+                  <td>{second.nonUnique && /Fitted|Absolute/.test(String(k)) ? 'Non-unique' : b}</td>
                 </tr>
               ))}
             </tbody>
@@ -130,7 +130,7 @@ export function Comparison({
               ? 'The compatible range narrowed.'
               : 'The compatible range stayed as wide or grew.'}
           </strong>{' '}
-          {err.improved
+          {first.nonUnique || second.nonUnique ? 'A point fit is non-unique. Directional accuracy is unavailable.' : err.improved
             ? 'The absolute rate error fell.'
             : 'The absolute rate error did not improve.'}{' '}
           This is one paired synthetic run.

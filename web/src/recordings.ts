@@ -89,6 +89,14 @@ const standardMap: ColumnMapping = {
 }
 
 function readCsv(text: string) {
+  // d3 accepts an open quoted field at EOF. Validate quote balance before parsing.
+  let quoted=false
+  for(let i=0;i<text.length;i++){
+    if(text[i]!=='"') continue
+    if(quoted && text[i+1]==='"') i++
+    else quoted=!quoted
+  }
+  if(quoted) throw new Error('Unterminated quoted CSV field.')
   const [columns, ...rows] = csvParseRows(text.replace(/^\uFEFF/, ''))
   if (
     !columns?.length ||
@@ -253,6 +261,19 @@ export function parseCustomRecording(
   volumeM3?: number,
 ): Recording {
   return assemble(text, name, mapping, 'custom', volumeM3 ?? null)
+}
+
+// Only transport uses the sidecar. Restore it into the private reference store before handing a recording to the UI.
+export function prepareImport(text:string,name:string,mapping:ColumnMapping,volume?:number) {
+  const recording=parseCustomRecording(text,name,mapping,volume)
+  return {recording,referenceSidecar:recording.sessions.map(s=>referenceFlows.get(s))}
+}
+export function receiveImport(packet:ReturnType<typeof prepareImport>) {
+  packet.recording.sessions.forEach((s,i)=>{
+    const flows=packet.referenceSidecar[i]
+    if(flows) referenceFlows.set(s,flows)
+  })
+  return packet.recording
 }
 
 export function parseBundledRecording(file: BundledFile, text: string): Recording {

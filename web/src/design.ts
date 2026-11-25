@@ -1,3 +1,4 @@
+import {continuousMinimum, continuousBand, searchRates as RATES} from './profile-search'
 /** Prospective, single-zone experiments. Time in minutes at the UI boundary. */
 export interface Design {
   rate: number
@@ -29,7 +30,7 @@ export const defaultDesign: Design = {
 
 const MAX_RATE = 8
 const MAX_SOURCE_PER_PERSON = 1200
-const RATES = Array.from({ length: 161 }, (_, i) => i / 20)
+
 const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x))
 
 function check(d: Design) {
@@ -97,64 +98,58 @@ interface Quadratic {
 }
 
 /** Eliminate the unknown observed start analytically from z = e*A + phi*h, z = y - B. */
-function profile(minutes: number[], observed: number[], b: number, rates: number[]): Quadratic[] {
-  return rates.map((k) => {
-    let ee = 0,
-      pp = 0,
-      ep = 0,
-      ez = 0,
-      pz = 0,
-      zz = 0
-    for (let i = 0; i < minutes.length; i++) {
-      const phi = basis(k, minutes[i])
-      const e = Math.exp((-k * minutes[i]) / 60)
-      const z = observed[i] - b
-      ee += e * e
-      pp += phi * phi
-      ep += e * phi
-      ez += e * z
-      pz += phi * z
-      zz += z * z
+function profileAt(minutes: number[], observed:number[], b:number) {
+  const cache=new Map<number,Quadratic>()
+  const hours=minutes.map(t=>t/60)
+  const z=observed.map(v=>v-b)
+  return (k:number):Quadratic => {
+    const cached=cache.get(k)
+    if(cached) return cached
+    const e=hours.map(t=>Math.exp(-k*t))
+    const phi=hours.map(t=>k===0?t:-Math.expm1(-k*t)/k)
+    let ee=0, ep=0, ez=0
+    for(let i=0;i<z.length;i++){ee+=e[i]*e[i]; ep+=e[i]*phi[i]; ez+=e[i]*z[i]}
+    const startTerm=ez/ee, startSlope=ep/ee
+    let curvature=0, cross=0
+    for(let i=0;i<z.length;i++){
+      const orth=phi[i]-startSlope*e[i]
+      curvature+=orth*orth
+      cross+=orth*(z[i]-startTerm*e[i])
     }
-    const curvature = pp - (ep * ep) / ee
-    const hBest = (pz - (ep * ez) / ee) / curvature
-    return {
-      k,
-      curvature,
-      hBest,
-      minLoss: Math.max(0, zz - (ez * ez) / ee - curvature * hBest * hBest),
-      startTerm: ez / ee,
-      startSlope: ep / ee,
+    const hBest=cross/curvature
+    let minLoss=0
+    for(let i=0;i<z.length;i++){
+      const residual=(z[i]-e[i]*startTerm)-(phi[i]-e[i]*startSlope)*hBest
+      minLoss+=residual*residual
     }
-  })
+    const point={k,curvature,hBest,minLoss,startTerm,startSlope}
+    cache.set(k,point)
+    return point
+  }
 }
 
 function loss(p: Quadratic, h: number) {
   return p.minLoss + p.curvature * (h - p.hBest) ** 2
 }
 
-function compatible(profiles: Quadratic[], d: Pick<Design, 'occupancy' | 'noise' | 'supplyKnown'>) {
-  const maxSource = MAX_SOURCE_PER_PERSON * d.occupancy
-  const delta = 30 + (d.supplyKnown ? 10 : 75)
-  const losses = profiles.map((p) => {
-    // h = G + k*(room offset + true B - nominal B). Independent bounded nuisances.
-    const h = clamp(p.hBest, -p.k * delta, maxSource + p.k * delta)
-    return loss(p, h)
-  })
-  return compatibilitySpan(profiles.map(p => p.k), losses, d.noise)
+function compatible(at:ReturnType<typeof profileAt>, d:Pick<Design,'occupancy'|'noise'|'supplyKnown'>) {
+  const delta=30+(d.supplyKnown?10:75)
+  return continuousBand(k=>{
+    const p=at(k)
+    return loss(p,clamp(p.hBest,-k*delta,MAX_SOURCE_PER_PERSON*d.occupancy+k*delta))
+  },d.noise)
 }
 
-/** Finite rate-grid envelope using the frozen Phase 2 relative-SSE threshold. */
-export function compatibilitySpan(rates: number[], losses: number[], noise: number) {
-  const threshold = Math.min(...losses) + 4 * Math.max(noise, 1) ** 2
-  const inside = losses.map((value) => value <= threshold)
-  const first = inside.indexOf(true),
-    last = inside.lastIndexOf(true)
-  const crossing = (i: number, j: number) =>
-    rates[i] + ((rates[j] - rates[i]) * (threshold - losses[i])) / (losses[j] - losses[i])
-  const low = first === 0 ? 0 : crossing(first - 1, first)
-  const high = last === rates.length - 1 ? MAX_RATE : crossing(last, last + 1)
-  return { low, high, width: high - low }
+function fitted(at:ReturnType<typeof profileAt>, occupancy:number) {
+  const best=continuousMinimum(k=>{const p=at(k);return loss(p,clamp(p.hBest,0,MAX_SOURCE_PER_PERSON*occupancy))})
+  return nominal([at(best.k)],occupancy)
+}
+
+// A constant nominal trajectory can be sustained by G=k(C-B). Require multiple admissible rates.
+function nonUnique(minutes:number[], y:number[], b:number, occupancy:number) {
+  const excess=y[0]-b
+  const constant=y.every(v=>Math.abs(v-y[0]) <= 1e-10)
+  return minutes.length===2 && occupancy>0 || constant && (Math.abs(excess)<=1e-10 || occupancy>0 && excess>0)
 }
 
 function background(d: Design) {
@@ -174,8 +169,7 @@ function nominal(profiles: Quadratic[], occupancy: number) {
 export function plannedWidth(d: Design) {
   const { minutes, truth } = observe(d)
   const expected = truth.map((c) => c + d.offset)
-  const rates = RATES.includes(d.rate) ? RATES : [...RATES, d.rate].sort((a, b) => a - b)
-  return compatible(profile(minutes, expected, background(d), rates), d).width
+  return compatible(profileAt(minutes,expected,background(d)),d).width
 }
 
 export interface Strategy {
@@ -240,13 +234,14 @@ export function analyzeTrace(
     settings.noise < 0 ||
     typeof settings.supplyKnown !== 'boolean'
   ) throw new RangeError('Invalid synthetic recovery observations or sensor settings.')
-  const profiles = profile(minutes, observed, settings.nominalSupply, RATES)
-  const fit = nominal(profiles, settings.occupancy)
+  const at=profileAt(minutes,observed,settings.nominalSupply)
+  const fit=fitted(at,settings.occupancy)
   return {
     rate: fit.p.k,
     generation: fit.g,
     rmse: Math.sqrt(fit.sse / minutes.length),
-    ...compatible(profiles, settings),
+    nonUnique:nonUnique(minutes,observed,settings.nominalSupply,settings.occupancy),
+    ...compatible(at, settings),
   }
 }
 
@@ -259,8 +254,9 @@ export function recover(d: Design) {
 export function experiment(d: Design, maxDisplayGeneration?: number) {
   const trace = observe(d)
   const b = background(d)
-  const profiles = profile(trace.minutes, trace.observed, b, RATES)
-  const fit = nominal(profiles, d.occupancy)
+  const at=profileAt(trace.minutes,trace.observed,b)
+  const profiles=RATES.map(at)
+  const fit=fitted(at,d.occupancy)
   // Compare a substantially different, still physically allowed rate. The truth is used
   // only for this deliberate teaching contrast and the prospective design calculation.
   const alt = nominal(
@@ -275,10 +271,11 @@ export function experiment(d: Design, maxDisplayGeneration?: number) {
   const upper = maxDisplayGeneration ?? MAX_SOURCE_PER_PERSON * Math.max(d.occupancy, 1)
   if (!Number.isFinite(upper) || upper <= 0 || upper > 4 * MAX_SOURCE_PER_PERSON)
     throw new RangeError('Display generation limit must lie in (0, 4800] ppm/h.')
-  const band = compatible(profiles, d)
+  const band = compatible(at, d)
   const sources = Array.from({ length: 33 }, (_, i) => (upper * i) / 32)
   return {
     ...trace,
+    nonUnique:nonUnique(trace.minutes,trace.observed,b,d.occupancy), compatibleRegions:band.regions,
     compatibleLow: band.low, compatibleHigh: band.high, compatibleWidth: band.width,
     alternative,
     alternativeRate: alt.p.k,

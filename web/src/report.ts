@@ -1,3 +1,4 @@
+import {repeatEligibility} from './repeat-eligibility'
 import type { Design, experiment } from './design'
 import type { PairedResult } from './comparison-model'
 import type { ObservedWindow } from './recording-plan'
@@ -5,6 +6,7 @@ import type { PlanningInput, PlanningConstraints, RobustPlan, OptionId } from '.
 
 type Run = ReturnType<typeof experiment>
 export interface Decision {
+  expectedInitialReadingPpm?: number
   mode: 'robust' | 'scenario'
   selected: OptionId
   recommended: string
@@ -82,6 +84,8 @@ export function recordingReport(
       ? {
           assumptions: planned.inputs,
           decision: plannedDecision(planned.decision),
+          eligibility: repeatEligibility(planned.inputs,planned.decision.selected,
+            planned.decision.alternatives.find(a=>a.id===planned.decision.selected)!.minutes),
           interpretation:
             'Planned inputs are user-confirmed expectations for the repeat. Sensor noise is a user assumption. Widths describe modeled scenarios. Future rate and accuracy are unknown.',
         }
@@ -94,13 +98,14 @@ function syntheticFit(d: Design, r: Run) {
     configuration: d,
     elapsedMinutes: r.minutes,
     roomObservationsPpm: r.observed,
-    fitRateAch: r.fitRate,
-    fitGenerationPpmPerHour: r.fitGeneration,
+    compatibleRegionsAch:r.compatibleRegions, nonUnique:r.nonUnique,
+    fitRateAch: r.nonUnique ? null : r.fitRate,
+    fitGenerationPpmPerHour: r.nonUnique ? null : r.fitGeneration,
     rmsePpm: r.rmse,
     compatibleRangeAch: [r.compatibleLow, r.compatibleHigh],
     widthAch: r.compatibleWidth,
-    absoluteRateErrorAch: Math.abs(d.rate - r.fitRate),
-    absoluteSourceErrorPpmPerHour: Math.abs(d.occupancy * d.generation - r.fitGeneration),
+    absoluteRateErrorAch: r.nonUnique ? null : Math.abs(d.rate - r.fitRate),
+    absoluteSourceErrorPpmPerHour: r.nonUnique ? null : Math.abs(d.occupancy * d.generation - r.fitGeneration),
     diagnostics: {
       touchesSearchBoundary: r.compatibleLow === 0 || r.compatibleHigh === 8,
       occupiedUnknownSource: d.occupancy > 0,
@@ -113,7 +118,7 @@ export function simulationReport(d: Design, r: Run, decision: Decision, pair: Pa
     kind: 'Seeded synthetic experiment',
     source: 'VentLab single-zone simulator. The configured rate and source are synthetic truth.',
     estimator:
-      'Profile least squares, 0–8 h⁻¹ grid. Compatible span uses SSE within 4 × max(noise SD, 1 ppm)² of the minimum; no calibrated coverage probability.',
+      'Continuously refined profile least squares on 0–8 h⁻¹. Compatible span uses SSE within 4 × max(noise SD, 1 ppm)² of the minimum; no calibrated coverage probability.',
     before: syntheticFit(d, r),
     plannedSelection: plannedDecision(decision),
     executedComparison: pair
@@ -121,7 +126,7 @@ export function simulationReport(d: Design, r: Run, decision: Decision, pair: Pa
           strategy: pair.label,
           after: syntheticFit(pair.after, pair.second),
           widthChangeAch: pair.second.compatibleWidth - pair.first.compatibleWidth,
-          absoluteErrorChangeAch:
+          absoluteErrorChangeAch: pair.first.nonUnique || pair.second.nonUnique ? null :
             Math.abs(pair.after.rate - pair.second.fitRate) -
             Math.abs(pair.before.rate - pair.first.fitRate),
         }

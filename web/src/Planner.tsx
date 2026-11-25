@@ -1,3 +1,4 @@
+import {repeatEligibility} from './repeat-eligibility'
 import { useEffect, useId, useState } from 'react'
 import { ArrowRight, Target } from 'lucide-react'
 import stress from '../fixtures/phase3-stress-summary.json'
@@ -61,6 +62,7 @@ export function Planner({ design, result, onCompare, onInvalidate, onExport }: P
       : (result?.strategies ?? []).map((s) => ({ ...s, id: s.id as OptionId }))
   const selected = options.find((o) => o.id === chosen) ?? options[0]
   const robust = mode === 'robust' ? plan?.options.find((o) => o.id === selected?.id) : null
+  const eligibility = !result && selected ? repeatEligibility(design,selected.id,selected.minutes) : null
   return (
     <section className="panel analysis-panel planner">
       <div className="card-head">
@@ -158,6 +160,9 @@ export function Planner({ design, result, onCompare, onInvalidate, onExport }: P
               </option>
             ))}
           </select>
+          {eligibility && <div className="guide-panel"><div><h3>What this repeat can estimate</h3>
+            <p>{eligibility.model}</p><p><strong>{eligibility.empirical}</strong></p>
+            <p>{eligibility.operatingCondition} {eligibility.evidence}</p></div></div>}
           {robust ? (
             <div className="plan-metrics">
               <div>
@@ -198,7 +203,7 @@ export function Planner({ design, result, onCompare, onInvalidate, onExport }: P
                 recommended: options[0].id,
                 alternatives: mode === 'robust' ? plan!.options : result!.strategies,
                 ...(mode === 'robust' && plan
-                  ? { constraints, ensembleSize: plan.ensembleSize }
+                  ? { constraints, ensembleSize: plan.ensembleSize,expectedInitialReadingPpm:design.initial }
                   : {}),
               })
             }
@@ -210,7 +215,7 @@ export function Planner({ design, result, onCompare, onInvalidate, onExport }: P
             {plan && mode === 'robust' ? ' · ' + plan.ensembleSize + ' planning scenarios' : ''}
           </div>
           <p className="planning-caution">
-            <strong>Width and accuracy can disagree.</strong> In the frozen synthetic study, robust
+            <strong>Width and accuracy can disagree.</strong> In the revised synthetic study, robust
             planning narrowed the range and increased error in{' '}
             {stress.evaluation.summary.robust.narrowerWorseRate}/
             {stress.evaluation.summary.robust.trials} trials.{' '}

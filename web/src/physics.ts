@@ -259,6 +259,7 @@ export function inferWindow({ timeS, room, supply, occupancy }: WindowInput): In
     result.reason = numericalMessage(err)
     return result
   }
+  if (n === 2) flags.push('insufficient_residual_information')
   if (atBound(rate)) flags.push('nominal_rate_at_bound')
   if ((rate * t[n - 1]) / 3600 < 0.25) flags.push('short_relative_to_time_constant')
   if (result.rmse_ppm > ROOM_ACCURACY) flags.push('large_fit_residual')

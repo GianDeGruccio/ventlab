@@ -1,5 +1,5 @@
 /** Phase 3 assessment-only generator. Designers see the planned fields, never these physical truths. */
-import { analyzeTrace, type Design } from './src/design'
+import { analyzeTrace as historicalFit, type Design } from './historical/design'
 import protocol from './fixtures/phase3-stress-protocol.json'
 
 export type StressCase = (typeof protocol.evaluation)[number]
@@ -49,15 +49,15 @@ function traceSettings(d: Design, action: Action, cap: number) {
   }
 }
 
-export function stressTrace(c: StressCase, action: Action, seed: number) {
+export function stressTrace(c: StressCase, action: Action, seed: number, rng=stream, emptyRateFactor=1) {
   if (!feasible(c, action)) throw new RangeError('Infeasible planning action')
   if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new RangeError('Invalid seed')
   const d = plannedDesign(c)
   const settings = traceSettings(d,action,c.cap)
-  const noiseDraw = stream(seed, 0x13579bdf)
-  const roomDraw = stream(seed, 0x2468ace0)
-  const supplyDraw = stream(seed, 0x53417021)
-  const jitterDraw = stream(seed, 0x9f27cafe)
+  const noiseDraw = rng(seed, 0x13579bdf)
+  const roomDraw = rng(seed, 0x2468ace0)
+  const supplyDraw = rng(seed, 0x53417021)
+  const jitterDraw = rng(seed, 0x9f27cafe)
   const gaussian = () => Math.sqrt(-2*Math.log(noiseDraw())) * Math.cos(2*Math.PI*noiseDraw())
   const roomBias = c.biases[0] + (2*roomDraw()-1)*c.biases[1]
   const ductBias = c.biases[2] + (2*supplyDraw()-1)*c.biases[3]
@@ -81,7 +81,7 @@ export function stressTrace(c: StressCase, action: Action, seed: number) {
       const segment = Math.floor(t/half)
       const stop = Math.min(end, (segment+1)*half)
       const level = segment % 2
-      const k = c.k[level], g = c.g[level]*settings.occupancy
+      const k = c.k[level] * (action === 'empty' ? emptyRateFactor : 1), g = c.g[level]*settings.occupancy
       const h = (stop-t)/60
       const integral = k === 0 ? h : -Math.expm1(-k*h)/k
       physical += integral * (k*(c.b-physical)+g)
@@ -99,13 +99,13 @@ export function stressTrace(c: StressCase, action: Action, seed: number) {
   }
 }
 
-export function assessTrial(c: StressCase, action: Action, seed: number) {
-  const t = stressTrace(c,action,seed)
+export function assessTrial(c: StressCase, action: Action, seed: number, analyzeTrace=historicalFit, rng=stream, emptyRateFactor=1) {
+  const t = stressTrace(c,action,seed,rng,emptyRateFactor)
   const fit = analyzeTrace(t.minutes,t.observed,t.settings)
   return {
     seed, minutes:t.settings.duration, rate:fit.rate, source:fit.generation, rmse:fit.rmse,
     targetRate:t.targetRate, targetSource:t.targetSource, width:fit.width, low:fit.low, high:fit.high,
-    inside:fit.low<=t.targetRate && t.targetRate<=fit.high,
+    inside: "regions" in fit ? (fit.regions as [number,number][]).some(([lo,hi])=>lo<=t.targetRate && t.targetRate<=hi) : fit.low<=t.targetRate && t.targetRate<=fit.high,
     boundary:fit.rate===0 || fit.rate===8,
     rateError:Math.abs(fit.rate-t.targetRate), sourceError:Math.abs(fit.generation-t.targetSource),
   }

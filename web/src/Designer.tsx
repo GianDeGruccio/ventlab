@@ -3,7 +3,7 @@ import { Surface } from './Surface'
 import { downloadReport, simulationReport } from './report'
 import { Planner } from './Planner'
 import { Comparison, compareMeasurement, type PairedResult } from './Comparison'
-import { type OptionId } from './robust'
+import { planningInputs, type OptionId } from './robust'
 import { useEffect } from 'react'
 import {
   Activity,
@@ -64,6 +64,8 @@ function Slider({
 export default function Designer() {
   const [draft, setDraft] = useState<Design>({ ...defaultDesign }),
     [applied, setApplied] = useState<Design>({ ...defaultDesign })
+  const [expectedReading,setExpectedReading] = useState(1300)
+  const planInput=useMemo(()=>planningInputs({...applied,initial:expectedReading}),[applied,expectedReading])
   const [run, setRun] = useState(0)
   const r = useMemo(() => experiment(applied), [applied])
   const [guide, setGuide] = useState(0)
@@ -83,6 +85,7 @@ export default function Designer() {
       noise: 0,
       supplyKnown: true,
     }
+    setExpectedReading(520)
     setApplied(demo)
     setDraft(demo)
     setPair(null)
@@ -146,6 +149,7 @@ export default function Designer() {
             onClick={() => {
               setDraft({ ...defaultDesign })
               setApplied({ ...defaultDesign })
+              setExpectedReading(1300)
               setRun(0)
               setGuide(0)
               setPair(null)
@@ -236,7 +240,7 @@ export default function Designer() {
             <h2>Experiment settings</h2>
           </div>
           {slider('rate', 'Air-change rate', 'h⁻¹', 0, 8, 0.1)}
-          {slider('initial', 'Initial room CO₂', 'ppm', 300, 3000, 10)}
+          {slider('initial', 'Physical initial room CO₂', 'ppm', 300, 3000, 10)}
           {slider('supply', 'Supply-air CO₂', 'ppm', 300, 1200, 5)}
           {slider('duration', 'Observation duration', 'min', 5, 240, 5)}
           <details>
@@ -299,12 +303,12 @@ export default function Designer() {
             <p>
               At equilibrium, generation = 100 × air-change rate. Every physically allowed pair
               along that line predicts the same CO₂ level. Try repeating the experiment after the
-              occupant leaves.
+              occupant leaves. This fixed teaching example runs separately from the constrained plan.
             </p>
           </div>
           <button
             className="subtle-btn"
-            onClick={() => runComparison('empty', applied.duration, 'Observe an empty room')}
+            onClick={() => runComparison('empty', applied.duration, 'Teaching example · Observe an empty room')}
           >
             Compare an empty room <ArrowRight size={16} />
           </button>
@@ -312,9 +316,14 @@ export default function Designer() {
       )}
       <div className="analysis-grid">
         <Surface r={r} empty={applied.occupancy === 0} />
+        <div className="designer-plan">
+          <label className="field panel details-box">Expected initial sensor reading for robust planning (ppm)
+            <input type="number" min={31} max={10000} value={expectedReading || ''} onChange={e=>{setExpectedReading(Number(e.target.value));setPair(null)}}/>
+            Set the expected instrument reading independently of the physical simulation.
+          </label>
         <Planner
-          key={JSON.stringify(applied)}
-          design={applied}
+          key={JSON.stringify([applied,expectedReading])}
+          design={planInput}
           result={r}
           onCompare={runComparison}
           onExport={(decision) => downloadReport(simulationReport(applied, r, decision, pair))}
@@ -323,6 +332,7 @@ export default function Designer() {
             if (guide === 3) setGuide(0)
           }}
         />
+        </div>
       </div>
       {pair && <Comparison pair={pair} guided={guide === 3} finishGuide={() => setGuide(0)} />}
       <div className="insight">

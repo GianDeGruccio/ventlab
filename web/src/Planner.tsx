@@ -1,22 +1,26 @@
 import { useEffect, useId, useState } from 'react'
 import { ArrowRight, Target } from 'lucide-react'
-import { type Design, type experiment } from './design'
+import stress from '../fixtures/phase3-stress-summary.json'
+import type { Decision } from './report'
+import { type experiment } from './design'
 import {
   defaultPlanningConstraints,
   planningInputs,
   type OptionId,
   type PlanningConstraints,
+  type PlanningInput,
   type RobustPlan,
 } from './robust'
 
 type Props = {
-  design: Design
-  result: ReturnType<typeof experiment>
-  onCompare: (id: OptionId, minutes: number, label: string) => void
-  onInvalidate: () => void
+  design: PlanningInput
+  result?: ReturnType<typeof experiment>
+  onCompare?: (id: OptionId, minutes: number, label: string) => void
+  onInvalidate?: () => void
+  onExport: (d: Decision) => void
 }
 
-export function Planner({ design, result, onCompare, onInvalidate }: Props) {
+export function Planner({ design, result, onCompare, onInvalidate, onExport }: Props) {
   const [mode, setMode] = useState<'robust' | 'scenario'>('robust')
   const [constraints, setConstraints] = useState<PlanningConstraints>({
     ...defaultPlanningConstraints,
@@ -34,11 +38,10 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
         setPlan(e.data.plan ?? null)
         setError(e.data.error ?? '')
       }
-      worker.onerror = () =>
-        setError('Robust planning could not run. The configured scenario is available.')
+      worker.onerror = () => setError('Robust planning could not run. Change a setting to retry.')
       worker.postMessage({ inputs: planningInputs(design), constraints })
     } catch {
-      setError('The browser could not start the planning worker. Try the configured scenario.')
+      setError('The browser could not start the planning worker. Reload to retry.')
     }
     return () => worker?.terminate()
   }, [design, constraints, mode])
@@ -46,7 +49,7 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
     setChosen(null)
     setPlan(null)
     setError('')
-    onInvalidate()
+    onInvalidate?.()
   }
   function update(patch: Partial<PlanningConstraints>) {
     invalidate()
@@ -55,7 +58,7 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
   const options =
     mode === 'robust'
       ? (plan?.options ?? [])
-      : result.strategies.map((s) => ({ ...s, id: s.id as OptionId }))
+      : (result?.strategies ?? []).map((s) => ({ ...s, id: s.id as OptionId }))
   const selected = options.find((o) => o.id === chosen) ?? options[0]
   const robust = mode === 'robust' ? plan?.options.find((o) => o.id === selected?.id) : null
   return (
@@ -64,22 +67,24 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
         <Target size={20} />
         <h2>Measurement strategies</h2>
       </div>
-      <div className="mode-switch" role="group" aria-label="Planning mode">
-        {(['robust', 'scenario'] as const).map((m) => (
-          <button
-            key={m}
-            aria-pressed={mode === m}
-            onClick={() => {
-              if (m !== mode) {
-                invalidate()
-                setMode(m)
-              }
-            }}
-          >
-            {m === 'robust' ? 'Robust ensemble' : 'Configured scenario'}
-          </button>
-        ))}
-      </div>
+      {result && (
+        <div className="mode-switch" role="group" aria-label="Planning mode">
+          {(['robust', 'scenario'] as const).map((m) => (
+            <button
+              key={m}
+              aria-pressed={mode === m}
+              onClick={() => {
+                if (m !== mode) {
+                  invalidate()
+                  setMode(m)
+                }
+              }}
+            >
+              {m === 'robust' ? 'Robust ensemble' : 'Configured scenario'}
+            </button>
+          ))}
+        </div>
+      )}
       <p>
         {mode === 'robust'
           ? 'Plan across plausible rates, sources, supply concentrations and calibration errors.'
@@ -144,7 +149,7 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
             value={selected.id}
             onChange={(e) => {
               setChosen(e.target.value as OptionId)
-              onInvalidate()
+              onInvalidate?.()
             }}
           >
             {options.map((s, i) => (
@@ -172,20 +177,45 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
             <div className="strategy-baseline">
               Projected compatible width{' '}
               <strong>
-                {result.strategies.find((s) => s.id === selected.id)?.width.toFixed(2)} h⁻¹
+                {result?.strategies.find((s) => s.id === selected.id)?.width.toFixed(2)} h⁻¹
               </strong>
             </div>
           )}
+          {onCompare && (
+            <button
+              className="primary"
+              onClick={() => onCompare(selected.id, selected.minutes, selected.label)}
+            >
+              Run comparison <ArrowRight size={16} />
+            </button>
+          )}
           <button
-            className="primary"
-            onClick={() => onCompare(selected.id, selected.minutes, selected.label)}
+            className="subtle-btn"
+            onClick={() =>
+              onExport({
+                mode,
+                selected: selected.id,
+                recommended: options[0].id,
+                alternatives: mode === 'robust' ? plan!.options : result!.strategies,
+                ...(mode === 'robust' && plan
+                  ? { constraints, ensembleSize: plan.ensembleSize }
+                  : {}),
+              })
+            }
           >
-            Run comparison <ArrowRight size={16} />
+            Download experiment report
           </button>
           <div className="control-status">
             {selected.minutes} min repeat
             {plan && mode === 'robust' ? ' · ' + plan.ensembleSize + ' planning scenarios' : ''}
           </div>
+          <p className="planning-caution">
+            <strong>Width and accuracy can disagree.</strong> In the frozen synthetic study, robust
+            planning narrowed the range and increased error in{' '}
+            {stress.evaluation.summary.robust.narrowerWorseRate}/
+            {stress.evaluation.summary.robust.trials} trials.{' '}
+            <a href="#methods">Explore the failures</a>.
+          </p>
           <details>
             <summary>Inspect ranking & assumptions</summary>
             {mode === 'robust' && plan ? (
@@ -238,7 +268,7 @@ export function Planner({ design, result, onCompare, onInvalidate }: Props) {
                   parameters. The largest width reduction ranks first. Its ranking has no time
                   penalty.
                 </p>
-                {result.strategies.map((s) => (
+                {(result?.strategies ?? []).map((s) => (
                   <p key={s.id}>
                     {s.label} · {signed(s.reduction)} h⁻¹ reduction · {s.minutes} min
                   </p>

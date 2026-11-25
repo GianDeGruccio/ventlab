@@ -1,18 +1,45 @@
 # VentLab
 
-Two ventilation rates can explain the same indoor CO₂ record when the occupants’ CO₂ generation is unknown. VentLab lets you inspect those competing explanations, choose another measurement and see whether it improves the estimate.
+[Open the public application](https://giandegruccio.github.io/ventlab/)
 
-The [public application](https://giandegruccio.github.io/ventlab/) runs the reviewed Phase 2 release. This Phase 3 branch adds robust measurement planning and paired synthetic experiments.
+An indoor CO₂ sensor can give the same reading in two rooms with different ventilation rates. VentLab shows which rates the measurements support, why competing explanations fit and which repeat measurement could help distinguish them. All computation and CSV processing run locally in the browser.
 
-## Try the Phase 3 experiment
+## Try it in thirty seconds
 
-In **Experiment designer**, choose **Start guided demo**. An occupied room holds steady at 520 ppm. Inspect the combinations of generation and ventilation that produce that reading, then choose **Compare an empty room**. The paired trajectories, linked residual maps and recovery table show what changed when the source was removed.
+1. In **Experiment designer**, start the guided demo. One occupant adds CO₂ as fast as ventilation removes it. The sensor stays at 520 ppm.
+2. **Inspect the map** to see how different combinations of generation and ventilation can sustain that reading.
+3. **Compare an empty room**. Removing the source lets the CO₂ decay. Compare the range and the error against the known synthetic rate. They measure different things.
 
-For your own simulated experiment, select **Robust ensemble** or **Configured scenario** in **Measurement strategies**, choose a feasible action and run the comparison. **Methods** contains the 256-trial stress comparison, including cases where a narrower range accompanied a worse estimate. **Blind validation** separately evaluates retrospective room recordings against measured mechanical airflow. Prospective field validation remains open.
+![Linked maps showing the change from an occupied equilibrium to an empty-room repeat](docs/screenshots/phase3/paired-maps-1440.png)
 
-- [Ensemble assumptions, objective and constraints](docs/robust-planning.md)
-- [Independent synthetic stress protocol and results](docs/stress-protocol.md)
-- [Browser checks and screenshots](docs/phase3-qa.md)
+## Plan from a recording
+
+This Phase 4 review adds **Plan my next measurement** to Blind validation and Data explorer. Select a window from a bundled recording or import a local CSV. Review its measured starting level, timing, occupancy and supply availability, enter an assumed sensor noise level and set practical constraints. The robust planner ranks feasible repeat measurements across plausible room conditions. The recording report preserves estimator flags and abstentions. A separate synthetic report can compare estimated and known parameters.
+
+[Recording and report guide](docs/recording-to-plan.md) · [Recording workflow screenshot](docs/screenshots/phase4/recording-window-1440.png) · [Interactive evidence on mobile](docs/screenshots/phase4/evidence-390.png)
+
+## What the evidence supports
+
+The independent synthetic study paired four decision policies across eight fixed stress cases and 32 seeds per case. MAE measures absolute error in the fitted rate. “Inside” counts trials whose compatible span included the time-average target.
+
+| Policy | Rate MAE (h⁻¹) | Mean width (h⁻¹) | Mean minutes | Inside |
+|---|---:|---:|---:|---:|
+| Keep the measurement | 1.533 | 3.727 | 40.25 | 144/256 |
+| Configured scenario | 1.328 | 2.868 | 57.50 | 122/256 |
+| Simple feasible rule | 1.116 | 2.827 | 60.00 | 120/256 |
+| Robust ensemble | 1.106 | 2.887 | 45.25 | 122/256 |
+
+Robust planning narrowed the range and increased absolute error in **32/256** trials relative to keeping the measurement. When source and fan both drifted, all 32 robust spans missed the target. These compatible ranges have no calibrated coverage probability. The time penalty and equal weighting of planning scenarios are design choices. [Frozen study, failures and reproduction](docs/stress-protocol.md)
+
+In the previously inspected **retrospective** evaluation file, 12 of 21 periods yielded a decay fit. Ten had a usable mechanical comparison. Mean absolute discrepancy was **0.72 h⁻¹**, and the mechanical rate fell within the sensitivity range in **4/10** comparisons. Air exchanged in a room can differ from mechanical supply. No prospective building study has established field accuracy or recommendation effectiveness. [Measured findings](reports/findings.md)
+
+## Architecture and attribution
+
+React and TypeScript provide the interface. A browser worker evaluates the robust design objective. Vite builds relative static assets for GitHub Pages. Python supplies the offline reference simulation and archived retrospective evaluation. Shared fixtures check Python–TypeScript numerical agreement. [Numerical parity](docs/parity.md) · [Ensemble model](docs/robust-planning.md)
+
+The bundled data are *Indoor occupancy ground truth dataset with variable ventilation*, v1.0, by Julius Mikala, Yinda Xu and Matti Huotari (2026), CC BY 4.0. The original CSVs are preserved. The project's MIT software license is separate. [Dataset and metadata](https://doi.org/10.5281/zenodo.18299691) · [Rights and attribution](NOTICE.md)
+
+**AI use.** OpenAI Codex assisted with implementation, documentation and test authoring. The reported numbers come from the versioned numerical programs and evidence files. Reviewers can reproduce the outputs independently.
 
 ## Run locally
 
@@ -21,6 +48,8 @@ With Node.js 24 and npm installed, run the following from the repository root.
 ```sh
 cd web
 npm ci
+npm test
+npm run build
 npm run dev
 ```
 

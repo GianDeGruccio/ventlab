@@ -1,3 +1,4 @@
+import { PolicyComparison } from './PolicyComparison'
 import { Download, TestTubes } from 'lucide-react'
 import report from '../fixtures/phase3-stress-summary.json'
 import fullReport from '../../reports/phase3-stress.json?url'
@@ -24,6 +25,7 @@ export function StressEvidence() {
         noise, sensor bias and weak contrast. Each method chose an action before observing the 32
         paired trials per case.
       </p>
+      <PolicyComparison />
       <div
         className="table-wrap"
         role="region"
@@ -121,6 +123,9 @@ export function StressEvidence() {
         <a href={costs} download="planning-cost.json">
           <Download />
           Computational costs
+        </a>
+        <a href="https://github.com/GianDeGruccio/ventlab/blob/main/docs/stress-protocol.md">
+          Reproduce this study
         </a>
       </div>
     </section>

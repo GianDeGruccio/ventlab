@@ -1,0 +1,728 @@
+{
+  "protocol": "Single-room constant-rate constant-source synthetic experiments, paired noise draws across options.",
+  "development": {
+    "summary": {
+      "cases": 3,
+      "trialsPerCase": 32,
+      "observations": 96,
+      "recommendedSmallestWidth": 3,
+      "improvedMeanWidth": 3,
+      "improvedMeanRateMAE": 2,
+      "meanBaselineRateMAE": 0.4583333333333333,
+      "meanChosenRateMAE": 0.07343749999999999,
+      "meanBaselineWidth": 1.3986915241973517,
+      "meanChosenWidth": 0.49174456664807503,
+      "meanBaselineSourceMAE": 395.89444105882535,
+      "baselineInside": 92,
+      "chosenInside": 91
+    },
+    "cases": [
+      {
+        "name": "Occupied transient",
+        "design": {
+          "rate": 1.55,
+          "initial": 1370,
+          "supply": 430,
+          "duration": 60,
+          "interval": 2,
+          "noise": 18,
+          "offset": 0,
+          "occupancy": 1,
+          "generation": 370,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 1000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 0.11406250000000001,
+          "sourceMAE": 65.51943957028843,
+          "meanWidth": 0.6345263772865601,
+          "targetInside": 31,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 16.25991671192923
+        },
+        "expectedBaselineWidth": 0.6336922886695686,
+        "recommendation": "longer",
+        "smallestObservedMeanWidth": "longer",
+        "actualReduction": 0.4031437431617433,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "longer",
+          "rateMAE": 0.05,
+          "sourceMAE": 28.73664577607655,
+          "meanWidth": 0.23138263412481688,
+          "targetInside": 32,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 17.23860102755536,
+          "expectedReduction": 0.40488198477586534
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.05,
+            "sourceMAE": 28.73664577607655,
+            "meanWidth": 0.23138263412481688,
+            "targetInside": 32,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 17.23860102755536,
+            "expectedReduction": 0.40488198477586534
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.05625000000000002,
+            "sourceMAE": 36.163752074213875,
+            "meanWidth": 0.3161149660489554,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 8.134553231562828,
+            "expectedReduction": 0.3183330201122887
+          },
+          {
+            "id": "supply",
+            "rateMAE": 0.11406250000000001,
+            "sourceMAE": 64.748074354593,
+            "meanWidth": 0.634526377286406,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 16.259916711928714,
+            "expectedReduction": 1.4703793738135573e-12
+          },
+          {
+            "id": "empty",
+            "rateMAE": 0.028125000000000025,
+            "sourceMAE": 0,
+            "meanWidth": 0.4601709824333041,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 16.59794216483371,
+            "expectedReduction": 0.16204537424367604
+          }
+        ]
+      },
+      {
+        "name": "Known empty decay",
+        "design": {
+          "rate": 2.35,
+          "initial": 1660,
+          "supply": 460,
+          "duration": 60,
+          "interval": 2,
+          "noise": 18,
+          "offset": 0,
+          "occupancy": 0,
+          "generation": 450,
+          "supplyKnown": true,
+          "seed": 42
+        },
+        "firstSeed": 2000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 0.02031250000000001,
+          "sourceMAE": 0,
+          "meanWidth": 0.3214937069439039,
+          "targetInside": 29,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 17.61227581101443
+        },
+        "expectedBaselineWidth": 0.34893798366055373,
+        "recommendation": "longer",
+        "smallestObservedMeanWidth": "longer",
+        "actualReduction": 0.15432234389453112,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "longer",
+          "rateMAE": 0.0234375,
+          "sourceMAE": 0,
+          "meanWidth": 0.16717136304937277,
+          "targetInside": 28,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 17.82957960015532,
+          "expectedReduction": 0.1862986386394132
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.0234375,
+            "sourceMAE": 0,
+            "meanWidth": 0.16717136304937277,
+            "targetInside": 28,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 17.82957960015532,
+            "expectedReduction": 0.1862986386394132
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.009374999999999994,
+            "sourceMAE": 0,
+            "meanWidth": 0.17280109378625857,
+            "targetInside": 29,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 8.880347076941602,
+            "expectedReduction": 0.1787889847631856
+          }
+        ]
+      },
+      {
+        "name": "Short noisy record",
+        "design": {
+          "rate": 0.85,
+          "initial": 1300,
+          "supply": 430,
+          "duration": 14,
+          "interval": 2,
+          "noise": 37,
+          "offset": 0,
+          "occupancy": 2,
+          "generation": 450,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 3000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 1.240625,
+          "sourceMAE": 1122.1638836061877,
+          "meanWidth": 3.2400544883615905,
+          "targetInside": 32,
+          "searchBoundaryFits": 11,
+          "meanResidualRMSE": 32.140025774561835
+        },
+        "expectedBaselineWidth": 3.2921526939382377,
+        "recommendation": "empty",
+        "smallestObservedMeanWidth": "empty",
+        "actualReduction": 2.163374785591555,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "empty",
+          "rateMAE": 0.14687499999999998,
+          "sourceMAE": 0,
+          "meanWidth": 1.0766797027700354,
+          "targetInside": 31,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 32.3716223786237,
+          "expectedReduction": 2.1926098723561323
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 1.1656250000000001,
+            "sourceMAE": 1068.6564353730012,
+            "meanWidth": 2.968111874171072,
+            "targetInside": 32,
+            "searchBoundaryFits": 11,
+            "meanResidualRMSE": 33.95632614052818,
+            "expectedReduction": 0.3081163396936275
+          },
+          {
+            "id": "precision",
+            "rateMAE": 1.2390625000000002,
+            "sourceMAE": 1118.1816916214548,
+            "meanWidth": 3.037807708358671,
+            "targetInside": 32,
+            "searchBoundaryFits": 13,
+            "meanResidualRMSE": 15.983026200460387,
+            "expectedReduction": 0.22633503152742218
+          },
+          {
+            "id": "supply",
+            "rateMAE": 1.2515625000000001,
+            "sourceMAE": 1118.8326846984073,
+            "meanWidth": 3.0287556441026218,
+            "targetInside": 32,
+            "searchBoundaryFits": 11,
+            "meanResidualRMSE": 32.13778000374782,
+            "expectedReduction": 0.21585994836791444
+          },
+          {
+            "id": "empty",
+            "rateMAE": 0.14687499999999998,
+            "sourceMAE": 0,
+            "meanWidth": 1.0766797027700354,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 32.3716223786237,
+            "expectedReduction": 2.1926098723561323
+          }
+        ]
+      }
+    ]
+  },
+  "evaluation": {
+    "summary": {
+      "cases": 6,
+      "trialsPerCase": 32,
+      "observations": 192,
+      "recommendedSmallestWidth": 4,
+      "improvedMeanWidth": 6,
+      "improvedMeanRateMAE": 5,
+      "meanBaselineRateMAE": 1.07109375,
+      "meanChosenRateMAE": 0.3920833333333333,
+      "meanBaselineWidth": 4.090711268563591,
+      "meanChosenWidth": 2.316879695062632,
+      "meanBaselineSourceMAE": 306.4174131937054,
+      "baselineInside": 159,
+      "chosenInside": 152
+    },
+    "cases": [
+      {
+        "name": "Slow occupied transient",
+        "design": {
+          "rate": 0.72,
+          "initial": 1350,
+          "supply": 445,
+          "duration": 44,
+          "interval": 2,
+          "noise": 18,
+          "offset": 12,
+          "occupancy": 1,
+          "generation": 510,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 100000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 0.5518750000000001,
+          "sourceMAE": 514.4998579378023,
+          "meanWidth": 1.5944121013593113,
+          "targetInside": 32,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 17.532011501244376
+        },
+        "expectedBaselineWidth": 1.607844298252729,
+        "recommendation": "empty",
+        "smallestObservedMeanWidth": "empty",
+        "actualReduction": 1.319036983357383,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "empty",
+          "rateMAE": 0.046562499999999965,
+          "sourceMAE": 0,
+          "meanWidth": 0.27537511800192843,
+          "targetInside": 32,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 17.942678569767942,
+          "expectedReduction": 1.323789351197569
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.26718749999999997,
+            "sourceMAE": 232.57255782677817,
+            "meanWidth": 1.2467328057474016,
+            "targetInside": 29,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 17.84360939283951,
+            "expectedReduction": 0.19384670259204007
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.48781250000000015,
+            "sourceMAE": 457.01345963845614,
+            "meanWidth": 1.4558208738931666,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 8.688259751730746,
+            "expectedReduction": 0.04778017320898886
+          },
+          {
+            "id": "supply",
+            "rateMAE": 0.5768750000000001,
+            "sourceMAE": 509.52237519457714,
+            "meanWidth": 1.5065967068306179,
+            "targetInside": 32,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 17.522105959613647,
+            "expectedReduction": 0.08749234184551002
+          },
+          {
+            "id": "empty",
+            "rateMAE": 0.046562499999999965,
+            "sourceMAE": 0,
+            "meanWidth": 0.27537511800192843,
+            "targetInside": 32,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 17.942678569767942,
+            "expectedReduction": 1.323789351197569
+          }
+        ]
+      },
+      {
+        "name": "Near steady state",
+        "design": {
+          "rate": 2.1,
+          "initial": 665,
+          "supply": 425,
+          "duration": 60,
+          "interval": 3,
+          "noise": 25,
+          "offset": 0,
+          "occupancy": 1,
+          "generation": 500,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 101000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 2.1984375000000003,
+          "sourceMAE": 533.0858487178845,
+          "meanWidth": 8,
+          "targetInside": 32,
+          "searchBoundaryFits": 6,
+          "meanResidualRMSE": 23.349274748588964
+        },
+        "expectedBaselineWidth": 8,
+        "recommendation": "empty",
+        "smallestObservedMeanWidth": "empty",
+        "actualReduction": 5.1838825294876605,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "empty",
+          "rateMAE": 0.19062500000000004,
+          "sourceMAE": 0,
+          "meanWidth": 2.8161174705123395,
+          "targetInside": 31,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 23.52408679675216,
+          "expectedReduction": 5.199495088752642
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 2.2156249999999993,
+            "sourceMAE": 546.018837844947,
+            "meanWidth": 7.844406739419475,
+            "targetInside": 32,
+            "searchBoundaryFits": 3,
+            "meanResidualRMSE": 23.73675511482071,
+            "expectedReduction": 0
+          },
+          {
+            "id": "precision",
+            "rateMAE": 2.19375,
+            "sourceMAE": 534.2063305902456,
+            "meanWidth": 8,
+            "targetInside": 32,
+            "searchBoundaryFits": 6,
+            "meanResidualRMSE": 11.673900672660642,
+            "expectedReduction": 0
+          },
+          {
+            "id": "supply",
+            "rateMAE": 2.2453125000000007,
+            "sourceMAE": 531.8066149392471,
+            "meanWidth": 6.433346691099966,
+            "targetInside": 32,
+            "searchBoundaryFits": 6,
+            "meanResidualRMSE": 23.345747526246978,
+            "expectedReduction": 1.5350888826520714
+          },
+          {
+            "id": "empty",
+            "rateMAE": 0.19062500000000004,
+            "sourceMAE": 0,
+            "meanWidth": 2.8161174705123395,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 23.52408679675216,
+            "expectedReduction": 5.199495088752642
+          }
+        ]
+      },
+      {
+        "name": "Fast empty decay",
+        "design": {
+          "rate": 3.82,
+          "initial": 1550,
+          "supply": 430,
+          "duration": 32,
+          "interval": 1,
+          "noise": 18,
+          "offset": 0,
+          "occupancy": 0,
+          "generation": 450,
+          "supplyKnown": true,
+          "seed": 42
+        },
+        "firstSeed": 102000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 0.04250000000000005,
+          "sourceMAE": 0,
+          "meanWidth": 0.6036500102669071,
+          "targetInside": 32,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 16.665084998492112
+        },
+        "expectedBaselineWidth": 0.6756139293737715,
+        "recommendation": "longer",
+        "smallestObservedMeanWidth": "longer",
+        "actualReduction": 0.3053689592164048,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "longer",
+          "rateMAE": 0.033750000000000085,
+          "sourceMAE": 0,
+          "meanWidth": 0.29828105105050234,
+          "targetInside": 28,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 17.427510275759065,
+          "expectedReduction": 0.37882175610248137
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.033750000000000085,
+            "sourceMAE": 0,
+            "meanWidth": 0.29828105105050234,
+            "targetInside": 28,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 17.427510275759065,
+            "expectedReduction": 0.37882175610248137
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.02625000000000008,
+            "sourceMAE": 0,
+            "meanWidth": 0.34297000631109337,
+            "targetInside": 32,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 8.376580563509838,
+            "expectedReduction": 0.3316400375288038
+          }
+        ]
+      },
+      {
+        "name": "Weak empty contrast",
+        "design": {
+          "rate": 1.17,
+          "initial": 455,
+          "supply": 432,
+          "duration": 25,
+          "interval": 2,
+          "noise": 27,
+          "offset": 0,
+          "occupancy": 0,
+          "generation": 450,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 103000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 1.3890625000000003,
+          "sourceMAE": 0,
+          "meanWidth": 7.913402046979105,
+          "targetInside": 32,
+          "searchBoundaryFits": 9,
+          "meanResidualRMSE": 25.780218148490807
+        },
+        "expectedBaselineWidth": 8,
+        "recommendation": "precision",
+        "smallestObservedMeanWidth": "longer",
+        "actualReduction": 0.04241941183118403,
+        "excessWidthOverBest": 0.09570465023103036,
+        "chosen": {
+          "id": "precision",
+          "rateMAE": 0.7931250000000001,
+          "sourceMAE": 0,
+          "meanWidth": 7.870982635147921,
+          "targetInside": 32,
+          "searchBoundaryFits": 4,
+          "meanResidualRMSE": 12.86690832922419,
+          "expectedReduction": 0
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.890625,
+            "sourceMAE": 0,
+            "meanWidth": 7.77527798491689,
+            "targetInside": 31,
+            "searchBoundaryFits": 6,
+            "meanResidualRMSE": 25.739746182568005,
+            "expectedReduction": 0
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.7931250000000001,
+            "sourceMAE": 0,
+            "meanWidth": 7.870982635147921,
+            "targetInside": 32,
+            "searchBoundaryFits": 4,
+            "meanResidualRMSE": 12.86690832922419,
+            "expectedReduction": 0
+          },
+          {
+            "id": "supply",
+            "rateMAE": 1.9840624999999998,
+            "sourceMAE": 0,
+            "meanWidth": 7.920155490751093,
+            "targetInside": 31,
+            "searchBoundaryFits": 12,
+            "meanResidualRMSE": 25.838622090196587,
+            "expectedReduction": 0
+          }
+        ]
+      },
+      {
+        "name": "Strong source, short record",
+        "design": {
+          "rate": 2.67,
+          "initial": 840,
+          "supply": 460,
+          "duration": 20,
+          "interval": 2,
+          "noise": 22,
+          "offset": -18,
+          "occupancy": 3,
+          "generation": 660,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 104000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 1.51875,
+          "sourceMAE": 790.9187725065455,
+          "meanWidth": 6.311140105959266,
+          "targetInside": 31,
+          "searchBoundaryFits": 4,
+          "meanResidualRMSE": 18.239604949789875
+        },
+        "expectedBaselineWidth": 7.137161554391441,
+        "recommendation": "longer",
+        "smallestObservedMeanWidth": "longer",
+        "actualReduction": 3.710933112628398,
+        "excessWidthOverBest": 0,
+        "chosen": {
+          "id": "longer",
+          "rateMAE": 0.5578124999999999,
+          "sourceMAE": 311.92494816333675,
+          "meanWidth": 2.6002069933308682,
+          "targetInside": 29,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 19.96828165482887,
+          "expectedReduction": 4.533499566894737
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.5578124999999999,
+            "sourceMAE": 311.92494816333675,
+            "meanWidth": 2.6002069933308682,
+            "targetInside": 29,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 19.96828165482887,
+            "expectedReduction": 4.533499566894737
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.8375,
+            "sourceMAE": 437.31682300676914,
+            "meanWidth": 4.271816236181064,
+            "targetInside": 31,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 9.095816570307393,
+            "expectedReduction": 2.766730613011071
+          },
+          {
+            "id": "supply",
+            "rateMAE": 1.5625,
+            "sourceMAE": 756.7359394206214,
+            "meanWidth": 6.082543857721844,
+            "targetInside": 31,
+            "searchBoundaryFits": 4,
+            "meanResidualRMSE": 18.22600138059783,
+            "expectedReduction": 0.3358451675124261
+          },
+          {
+            "id": "empty",
+            "rateMAE": 0.21,
+            "sourceMAE": 0,
+            "meanWidth": 3.215935555039911,
+            "targetInside": 32,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 19.269223551180215,
+            "expectedReduction": 3.825550783495288
+          }
+        ]
+      },
+      {
+        "name": "Background/calibration stress",
+        "design": {
+          "rate": 1.39,
+          "initial": 950,
+          "supply": 560,
+          "duration": 70,
+          "interval": 2,
+          "noise": 11,
+          "offset": 65,
+          "occupancy": 0,
+          "generation": 450,
+          "supplyKnown": false,
+          "seed": 42
+        },
+        "firstSeed": 105000,
+        "trials": 32,
+        "baseline": {
+          "rateMAE": 0.7259374999999996,
+          "sourceMAE": 0,
+          "meanWidth": 0.12166334681695065,
+          "targetInside": 0,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 14.734765949397834
+        },
+        "expectedBaselineWidth": 0.12167682897100318,
+        "recommendation": "precision",
+        "smallestObservedMeanWidth": "longer",
+        "actualReduction": 0.08134844448471734,
+        "excessWidthOverBest": 0.001930404232289705,
+        "chosen": {
+          "id": "precision",
+          "rateMAE": 0.7306249999999995,
+          "sourceMAE": 0,
+          "meanWidth": 0.04031490233223332,
+          "targetInside": 0,
+          "searchBoundaryFits": 0,
+          "meanResidualRMSE": 11.49789093638108,
+          "expectedReduction": 0.08745428248438036
+        },
+        "alternatives": [
+          {
+            "id": "longer",
+            "rateMAE": 0.9150000000000004,
+            "sourceMAE": 0,
+            "meanWidth": 0.03838449809994361,
+            "targetInside": 0,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 28.063083640927953,
+            "expectedReduction": 0.08367797387573728
+          },
+          {
+            "id": "precision",
+            "rateMAE": 0.7306249999999995,
+            "sourceMAE": 0,
+            "meanWidth": 0.04031490233223332,
+            "targetInside": 0,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 11.49789093638108,
+            "expectedReduction": 0.08745428248438036
+          },
+          {
+            "id": "supply",
+            "rateMAE": 0.34937499999999994,
+            "sourceMAE": 0,
+            "meanWidth": 0.2314283400758603,
+            "targetInside": 0,
+            "searchBoundaryFits": 0,
+            "meanResidualRMSE": 11.798125768928292,
+            "expectedReduction": -0.10221653688161758
+          }
+        ]
+      }
+    ]
+  }
+}

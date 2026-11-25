@@ -1,6 +1,25 @@
 # ventlab
 Physics-based ventilation inference, uncertainty quantification, and optimal scientific measurement design.
 
+## Phase 2 web application
+
+VentLab runs the CO₂ experiment designer, blind empirical validation lab, and recording explorer in the browser. Open **Methods** inside the app for both synthetic and retrospective results, including abstentions and failed estimates.
+
+With Node.js 24 and npm installed, run the following from the repository root.
+
+```sh
+cd web
+npm ci
+npm run dev
+```
+
+Open the URL printed by Vite. For a static distribution, run `npm run build` in `web/` and serve `web/dist/`. The application uses hash navigation and relative asset URLs for GitHub Pages project paths.
+
+- [Application guide, deployment and verification](docs/web-application.md)
+- [Experiment design model, strategy ranking and seeded benchmark](docs/design-study.md)
+- [Python–TypeScript numerical agreement](docs/parity.md)
+- [Desktop](docs/screenshots/designer-1440.png) · [Mobile](docs/screenshots/designer-390.png) · [Identifiability and strategy ranking](docs/screenshots/measurement-design.png) · [Blind validation](docs/screenshots/validation-1440.png)
+
 ## Phase 1 scientific reference
 
 Phase 1 estimates a constant effective air-change rate from one room's CO₂ record and reports when the data give little support for that estimate. The default run is offline. See [the computed findings](reports/findings.md) and [the scientific protocol](docs/science.md).

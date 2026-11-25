@@ -221,3 +221,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# VentLab local analysis
+*.py[cod]
+.venv/
+work/
+output/

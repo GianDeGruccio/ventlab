@@ -1,0 +1,24 @@
+test_exact_decay_both_estimators_irregular_and_regular (test_physics.PhysicsTests.test_exact_decay_both_estimators_irregular_and_regular) ... ok
+test_flat_objective_and_invalid_baseline (test_physics.PhysicsTests.test_flat_objective_and_invalid_baseline) ... ok
+test_invalid_inputs (test_physics.PhysicsTests.test_invalid_inputs) ... ok
+test_large_exchange_and_stiff_limit (test_physics.PhysicsTests.test_large_exchange_and_stiff_limit) ... ok
+test_search_bounds_report_endpoints (test_physics.PhysicsTests.test_search_bounds_report_endpoints) ... ok
+test_varying_forcing_against_independent_ode_solver (test_physics.PhysicsTests.test_varying_forcing_against_independent_ode_solver) ... ok
+test_varying_supply_unoccupied_can_rise (test_physics.PhysicsTests.test_varying_supply_unoccupied_can_rise) ... ok
+test_zero_and_tiny_rates_with_generation (test_physics.PhysicsTests.test_zero_and_tiny_rates_with_generation) ... ok
+test_audit_and_session_integrity (test_pipeline.PipelineTests.test_audit_and_session_integrity) ... ok
+test_invalid_reference_preserves_estimate (test_pipeline.PipelineTests.test_invalid_reference_preserves_estimate) ... ok
+test_no_signal_and_missing_supply_recorded (test_pipeline.PipelineTests.test_no_signal_and_missing_supply_recorded) ... ok
+test_occupancy_boundaries_and_short_windows (test_pipeline.PipelineTests.test_occupancy_boundaries_and_short_windows) ... ok
+test_reference_blind_selection_and_fit (test_pipeline.PipelineTests.test_reference_blind_selection_and_fit) ... ok
+test_reference_units_time_weighted (test_pipeline.PipelineTests.test_reference_units_time_weighted) ... ok
+test_residual_and_change_diagnostics (test_pipeline.PipelineTests.test_residual_and_change_diagnostics) ... ok
+test_scoring_zero_and_near_zero (test_pipeline.PipelineTests.test_scoring_zero_and_near_zero) ... ok
+test_sensitivity_contains_nominal_and_flags_short_flat_signal (test_pipeline.PipelineTests.test_sensitivity_contains_nominal_and_flags_short_flat_signal) ... ok
+test_checksum_failure (test_release.ReleaseTests.test_checksum_failure) ... ok
+test_regenerated_reports_cover_original_data (test_release.ReleaseTests.test_regenerated_reports_cover_original_data) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 2.775s
+
+OK
